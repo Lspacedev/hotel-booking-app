@@ -1,0 +1,96 @@
+#React Hotel Booking App
+
+Problem: Create an app that allows users to book hotel rooms, using Firestore.
+    It should have 8 main pages:
+    1. Login Page
+    2. Registration Page
+    3. Landing Page
+    4. User Profile Page
+    5. Admin Profile Page
+    6. User Dashboard.
+    7. Admin Dashboard.
+    8. Checkout page.
+
+
+Requirements: 
+    Registration information:
+    1. Name.
+    2. Surname.
+    3. Email.
+    4. Password.
+    5. Profile picture.
+    ** Must encrypt login credentials after registration.
+    ** Must use redux for state management.
+
+    User interface:
+    1. Allow users to view, add/book hotel rooms.
+    2. The user should be able to view and update their details - Profile Page.
+    3. Use protected routing - authentication.
+
+    Admin interface:
+    1. Allow admin to view, add, update hotel rooms/accomodations.
+    2. The admin should be able to view and update their details - Profile Page.
+    3. Use protected routing - authentication.
+
+    Accomodation inputs:
+    1. Photo Gallery of the hotel.
+    2. Location of the hotel.
+    3. Price.
+    4. Address
+    5. Rating.
+    6. Amenities offered and policies.
+
+
+    ** Users must be able to share hotel room details with others
+
+
+    Features:
+    User must be able to:
+    1. View booked room.
+    2. Filter rooms by name of location, price and etc.
+    ** Must be able to search and sort using URL.
+
+    Admin must be able to:
+    1. Add new room.
+    2. View added rooms.
+    3. Update added room.
+    4. Delete rooms.
+
+    ** USE GET, POST, DELETE, PATCH/PUT with the JSON Server to manage user's shopping lists.
+    
+Solution: 
+    1. Create Registration Page to gather user login credentials.
+    2. Create an array of objects to store user login information along with a shopping lists array for each user.
+    3. Create Login Page to access Home Page using registered username and password, after validation.
+    4. Use username and other user info to render Profile Page.
+    5. Create Shopping Lists Page to show all shopping lists.
+    6. Create page for each individual shopping list with all the items.
+
+
+    Functions:
+    1. AddUser - function to add user.
+    2. UserUpdate - function to update user information.
+
+    3. AddShoppingList - function to add shopping list.
+    5. UpdateShoppingList - function to update shopping list information.
+    6. DeleteShoppingList - function to delete shoppingList.
+
+    7. AddItem - function to add shopping list item.
+    8. UpdateItem - function to update shopping list item information.
+    9. DeleteItem - function to delete shopping list item.
+    10. FilterItems - function to filter items.
+
+    Components:
+    1. HomePage - component with home page information.
+    2. RegistrationPage - component to get user information.
+    3. LoginPage - component to log in.
+    4. LandingPage - component with landing page information.
+
+
+
+    4. Profile - component with user profile information.
+    5. AddShoppingList - component to enter shopping list information.
+    6. DisplayShoppingLists - displays user shopping lists on page.
+    7. SearchItems - used to filter items by name, category and date added.
+    8. ShoppingListCard - component to show individual shopping list card.
+    9. Item - component to show item.
