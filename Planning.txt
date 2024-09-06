@@ -96,10 +96,10 @@ Solution:
     
     Admin:
         1. Add - function to add accomodations.
-        5. UpdateAccomodation - function to update accomodation information.
-        6. DeleteAccomodation - function to delete accomodation.
+        2. UpdateAccomodation - function to update accomodation information.
+        3. DeleteAccomodation - function to delete accomodation.
 
-    10. FilterAccomodation - function to filter accomodations.
+        4. FilterAccomodation - function to filter accomodations.
 
     Components:
     1. HomePage - component with home page information.

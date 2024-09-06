@@ -1,95 +1,89 @@
-Functions:
-    Global variables, arrays:
-    1. Create users Array: 
-        1. INITIALIZE users = [];
-        2. INITIALIZE userObj = {
+ Global variables, arrays:
+    1. Create users variables: 
+        1. INITIALIZE rooms = [];
+        2. INITIALIZE favourites = [];
+        3. INITIALIZE history = [];
+        4. INITIALIZE reviews = [];
+        5. INITIALIZE currentUserObj = {
                                     name: name, 
                                     surname: surname,
                                     email: email,
                                     password: password,
-                                    cell: cell,
-                                    lists: []
                                 }
-        3. PUSH userObj to users.
-        4. INITIALIZE loginStatus = true;
+    2. Create admin variables: 
+        1. INITIALIZE accomodations = [];
+        2. INITIALIZE reservations = [];
+        3. INITIALIZE adminObj = {
+                                    name: name, 
+                                    surname: surname,
+                                    email: email,
+                                    password: password,
+                                }
+Functions: 
+    User:
+        1. FUNCTION AddUser(inputs: name, surname, email, password):
+            1. FILTER users, SET filteredUser = user.filter((user) => user.name === name);
+            2. IF filteredUser.length > 0:
+                    return;
+                ELSE: 
+                Add to firestore;
 
-    2. FUNCTION AddUser(inputs: name, surname, email, password, cell):
-        1. FILTER users, SET filteredUser = user.filter((user) => user.name === name);
-        2. IF filteredUser.length > 0:
-                return;
-            ELSE: 
-                PUSH to users;
 
-
-    3. FUNCTION AddShoppingList (inputs: List Name, Quantity, Optional notes, Category, Image):
-        1. INITIALIZE shoppingListObj = { ListName, Quantity, Optional notes, Category, Image, Items:[]};
-        2. PUSH shoppingListObj to lists array in userObj, userObj.lists;
-
-
-
-    4. FUNCTION UpdateShoppingList (inputs: name, updateShoppingListInfo object):
-        1. FILTER users, SET filteredUser = user.filter((user) => user.name === name);
-        2. FILTER shopping lists, SET filteredShoppingList = filteredUser.lists.filter((list) => list.name === updateShoppingListInfo.name);
-        3. SET updateShoppingListInfo to filteredShoppingList;
-        4. SET users with, new updated filteredShoppingList;
-
-    5. FUNCTION DeleteShoppingList(inputs: name, shopping list name):
-        1. FILTER users, SET filteredUser = user.filter((user) => user.name === name);
-        2. FILTER lists, SET filteredLists = filteredUser.lists.filter((list) => list.name !== name);
-        3. SET filteredUser.lists = filteredLists;
-
-    6. FUNCTION AddItem (inputs: Item Name, Quantity, Optional notes, Category, Image):
-        1. INITIALIZE itemObj = { Item Name, Quantity, Optional notes, Category, Image};
-        2. PUSH itemObj to items array in shoppingListObj, shoppingListObj.items;
+    Admin:
+    1. FUNCTION AddAccomodation (inputs: Photo Gallery, Location, Price, Address, Rating, Amenities, Policies ):
+        1. INITIALIZE accomodationObj = { Photo Gallery, Location, Price, Address, Rating, Amenities, Policies};
+        2. Add accomodationObj to firestore admin > doc id > accomodations
 
 
 
-    7. FUNCTION UpdateItem (inputs: name, updateItemInfo object):
-        1. FILTER users, SET filteredUser = user.filter((user) => user.name === name);
-        2. FILTER shopping Obj items, SET filteredItem = shoppingListObj.items.filter((item) => item.name ===  updateItemInfo.name);
-        3. SET  updateItemInfo to filteredItem;
-        4. SET users with, new updated filteredItem;
+    2. FUNCTION UpdateAccomodation (inputs: name, updateAccomodationInfo object):
+        1. Find accomodation doc id.
+        2. SET updateAccomodationInfo accomodation doc in firestore;
 
-    8. FUNCTION DeleteItem (inputs: name, item name):
-        1. FILTER users, SET filteredUser = user.filter((user) => user.name === name);
-        2. FILTER items, SET filteredItems = shoppingListObj.items.filter((item) => item.name !== item name);
-        3. SET shoppingListObj.items = filteredItems;
-            
-        
+    3. FUNCTION DeleteAccomodation(inputs: name):
+        1. Find accomodation doc id.
+        2. DELETE accomodation doc in firestore;
 
-    9. FUNCTION FilterItems (inputs: items):
-        1. FILTER item information from items based on field / rule, filteredItemInformation => field;
 
-    10. FUNCTION UserUpdate (inputs: updateObj):
+    4. FUNCTION FilterAccomodation (inputs: accomodations):
+        1. FILTER accomodation information from accomodations based on field / rule, filteredAccomodationInformation => field;
+
+    5. FUNCTION UserUpdate (inputs: updateObj):
         1. Create userCopy;
         2. IF (updateObj.username): 
-            SET userCopy.username = updateObj.username;
+            SET firestore doc with updateObj.username;
         3. IF (updateObj.password): 
-            SET userCopy.password = updateObj.password; 
+            SET firestore doc with updateObj.password; 
 
-    11. FUNCTION handleLogOut():
-        1. SET loginStatus = false;
+    6. FUNCTION handleLogOut():
+        1. Firestore logout function.
 
 
  
    Components:
-    1. Profile(name, surname, email, password, cell):
-        1. Create divs to hold all prop information
+    1. Profile(name, surname, email, password):
+        1. Create divs to hold all user information.
 
-    2. AddShoppingList():
-        1. Create inputs field to get shopping list  information;
-        2. Create button to submit shopping list information from field;
+    2. AddAccomodation():
+        1. Create inputs field to get accomodation information;
+        2. Create button to submit accomodation information from field;
 
-    3. DisplayShoppingLists(inputs: lists Array):
-        1. Map through shopping lists and display each shopping list on page;
+    3. Accomodations(inputs: accomodations Array):
+        1. Map through accomodations and display each accomodation on page;
 
-    4. SearchItems(inputs: items, field):
+    4. SearchAccomodations(inputs: accomodations, field):
         1. Create search bar and button to allow search;
-        2. Filter items based on field.
+        2. Filter accomodations based on field.
 
     5. HomePage():
     6. RegistrationPage():
     7. LoginPage():
-    8. LandingPage():
-    9. ShoppingListCard():
-    10. Item():
+    8. ResultsPage ():
+    9. AccomodationCard():
+
+    10. Bookings():
+    11. Reservations():
+    12. History():
+    13. Favourites():
+    14. Reviews():
+    
