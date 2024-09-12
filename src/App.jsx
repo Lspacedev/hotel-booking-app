@@ -19,68 +19,73 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { auth } from "./config/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
-//import { ref, listAll } from "firebase/storage";
-//import { storage } from "./config/firebase";
 import { db } from "./config/firebase";
 import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
-import { useDispatch } from "react-redux";
-import { setAccomodations } from "./app/accomodationsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setAccomodations, setBookings } from "./app/accomodationsSlice";
+import { setUser, setUsers } from "./app/userSlice";
+import Bookings from "./components/user/Bookings";
+import Reviews from "./components/user/Reviews";
+import Favourites from "./components/user/Favourites";
 
 function App() {
   const [acc, setAcc] = useState([]);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        console.log(user);
+        dispatch(setUser(uid));
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        console.log("user is logged out");
+      }
+    });
+  }, []);
+
   useEffect(() => {
     fetchAccomodations();
+    fetchUsers();
   }, []);
   async function fetchAccomodations() {
     try {
       const querySnapshot = await getDocs(collectionGroup(db, "accomodations"));
-      //  const adminDocRef = adminRef.doc('A2Kvj5vTHdfJde8Sl8KV8rw1e2v1');
-      //   const accomodationsRef = adminDocRef.collection('accomodations');
-      //   const querySnapshot = await accomodationsRef.get();
 
-      //const accomodationsRef = query(collectionGroup(db, 'landmarks')
-
-      // const querySnapshot = await getDocs(collection(db, "admin"));
       const data = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      //setAcc(data);
-      console.log(data);
-      dispatch(setAccomodations(data));
 
-      //setTransactions(data);
+      //console.log(data);
+      dispatch(setAccomodations(data));
     } catch (error) {
       console.log(error);
     }
   }
+  async function fetchUsers() {
+    try {
+      const querySnapshot = await getDocs(collection(db, "users"));
 
-  // Create a reference under which you want to list
-  // const storage = getStorage();
-  // const imagesRef = ref(storage, "K0F2qKu4p6VdAaRXbCVL");
-  // listAll(imagesRef)
-  //   .then((res) => {
-  //     res.prefixes.forEach((folderRef) => {
-  //       // All the prefixes under listRef.
-  //       // You may call listAll() recursively on them.
-  //       console.log({ folderRef });
-  //     });
-  //     res.items.forEach((itemRef) => {
-  //       // All the items under listRef.
-  //       getDownloadURL(itemRef)
-  //         .then((url) => {
-  //           console.log(url);
-  //         })
-  //         .catch((error) => {
-  //           console.log(error);
-  //         });
-  //     });
-  //   })
-  //   .catch((error) => {
-  //     // Uh-oh, an error occurred!
-  //   });
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      console.log(data);
+      dispatch(setUsers(data));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const user = useSelector((state) => state.user.currentUser);
 
   return (
     <Router>
@@ -90,13 +95,17 @@ function App() {
           <Route path="results" element={<ResultsPage />}>
             <Route path=":result_id" element={<AccomodationCard />} />
           </Route>
-          <Route element={<ProtectedRouteReg auth={auth} />}>
+          <Route element={<ProtectedRouteReg auth={user} />}>
             <Route exact path="registration" element={<UserRegistration />} />
             <Route exact path="login" element={<UserLogin />} />
+            <Route path="checkout" element={<Checkout />} />
           </Route>
 
-          <Route element={<ProtectedRoutes auth={auth} />}>
+          <Route element={<ProtectedRoutes auth={user} />}>
             <Route path="home" element={<UserDashboard />}>
+              <Route path="bookings" element={<Bookings />} />
+              <Route path="reviews" element={<Reviews />} />
+              <Route path="favourites" element={<Favourites />} />
               {/* <Route
                 index
                 element={

@@ -4,8 +4,12 @@ export const accomodationsSlice = createSlice({
   name: "accomodations",
   initialState: {
     accomodations: [],
+    bookings: [],
     searchTerm: {},
     searchResults: [],
+    checkInOut: {},
+    guests: 0,
+    location: "",
   },
   reducers: {
     setSearchTerm: (state, action) => {
@@ -17,9 +21,20 @@ export const accomodationsSlice = createSlice({
     setAccomodations: (state, action) => {
       state.accomodations = action.payload;
     },
+    setBookings: (state, action) => {
+      state.bookings = action.payload;
+    },
+    setCheckInOut: (state, action) => {
+      state.checkInOut = action.payload;
+    },
   },
 });
-export const { setSearchTerm, setSearchResults, setAccomodations } =
-  accomodationsSlice.actions;
+export const {
+  setSearchTerm,
+  setSearchResults,
+  setAccomodations,
+  setBookings,
+  setCheckInOut,
+} = accomodationsSlice.actions;
 
 export default accomodationsSlice.reducer;

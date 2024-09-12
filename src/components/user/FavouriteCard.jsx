@@ -1,9 +1,12 @@
-function FavouriteCard() {
+function FavouriteCard({ favourite }) {
   return (
     <div className="FavouriteCard">
       <div className="remove-fav">x</div>
       <div className="img"></div>
-      <p>Room name + Rating</p>
+      <p>
+        {favourite.room_name}
+        {favourite.rating}
+      </p>
     </div>
   );
 }

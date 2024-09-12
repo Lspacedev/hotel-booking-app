@@ -1,70 +1,153 @@
 import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
+import { collection, doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../../config/firebase";
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function AccomodationCard({ title }) {
+  const navigation = useNavigate();
+
   const { result_id } = useParams();
   const slidesRef = useRef(null);
   const [images, setImages] = useState([]);
   const storage = getStorage();
   const scrollAmount = 100;
-  useEffect(() => {
-    const imagesRef = ref(storage, result_id);
-    listAll(imagesRef)
-      .then((res) => {
-        // res.prefixes.forEach((folderRef) => {
-        //   // All the prefixes under listRef.
-        //   // You may call listAll() recursively on them.
-        //   console.log({ folderRef });
-        // });
-        res.items.forEach(async (itemRef) => {
-          const url = await getDownloadURL(itemRef);
-          // All the items under listRef.
-          setImages((prev) => [...prev, url]);
-        });
-      })
-      .catch((error) => {
-        // Uh-oh, an error occurred!
-      });
-  }, []);
+  // useEffect(() => {
+  //   const imagesRef = ref(storage, result_id);
+  //   listAll(imagesRef)
+  //     .then((res) => {
+  //       res.items.forEach(async (itemRef) => {
+  //         const url = await getDownloadURL(itemRef);
+  //         // All the items under listRef.
+  //         setImages((prev) => [...prev, url]);
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       // Uh-oh, an error occurred!
+  //     });
+  // }, []);
 
-  /* Slider */
-  // console.log(slidesRef);
-  // let slideIndex = 1;
-  // showSlides(slideIndex);
+  //user id , acccomodation id
+  const user = useSelector((state) => state.user.currentUser);
+  //const bookings = useSelector((state) => state.accomodations.bookings);
+  const accomodations = useSelector(
+    (state) => state.accomodations.accomodations
+  );
+  //get accomodation based on result_id
+  const [accomodation] = accomodations.filter(
+    (acccomodation) => acccomodation.id === result_id
+  );
+  const checkInOut = useSelector((state) => state.accomodations.checkInOut);
 
-  // // Next/previous controls
-  // function plusSlides(n) {
-  //   showSlides((slideIndex += n));
-  // }
+  async function book() {
+    if (user === "") {
+      alert("Please Login or Register an account.");
+      //navigation("/login");
+    } else {
+      //Check if check in and out dates have been set
+      if (JSON.stringify(checkInOut) !== "{}") {
+        console.log(accomodation.bookings.length);
+        if (accomodation.bookings.length > 0) {
+          //check if date is available
+          let isAvailable = checkAvailability(
+            checkInOut,
+            accomodation.bookings
+          );
+          if (isAvailable) {
+            navigation("/checkout");
+            let booking = {
+              userId: user,
+              checkIn: checkInOut.checkIn,
+              checkOut: checkInOut.checkOut,
+            };
+            try {
+              const accomodationsCollection = collection(
+                db,
+                "admin",
+                "A2Kvj5vTHdfJde8Sl8KV8rw1e2v1",
+                "accomodations"
+              );
+              const accomodationRef = doc(accomodationsCollection, result_id);
+              console.log(accomodationRef);
+              await updateDoc(accomodationRef, {
+                bookings: arrayUnion(booking),
+              });
+              alert("added booking");
+            } catch (err) {
+              console.log(err);
+            }
+          } else {
+            alert("Room is not available. Checkout our rooms");
+          }
+        } else {
+          let booking = {
+            userId: user,
+            checkIn: checkInOut.checkIn,
+            checkOut: checkInOut.checkOut,
+          };
+          try {
+            const accomodationsCollection = collection(
+              db,
+              "admin",
+              "A2Kvj5vTHdfJde8Sl8KV8rw1e2v1",
+              "accomodations"
+            );
+            const accomodationRef = doc(accomodationsCollection, result_id);
+            console.log(accomodationRef);
 
-  // Thumbnail image controls
-  // function currentSlide(n) {
-  //   showSlides((slideIndex = n));
-  // }
+            await updateDoc(accomodationRef, {
+              bookings: arrayUnion(booking),
+            });
+            alert("added booking");
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      } else {
+        //if not checkin and out dates have been set alert user
+        alert("Please set checkin and checkout dates");
+      }
+    }
+    console.log({ user, result_id, checkInOut, accomodation });
+  }
+  function checkAvailability(obj, array) {
+    let checkIn = new Date(obj.checkIn);
+    let checkOut = new Date(obj.checkOut);
 
-  // function showSlides(n) {
-  //   let i;
+    let availability = true;
 
-  //   if (n > slidesRef.length) {
-  //     slideIndex = 1;
-  //   }
-  //   if (n < 1) {
-  //     slideIndex = slidesRef.length;
-  //   }
-  //   for (i = 0; i < slidesRef.length; i++) {
-  //     slidesRef[i].style.display = "none";
-  //   }
-  //   slidesRef[slideIndex - 1].styles.display = "block";
-  // }
+    array.forEach((booking) => {
+      let bookingCheckIn = new Date(booking.checkIn);
+      let bookingCheckOut = new Date(booking.checkOut);
+      console.log(bookingCheckIn, checkIn);
+      //check if checkout date is within any date range
+      if (checkOut > bookingCheckIn && checkOut < bookingCheckOut) {
+        availability = false;
+      }
+      //check if checkin date is within any date range
+      if (checkIn > bookingCheckIn && checkIn < bookingCheckOut) {
+        availability = false;
+      }
+      //check if checkin/out date is not before any  date range
+      if (checkIn < bookingCheckIn && checkOut > bookingCheckOut) {
+        availability = false;
+      }
+    });
+
+    return availability;
+  }
+
   return (
     <div className="AccomodationCard">
       {JSON.stringify(images)}
       <h3 className="acc-name">Name</h3>
       <p className="acc-address">Address</p>
       <div className="slides" ref={slidesRef}>
-        {images.map((image) => {
-          return <img className="image" alt="sliderImage" src={image} />;
+        {images.map((image, i) => {
+          return (
+            <img key={i} className="image" alt="sliderImage" src={image} />
+          );
         })}
         <button
           className="prev"
@@ -122,7 +205,9 @@ function AccomodationCard({ title }) {
           </p>
         </div>
         <div className="acc-btns">
-          <button className="book-btn">Book</button>
+          <button className="book-btn" onClick={book}>
+            Book
+          </button>
         </div>
       </div>
     </div>

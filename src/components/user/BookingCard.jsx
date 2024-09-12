@@ -1,17 +1,17 @@
-function BookingCard() {
+function BookingCard({ booking }) {
   return (
     <div className="BookingCard">
       <div className="img"></div>
       <div className="booking-card-info">
         <div className="side-one">
-          <h4>Room Name</h4>
-          <h6>Location</h6>
-          <p>Rating</p>
-          <p>Description</p>
+          <h4>{booking.room_name}</h4>
+          <h6>{booking.hotel_name}</h6>
+          <p>{booking.rating}</p>
+          <p>{booking.description}</p>
         </div>
         <div className="side-two">
-          <p>Price</p>
-          <p>Status</p>
+          <p>{booking.price}</p>
+          <p>{booking.status}</p>
         </div>
       </div>
     </div>

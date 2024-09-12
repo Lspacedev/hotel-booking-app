@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { collection, doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 function ReviewForm({ toggleClicked }) {
   const [obj, setObj] = useState({
-    roomName: "",
+    room_name: "",
     rating: "",
     reviewText: "",
     date:
@@ -15,15 +18,46 @@ function ReviewForm({ toggleClicked }) {
     setObj((prev) => ({ ...prev, [name]: value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     //add review to firestore
+    try {
+      const accomodationsCollection = collection(
+        db,
+        "admin",
+        "A2Kvj5vTHdfJde8Sl8KV8rw1e2v1",
+        "accomodations"
+      );
+      const accomodationRef = doc(accomodationsCollection, obj.room_name);
+      console.log(accomodationRef);
+      await updateDoc(accomodationRef, {
+        reviews: arrayUnion({ ...obj, userId: user }),
+      });
+      alert("added review");
+    } catch (err) {
+      console.log(err);
+    }
     toggleClicked();
   }
 
   function handleFormClose() {
     toggleClicked();
   }
+
+  const user = useSelector((state) => state.user.currentUser);
+  const accomodations = useSelector(
+    (state) => state.accomodations.accomodations
+  );
+  let bookings = [];
+  accomodations.forEach((accomodation) => {
+    if (accomodation.bookings.length > 0) {
+      accomodation.bookings.forEach((booking) => {
+        if (booking.userId === user) {
+          bookings.push(accomodation);
+        }
+      });
+    }
+  });
 
   return (
     <div className="ReviewForm">
@@ -35,11 +69,22 @@ function ReviewForm({ toggleClicked }) {
           </div>
         </div>
         <form>
-          <div className="roomName">
-            <label htmlFor="roomName">
+          <div className="room_name">
+            <label htmlFor="room_name">
               Room Name
-              <select>
-                <option>Room 1</option>
+              <select
+                name="room_name"
+                onChange={(e) => handleChange(e)}
+                value={obj.room_type}
+              >
+                <option></option>
+                {typeof bookings !== "undefined" &&
+                  bookings.length > 0 &&
+                  bookings.map((booking, i) => (
+                    <option key={i} value={booking.id}>
+                      {booking.room_name}
+                    </option>
+                  ))}
               </select>
             </label>
           </div>
