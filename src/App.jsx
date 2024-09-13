@@ -29,6 +29,8 @@ import { setUser, setUsers } from "./app/userSlice";
 import Bookings from "./components/user/Bookings";
 import Reviews from "./components/user/Reviews";
 import Favourites from "./components/user/Favourites";
+import Success from "./components/checkout/Sucess";
+import Cancel from "./components/checkout/Cancel";
 
 function App() {
   const [acc, setAcc] = useState([]);
@@ -99,6 +101,8 @@ function App() {
             <Route exact path="registration" element={<UserRegistration />} />
             <Route exact path="login" element={<UserLogin />} />
             <Route path="checkout" element={<Checkout />} />
+            <Route path="success" element={<Success />} />
+            <Route path="cancel" element={<Cancel />} />
           </Route>
 
           <Route element={<ProtectedRoutes auth={user} />}>

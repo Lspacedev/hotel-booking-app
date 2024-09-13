@@ -4,6 +4,7 @@ import { db } from "../../config/firebase";
 import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import getStripe from "../../../lib/getStripe";
 
 function AccomodationCard({ title }) {
   const navigation = useNavigate();
@@ -55,7 +56,6 @@ function AccomodationCard({ title }) {
             accomodation.bookings
           );
           if (isAvailable) {
-            navigation("/checkout");
             let booking = {
               userId: user,
               checkIn: checkInOut.checkIn,
@@ -73,10 +73,10 @@ function AccomodationCard({ title }) {
               await updateDoc(accomodationRef, {
                 bookings: arrayUnion(booking),
               });
-              alert("added booking");
             } catch (err) {
               console.log(err);
             }
+            handleCheckout();
           } else {
             alert("Room is not available. Checkout our rooms");
           }
@@ -137,7 +137,22 @@ function AccomodationCard({ title }) {
 
     return availability;
   }
-
+  async function handleCheckout() {
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout({
+      lineItems: [
+        {
+          price: import.meta.env.VITE_NEXT_PUBLIC_STRIPE_PRICE_ID,
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      successUrl: `http://localhost:5173/success`,
+      cancelUrl: `http://localhost:5173/cancel`,
+      customerEmail: "customer@email.com",
+    });
+    console.warn(error.message);
+  }
   return (
     <div className="AccomodationCard">
       {JSON.stringify(images)}
