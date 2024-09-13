@@ -15,20 +15,26 @@ function AccomodationCard({ title }) {
 
   const storage = getStorage();
   const scrollAmount = 100;
-  // useEffect(() => {
-  //   const imagesRef = ref(storage, result_id);
-  //   listAll(imagesRef)
-  //     .then((res) => {
-  //       res.items.forEach(async (itemRef) => {
-  //         const url = await getDownloadURL(itemRef);
-  //         // All the items under listRef.
-  //         setImages((prev) => [...prev, url]);
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       // Uh-oh, an error occurred!
-  //     });
-  // }, []);
+  useEffect(() => {
+    const imagesRef = ref(storage, result_id);
+    listAll(imagesRef)
+      .then((res) => {
+        res.prefixes.forEach((folderRef) => {
+          console.log(folderRef);
+          // All the prefixes under listRef.
+          // You may call listAll() recursively on them.
+        });
+        console.log(res);
+        res.items.forEach(async (itemRef) => {
+          const url = await getDownloadURL(itemRef);
+          // All the items under listRef.
+          setImages((prev) => [...prev, url]);
+        });
+      })
+      .catch((error) => {
+        // Uh-oh, an error occurred!
+      });
+  }, []);
 
   //user id , acccomodation id
   const user = useSelector((state) => state.user.currentUser);
