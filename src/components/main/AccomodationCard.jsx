@@ -5,13 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import getStripe from "../../../lib/getStripe";
-
+import { v4 as uuid } from "uuid";
 function AccomodationCard({ title }) {
   const navigation = useNavigate();
 
   const { result_id } = useParams();
   const slidesRef = useRef(null);
   const [images, setImages] = useState([]);
+
   const storage = getStorage();
   const scrollAmount = 100;
   // useEffect(() => {
@@ -48,7 +49,7 @@ function AccomodationCard({ title }) {
     } else {
       //Check if check in and out dates have been set
       if (JSON.stringify(checkInOut) !== "{}") {
-        console.log(accomodation.bookings.length);
+        console.log(accomodation.bookings.length > 0);
         if (accomodation.bookings.length > 0) {
           //check if date is available
           let isAvailable = checkAvailability(
@@ -57,9 +58,13 @@ function AccomodationCard({ title }) {
           );
           if (isAvailable) {
             let booking = {
+              bookingId: uuid(),
               userId: user,
+              roomId: accomodation.id,
               checkIn: checkInOut.checkIn,
               checkOut: checkInOut.checkOut,
+              paid: true,
+              status: "pending",
             };
             try {
               const accomodationsCollection = collection(
@@ -82,9 +87,13 @@ function AccomodationCard({ title }) {
           }
         } else {
           let booking = {
+            bookingId: uuid(),
             userId: user,
+            roomId: accomodation.id,
             checkIn: checkInOut.checkIn,
             checkOut: checkInOut.checkOut,
+            paid: true,
+            status: "pending",
           };
           try {
             const accomodationsCollection = collection(
@@ -99,6 +108,8 @@ function AccomodationCard({ title }) {
             await updateDoc(accomodationRef, {
               bookings: arrayUnion(booking),
             });
+            handleCheckout();
+
             alert("added booking");
           } catch (err) {
             console.log(err);
@@ -147,8 +158,8 @@ function AccomodationCard({ title }) {
         },
       ],
       mode: "payment",
-      successUrl: `http://localhost:5173/success`,
-      cancelUrl: `http://localhost:5173/cancel`,
+      successUrl: `http://localhost:5174/success`,
+      cancelUrl: `http://localhost:5174/cancel`,
       customerEmail: "customer@email.com",
     });
     console.warn(error.message);

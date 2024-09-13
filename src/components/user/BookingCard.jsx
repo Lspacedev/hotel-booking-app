@@ -10,7 +10,9 @@ function BookingCard({ booking }) {
           <p>{booking.description}</p>
         </div>
         <div className="side-two">
+          <h5>Price</h5>
           <p>{booking.price}</p>
+          <h5>Status</h5>
           <p>{booking.status}</p>
         </div>
       </div>

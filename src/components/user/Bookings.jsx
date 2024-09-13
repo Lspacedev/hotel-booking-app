@@ -11,7 +11,7 @@ function Bookings() {
     if (accomodation.bookings.length > 0) {
       accomodation.bookings.forEach((booking) => {
         if (booking.userId === user) {
-          bookings.push(accomodation);
+          bookings.push({ ...accomodation, status: booking.status });
         }
       });
     }
