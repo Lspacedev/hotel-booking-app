@@ -9,6 +9,7 @@ import UserLogin from "./components/login/UserLogin";
 import UserProfile from "./components/profiles/UserProfile";
 import AdminLogin from "./components/login/AdminLogin";
 import UserRegistration from "./components/registration/UserRegistration";
+import ResetPassword from "./components/registration/resetPassword";
 import Checkout from "./components/checkout/Checkout";
 import ProtectedRouteReg from "./components/protected-routes/ProtectedRouteReg";
 import ProtectedRoutes from "./components/protected-routes/ProtectedRoutes";
@@ -55,7 +56,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log('refresh -app')
+    console.log("refresh -app");
     fetchAccomodations();
     fetchUsers();
   }, []);
@@ -90,14 +91,14 @@ function App() {
     }
   }
 
-  
   const user = useSelector((state) => state.user.currentUser);
-
+  console.log(user);
   return (
     <Router>
       <div className="App">
         <Routes>
           <Route exact path="/" element={<HomePage />} />
+          <Route path="/forgotPassword" element={<ResetPassword />} />
           <Route path="results" element={<ResultsPage />}>
             <Route path=":result_id" element={<AccomodationCard />} />
           </Route>
@@ -124,7 +125,7 @@ function App() {
               <Route path="lists" element={<DisplayLists />}>
                 <Route path=":list_name" element={<List />} />
               </Route>*/}
-              <Route path="profile" element={<UserProfile />} /> 
+              <Route path="profile" element={<UserProfile userId={user} />} />
             </Route>
           </Route>
 

@@ -1,28 +1,98 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { auth } from "../../config/firebase";
+import { db } from "../../config/firebase";
+
+import { sendPasswordResetEmail, updateEmail, signOut } from "firebase/auth";
 import { deleteDoc, updateDoc, collection, doc } from "firebase/firestore";
 import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
-function UserProfile() {
+import bcrypt from "bcryptjs-react";
+function UserProfile({ userId }) {
+  useEffect(() => {
+    const fetchImages = async () => {
+      const imagesRef = ref(storage, userId);
+      let result = await listAll(imagesRef);
+      let urlPromises = result.items.map((imageRef) =>
+        getDownloadURL(imageRef)
+      );
+      console.log(urlPromises);
+      return Promise.all(urlPromises);
+    };
+    const loadImages = async () => {
+      const url = await fetchImages();
+      console.log(url);
+      setProfilePic(url[0]);
+    };
+    if (typeof userId !== "undefined") {
+      loadImages();
+    }
+  }, [userId]);
   const [userUpdate, setUserUpdate] = useState({
     name: "",
     surname: "",
     email: "",
-    password: "",
-    profilePic: "",
   });
+  const [profilePic, setProfilePic] = useState("");
   const [update, setUpdate] = useState(false);
+
   const isLoading = false;
   //get user from firestore
   const users = useSelector((state) => state.user.users);
   const currentUser = useSelector((state) => state.user.currentUser);
-  const [user] = users.filter((user)=>user.id === currentUser);
+  const [user] = users.filter((user) => user.id === currentUser);
+
+  const storage = getStorage();
+
   function handleDeleteAccount() {
     //delet user in firestore
     navigation("/");
   }
 
-  function handleSubmit(obj) {
+  async function handleSubmit() {
     //update firestore with obj
+    //check if properties are empty
+
+    let updatedObj = {};
+    let encryptedPass;
+    if (userUpdate.name !== "") {
+      updatedObj.name = userUpdate.name;
+    }
+    if (userUpdate.surname !== "") {
+      updatedObj.surname = userUpdate.name;
+    }
+    if (userUpdate.email !== "") {
+      updatedObj.email = userUpdate.email;
+      // updateEmail(auth.currentUser, userUpdate.email)
+      //   .then(() => {
+      //     // Email updated!
+      //     alert("Please re login");
+      //     signOut(auth)
+      //       .then(() => {
+      //         navigation("/");
+      //       })
+      //       .catch((err) => {});
+      //     // ...
+      //   })
+      //   .catch((error) => {
+      //     // An error occurred
+      //     // ...
+      //   });
+    }
+
+    //update users to firestore
+    try {
+      const usersCollection = collection(db, "users");
+      const userRef = doc(usersCollection, currentUser);
+
+      if (JSON.stringify(updatedObj) !== "{}") {
+        await updateDoc(userRef, updatedObj);
+        alert("Updated successfully");
+      } else {
+        alert("Nothing to update");
+      }
+    } catch (err) {
+      console.log(err);
+    }
     setUpdate(false);
   }
 
@@ -31,27 +101,23 @@ function UserProfile() {
     const { name, value } = e.target;
     setUserUpdate((prev) => ({ ...prev, [name]: value }));
   }
-
-  function handleImageUpload(e) {
-    let input = document.getElementById("profile-pic2");
-    var fReader = new FileReader();
-    fReader.readAsDataURL(input.files[0]);
-    fReader.onloadend = function (event) {
-      setUserUpdate({
-        ...userUpdate,
-        profilePic: event.target.result,
-      });
-    };
+  async function resetPassword() {
+    sendPasswordResetEmail(auth, user.email)
+      .then(() => {
+        alert("Check your email");
+      })
+      .catch((err) => {});
   }
-  function getProfilePic(obj) {
-    if (obj.profilePic === "") {
+
+  function getProfilePic(pic) {
+    if (pic === "") {
       return "/images/profile.png";
     } else {
-      return obj.profilePic;
+      return pic;
     }
   }
   return (
-    <div className="Profile">
+    <div className="UserProfile">
       {isLoading === true ? (
         <div>Loading...</div>
       ) : (
@@ -59,7 +125,7 @@ function UserProfile() {
           <div className="profile-picture">
             {update ? (
               <div className="profile-pic2">
-                <label htmlFor="profile-pic2">
+                {/* <label htmlFor="profile-pic2">
                   Profile picture:
                   <input
                     type="file"
@@ -67,14 +133,14 @@ function UserProfile() {
                     name="pic"
                     onChange={(e) => handleImageUpload(e)}
                   />
-                </label>
+                </label> */}
                 <button className="close" onClick={() => setUpdate(false)}>
                   x
                 </button>
               </div>
             ) : (
               <div className="profile-pic">
-                {user && <img src={getProfilePic(user)} alt="profile" />}
+                {profilePic !== "" && <img src={profilePic} />}
               </div>
             )}
           </div>
@@ -118,13 +184,14 @@ function UserProfile() {
               <h4>Email</h4>
               {update ? (
                 <div className="email">
-                  <input
+                  <div>{user && user.email}</div>
+                  {/* <input
                     type="text"
                     id="email"
                     name="email"
                     onChange={(e) => handleChange(e)}
                     value={userUpdate.email}
-                  />
+                  /> */}
                 </div>
               ) : (
                 <div>{user && user.email}</div>
@@ -132,19 +199,19 @@ function UserProfile() {
             </div>
 
             <div className="user-pass">
-             {JSON.stringify(user)}
               <div className="pass">
                 <h4>Password:</h4>
                 {update ? (
                   <div>
                     <div className="password">
-                      <input
-                        type="text"
+                      {/* <input
+                        type="password"
                         id="password"
                         name="password"
                         onChange={(e) => handleChange(e)}
                         value={userUpdate.password}
-                      />
+                      /> */}
+                      <button onClick={resetPassword}>reset password</button>
                     </div>
                   </div>
                 ) : (
@@ -154,9 +221,7 @@ function UserProfile() {
             </div>
             <div className="account-delete-update">
               <button
-                onClick={() =>
-                  update ? handleSubmit(userUpdate) : setUpdate(true)
-                }
+                onClick={() => (update ? handleSubmit() : setUpdate(true))}
               >
                 {update ? "Submit" : "Update"}
               </button>

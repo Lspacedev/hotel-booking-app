@@ -58,6 +58,7 @@ function UserLogin() {
           Don't have an account?
           {/* <p onClick={handleNavigateRegister}>Register here</p> */}
         </div>
+        <Link to="/forgotPassword">Forgot password</Link>
       </div>
     </div>
   );

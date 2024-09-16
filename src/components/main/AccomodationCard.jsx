@@ -6,6 +6,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import getStripe from "../../../lib/getStripe";
 import { v4 as uuid } from "uuid";
+
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
+import { IoMdArrowBack } from "react-icons/io";
+
 function AccomodationCard({ title }) {
   const navigation = useNavigate();
 
@@ -15,10 +20,10 @@ function AccomodationCard({ title }) {
   const [activeImageNum, setCurrent] = useState(0);
   const length = images.length;
   const nextSlide = () => {
-     setCurrent(activeImageNum === length - 1 ? 0 : activeImageNum + 1);
+    setCurrent(activeImageNum === length - 1 ? 0 : activeImageNum + 1);
   };
   const prevSlide = () => {
-     setCurrent(activeImageNum === 0 ? length - 1 : activeImageNum - 1);
+    setCurrent(activeImageNum === 0 ? length - 1 : activeImageNum - 1);
   };
   // if (!Array.isArray(images) || images.length <= 0) {
   //    return null;
@@ -26,21 +31,21 @@ function AccomodationCard({ title }) {
   const storage = getStorage();
   useEffect(() => {
     const fetchImages = async () => {
-       const imagesRef = ref(storage, result_id);
+      const imagesRef = ref(storage, result_id);
 
       let result = await listAll(imagesRef);
-          let urlPromises = result.items.map(imageRef => getDownloadURL(imageRef));
-      
-          return Promise.all(urlPromises);
-  
-      }
-      
-      const loadImages = async () => {
-          const urls = await fetchImages();
-          setImages(urls);
-      }
-      loadImages();
+      let urlPromises = result.items.map((imageRef) =>
+        getDownloadURL(imageRef)
+      );
 
+      return Promise.all(urlPromises);
+    };
+
+    const loadImages = async () => {
+      const urls = await fetchImages();
+      setImages(urls);
+    };
+    loadImages();
   }, []);
 
   //user id , acccomodation id
@@ -56,13 +61,13 @@ function AccomodationCard({ title }) {
   const checkInOut = useSelector((state) => state.accomodations.checkInOut);
 
   async function book() {
-    console.log(checkInOut)
+    console.log(checkInOut);
     if (user === "") {
       alert("Please Login or Register an account.");
       //navigation("/login");
     } else {
       //Check if check in and out dates have been set
-      console.log({checkInOut});
+      console.log({ checkInOut });
 
       if (JSON.stringify(checkInOut) !== "{}") {
         console.log(accomodation.bookings.length > 0);
@@ -97,7 +102,7 @@ function AccomodationCard({ title }) {
             } catch (err) {
               console.log(err);
             }
-           handleCheckout();
+            handleCheckout();
           } else {
             alert("Room is not available. Checkout our rooms");
           }
@@ -143,7 +148,7 @@ function AccomodationCard({ title }) {
     let checkOut = new Date(obj.checkOut);
 
     let availability = true;
-    console.log({obj})
+    console.log({ obj });
     array.forEach((booking) => {
       let bookingCheckIn = new Date(booking.checkIn);
       let bookingCheckOut = new Date(booking.checkOut);
@@ -174,79 +179,70 @@ function AccomodationCard({ title }) {
         },
       ],
       mode: "payment",
-      successUrl: `http://localhost:5174/success`,
-      cancelUrl: `http://localhost:5174/cancel`,
+      successUrl: `http://localhost:5173/success`,
+      cancelUrl: `http://localhost:5173/cancel`,
       customerEmail: "customer@email.com",
     });
     console.warn(error.message);
   }
 
-  
+  function goBack() {
+    navigation("/");
+  }
+
   return (
     <div className="AccomodationCard">
-      <h3 className="acc-name">Name</h3>
-      <p className="acc-address">Address</p>
+      <IoMdArrowBack onClick={goBack} />
+      <h3 className="acc-name">{accomodation && accomodation.room_name}</h3>
+      <p className="acc-address">{accomodation && accomodation.address}</p>
       <div className="slides" ref={slidesRef}>
         {images.map((image, ind) => {
           return (
             <div
-            className={ind === activeImageNum ? "currentSlide active" : "currentSlide"}
-            key={ind}
-         >
-            {ind === activeImageNum && <img src={image} className="image" />}
-         </div>
+              className={
+                ind === activeImageNum ? "currentSlide active" : "currentSlide"
+              }
+              key={ind}
+            >
+              {ind === activeImageNum && <img src={image} />}
+            </div>
             //<img key={i} className="image" alt="sliderImage" src={image} />
           );
         })}
-        <button
-          className="prev"
-          onClick={prevSlide}
-        >
-          prev
+        <button className="prev" onClick={prevSlide}>
+          <IoIosArrowBack />
         </button>
-        <button
-          className="next"
-        onClick={nextSlide}
-        >
-          next
+        <button className="next" onClick={nextSlide}>
+          <IoIosArrowForward />
         </button>
       </div>
       <button className="share-btn">Share</button>
       <div className="accomodation-info">
-        <h4>Price</h4>
+        <h4>{accomodation && accomodation.price}</h4>
         <div className="acc-info-section">
-          <h5>Hotel Facilities</h5>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam cum
-            facilis fuga ipsa consectetur atque suscipit totam rem aliquid quas
-            delectus velit numquam nemo, culpa asperiores perferendis, eius sint
-            placeat?
-          </p>
+          <h5>Description</h5>
+          <p>{accomodation && accomodation.description}</p>
+        </div>
+        <div className="acc-info-section">
+          <h5>Amenties</h5>
+          <p>{accomodation && accomodation.amenities}</p>
         </div>
         <div className="acc-info-section">
           <h5>Policies</h5>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias
-            aperiam illo amet et, voluptates possimus itaque rem accusamus
-            repudiandae quas dolor vel placeat quis ducimus laudantium. Modi hic
-            ea amet?
-          </p>
+          <p>{accomodation && accomodation.policies}</p>
         </div>
-        <div className="acc-details">
-          <h5>Policies</h5>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid,
-            consectetur labore odit quos temporibus quasi dignissimos placeat
-            facere atque nam quo nulla quod, possimus nesciunt aut? Aperiam
-            soluta amet voluptatibus.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
-            exercitationem quos repudiandae delectus eaque, autem odit, qui
-            facilis fugit odio molestiae, similique voluptatibus nobis molestias
-            perferendis magnam nihil velit ea?
-          </p>
+        <div className="acc-info-section">
+          <h5>Reviews</h5>
+          {accomodation &&
+            accomodation.reviews.map((review, i) => (
+              <div key={i}>
+                <h5>{review.rating}</h5>
+                <h5>{review.reviewText}</h5>
+                <p>Reviewed on: {review.date}</p>
+              </div>
+            ))}
         </div>
+
         <div className="acc-btns">
           <button className="book-btn" onClick={book}>
             Book

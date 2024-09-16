@@ -7,29 +7,29 @@ import { db } from "../../config/firebase";
 import { useSelector } from "react-redux";
 function ResultCard({ result }) {
   const [images, setImages] = useState([]);
+  const [liked, setLiked] = useState(false);
 
   const navigation = useNavigate();
 
   const storage = getStorage();
   useEffect(() => {
     const fetchImages = async () => {
-       const imagesRef = ref(storage, result.id);
+      const imagesRef = ref(storage, result.id);
 
       let results = await listAll(imagesRef);
-          let urlPromises = results.items.map(imageRef => getDownloadURL(imageRef));
-      
-          return Promise.all(urlPromises);
-  
-      }
-      
-      const loadImages = async () => {
-          const urls = await fetchImages();
-          setImages(urls);
-      }
-      loadImages();
+      let urlPromises = results.items.map((imageRef) =>
+        getDownloadURL(imageRef)
+      );
 
+      return Promise.all(urlPromises);
+    };
+
+    const loadImages = async () => {
+      const urls = await fetchImages();
+      setImages(urls);
+    };
+    loadImages();
   }, []);
-
 
   const user = useSelector((state) => state.user.currentUser);
   function handleNavigateSubPage() {
@@ -42,6 +42,7 @@ function ResultCard({ result }) {
 
       await updateDoc(userRef, {
         favourites: arrayUnion({
+          id: result.id,
           room_name: result.room_name,
           rating: result.rating,
         }),
@@ -51,11 +52,12 @@ function ResultCard({ result }) {
     } catch (err) {
       console.log(err);
     }
+    setLiked(true);
   }
   return (
     <div className="ResultCard">
       <div className="img" onClick={handleNavigateSubPage}>
-        <img src={images[0]}/>
+        <img src={images[0]} />
       </div>
       <div className="result-card-info">
         <div className="side-one">
@@ -66,8 +68,11 @@ function ResultCard({ result }) {
         </div>
         <div className="side-two">
           <p>{result.price}</p>
-          <button className="like-btn" onClick={addToFavourites}>
-            Like
+          <button
+            className="like-btn"
+            onClick={liked ? console.log("liked") : addToFavourites}
+          >
+            {liked ? "Liked" : "Like"}
           </button>
         </div>
       </div>

@@ -10,6 +10,7 @@ export const accomodationsSlice = createSlice({
     checkInOut: {},
     guests: {},
     location: "",
+    filters: {},
   },
   reducers: {
     setSearchTerm: (state, action) => {
@@ -27,8 +28,11 @@ export const accomodationsSlice = createSlice({
     setCheckInOut: (state, action) => {
       state.checkInOut = action.payload;
     },
-    setGuests:(state, action) => {
+    setGuests: (state, action) => {
       state.guests = action.payload;
+    },
+    setFilters: (state, action) => {
+      state.filters = action.payload;
     },
   },
 });
@@ -38,7 +42,8 @@ export const {
   setAccomodations,
   setBookings,
   setCheckInOut,
-  setGuests
+  setGuests,
+  setFilters,
 } = accomodationsSlice.actions;
 
 export default accomodationsSlice.reducer;

@@ -12,7 +12,7 @@ function Reviews() {
     if (accomodation.reviews.length > 0) {
       accomodation.reviews.forEach((review) => {
         if (review.userId === user) {
-          reviews.push(review);
+          reviews.push({ ...review, roomId: accomodation.id });
         }
       });
     }

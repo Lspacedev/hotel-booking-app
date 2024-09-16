@@ -6,7 +6,7 @@ import NavPath from "./NavPath";
 import Filters from "./Filters";
 import Results from "./Results";
 import { useSelector, useDispatch } from "react-redux";
-import { useSearchParams, useParams, Outlet } from "react-router-dom";
+import { useSearchParams, useParams, Outlet, Link } from "react-router-dom";
 import { useEffect } from "react";
 
 import { setSearchResults } from "../../app/accomodationsSlice";
@@ -16,31 +16,43 @@ function ResultsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
   const guestsN = searchParams.get("guests") || "";
-
-
+  const filterTerm = searchParams.get("filters") || "";
   const dispatch = useDispatch();
   const accomodations = useSelector(
     (state) => state.accomodations.accomodations
   );
   const searchT =
     useSelector((state) => state.accomodations.searchTerm?.title) || "";
-    const guestsNum =
+  const guestsNum =
     useSelector((state) => state.accomodations.guests?.num) || "";
+  const filters = useSelector((state) => state.accomodations.filters?.filter);
   useEffect(() => {
     //if there is no sub page(:result_name)
     if (searchT !== "") {
       if (guestsNum !== "") {
-        setSearchParams({ search: searchT, guests: guestsNum });
-      }else{
-      setSearchParams({ search: searchT });
+        if (filters !== "" && typeof filters !== "undefined") {
+          setSearchParams({
+            search: searchT,
+            guests: guestsNum,
+            filters: filters,
+          });
+        } else {
+          setSearchParams({ search: searchT, guests: guestsNum });
+        }
+      } else if (filters !== "" && typeof filters !== "undefined") {
+        setSearchParams({
+          search: searchT,
+          filters: filters,
+        });
+      } else {
+        setSearchParams({ search: searchT });
       }
-    
     }
-
-  }, [searchT, guestsNum]);
+    if (searchTerm !== "") {
+    }
+  }, [searchT, guestsNum, filters]);
 
   useEffect(() => {
-    console.log({ searchTerm, accomodations });
     if (
       searchTerm.length > 0 &&
       typeof accomodations !== "undefined" &&
@@ -53,14 +65,23 @@ function ResultsPage() {
             .match(searchTerm.toLowerCase()) ||
           accomodation.room_type.toLowerCase().match(searchTerm.toLowerCase())
       );
-      if(guestsN !=='') {
-        console.log(guestsN)
-        let filteredAccomodationsGuests = filteredAccomodations.filter((accomodation) =>
-          accomodation.guests === guestsN);
-        console.log(filteredAccomodationsGuests)
+      if (guestsN !== "") {
+        console.log(guestsN);
+        let filteredAccomodationsGuests = filteredAccomodations.filter(
+          (accomodation) => accomodation.guests === guestsN
+        );
+        console.log(filteredAccomodationsGuests);
         dispatch(setSearchResults(filteredAccomodationsGuests));
+      } else {
+        dispatch(setSearchResults(filteredAccomodations));
+      }
+      if (filterTerm !== "") {
+        let filteredAccomodationsFilter = filteredAccomodations.filter(
+          (accomodation) => accomodation.room_type === filterTerm
+        );
 
-      }else {
+        dispatch(setSearchResults(filteredAccomodationsFilter));
+      } else {
         dispatch(setSearchResults(filteredAccomodations));
       }
     }
@@ -68,7 +89,7 @@ function ResultsPage() {
     return () => {
       //setSearchResults([]);
     };
-  }, [searchTerm,guestsN, accomodations, dispatch]);
+  }, [searchTerm, guestsN, accomodations, filterTerm, dispatch]);
 
   return (
     <div className="ResultsPage">
@@ -76,9 +97,12 @@ function ResultsPage() {
       <div className="search-div">
         <SearchAccomodationsResults />
       </div>
-      <NavPath>
-        <a href="#">Test</a>/<a href="#">Test</a>/<a href="#">Test</a>
-      </NavPath>
+      {searchTerm !== "" && (
+        <NavPath>
+          <Link to="/">Home</Link> /
+          <Link to={`/results?search=${searchTerm}`}>{searchTerm}</Link>
+        </NavPath>
+      )}
       {result_id !== "" && typeof result_id !== "undefined" ? (
         <Outlet />
       ) : (

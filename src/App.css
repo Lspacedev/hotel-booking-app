@@ -1,5 +1,5 @@
 * {
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -46,13 +46,20 @@ body {
 }
 
 .showcase-img {
+  height: inherit;
   flex: 90%;
   width: 100%;
+
   background-color: #e0e0e0;
 
   position: relative;
 }
-
+.showcase-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+}
 .showcase-bottom {
   flex: 10%;
   background-color: #adadad;
@@ -65,6 +72,7 @@ body {
   transform: translate(-50%, 0%);
   width: 70%;
   font-size: 2.5rem;
+  color: white;
 }
 
 .SearchAccomodations {
@@ -115,6 +123,10 @@ body {
   height: 300px;
   width: 300px;
   background-color: #bbb;
+}
+.Card img {
+  height: 100%;
+  width: 100%;
 }
 
 .heading {
@@ -170,9 +182,14 @@ body {
 .NavPath {
   margin-left: 15%;
 }
+.sort-map {
+  display: flex;
+  align-items: start;
+}
 .results-main {
   display: flex;
   width: 80%;
+  height: 700px;
   margin: 0px auto;
 }
 
@@ -217,7 +234,7 @@ body {
 .AccomodationCard .slides {
   height: 400px;
   width: 70%;
-  background-color: #bbb;
+
   position: relative;
   display: flex;
 
@@ -226,8 +243,9 @@ body {
   transition: scroll 0.3s ease-in-out;
 }
 
-.slide {
-  display: none;
+.slides div {
+  height: 100%;
+  width: 100%;
 }
 
 .slides img {
@@ -243,13 +261,13 @@ body {
   top: 50%;
   width: auto;
   margin-top: -22px;
-  padding: 16px;
+  padding: 5px;
   color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+
+  font-size: 2rem;
+  border: none;
+  background-color: transparent;
+  border: 1px solid #a6a670;
 }
 
 /* Position the "next button" to the right */
@@ -261,7 +279,6 @@ body {
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .share-btn {
@@ -367,6 +384,10 @@ body {
   background-color: #bbb;
 }
 
+.BookingCard img {
+  width: 100%;
+  height: 100%;
+}
 .booking-card-info {
   flex: 70%;
   display: flex;
@@ -430,6 +451,11 @@ body {
   background-color: #bbb;
 }
 
+.img-rating img {
+  width: 100%;
+  height: 100%;
+}
+
 .img-rating p {
   margin: 5px;
 }
@@ -468,6 +494,10 @@ body {
   width: 200px;
   height: 200px;
   background-color: #bbb;
+}
+.FavouriteCard img {
+  width: 100%;
+  height: 100%;
 }
 
 /* History */
@@ -949,7 +979,15 @@ select {
   height: 80%;
   border: 1px dashed black;
 }
-
+.profile-pic img {
+  width: 250px;
+  height: 250px;
+}
+.profile-icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
 /* Footer */
 
 .footer {

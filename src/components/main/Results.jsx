@@ -1,7 +1,12 @@
 import ResultCard from "./ResultCard";
 import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function Results() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchTerm = searchParams.get("search") || "";
+  const searchFilters = searchParams.get("filters") || "";
   const accomodations = useSelector(
     (state) => state.accomodations.accomodations
   );
@@ -14,12 +19,13 @@ function Results() {
 
   return (
     <div className="Results">
-      <div>3 rooms found in Location</div>
+      <div>
+        {searchResults.length} rooms found for {searchTerm}
+      </div>
       <div className="sort-map">
         <select>
           <option>Price</option>
         </select>
-        <button className="show-map-btn">Show map</button>
       </div>
       {typeof searchResults !== "undefined" && searchResults.length > 0 ? (
         <div className="results-div">

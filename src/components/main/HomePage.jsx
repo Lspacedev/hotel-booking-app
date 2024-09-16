@@ -10,15 +10,15 @@ function HomePage() {
       <Nav />
       <ShowCase />
       <Categories heading="Hotels">
-        <Card title="Pretoria" />
-        <Card title="Johannesburg" />
-        <Card title="Cape Town" />
+        <Card title="Pretoria" url="images/pretoria.jpg" />
+        <Card title="Johannesburg" url="images/jozi.jpg" />
+        <Card title="Cape Town" url="images/cape.jpg" />
       </Categories>
 
       <Categories heading="Room Types">
-        <Card title="Standard" />
-        <Card title="Deluxe" />
-        <Card title="Suite" />
+        <Card title="Standard" url="images/standard.jpg" />
+        <Card title="Deluxe" url="images/deluxe.jpg" />
+        <Card title="Suite" url="images/suite.jpg" />
       </Categories>
 
       <Footer />

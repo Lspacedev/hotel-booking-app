@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { setSearchTerm } from "../../app/accomodationsSlice";
 import { useDispatch } from "react-redux";
-function Card({ img, title }) {
+function Card({ title, url }) {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   function searchCard() {
@@ -10,7 +10,9 @@ function Card({ img, title }) {
   }
   return (
     <div className="Card" onClick={searchCard}>
-      <div className="img"></div>
+      <div className="img">
+        <img src={url} />
+      </div>
       <div>{title}</div>
     </div>
   );

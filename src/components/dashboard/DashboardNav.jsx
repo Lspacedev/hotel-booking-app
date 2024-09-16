@@ -5,7 +5,9 @@ function DashboardNav() {
       <Link to="/">
         <p>Discover</p>
       </Link>
-      <div className="profile">profile</div>
+      <Link to="/home/profile">
+        <div className="profile">profile</div>{" "}
+      </Link>
     </div>
   );
 }

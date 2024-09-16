@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { db } from "../../config/firebase";
-import { collection, doc, addDoc, arrayUnion } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
+import bcrypt from "bcryptjs-react";
+
 import {
   getStorage,
   getDownloadURL,
@@ -10,7 +12,6 @@ import {
   listAll,
   uploadBytes,
 } from "firebase/storage";
-import { storage } from "../../config/firebase";
 
 function UserRegistration() {
   const [userDetails, setUserDetails] = useState({
@@ -20,8 +21,7 @@ function UserRegistration() {
     password: "",
   });
   const [profilePic, setProfilePic] = useState("");
-
-
+  const storage = getStorage();
   function handleChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
@@ -55,8 +55,10 @@ function UserRegistration() {
       userDetails.email,
       userDetails.password
     )
-      .then(() => {
-        addUser();
+      .then((res) => {
+        const userId = res.user.uid;
+        console.log(userId);
+        addUser(userId);
         alert("Registered successfully");
       })
       .catch((err) => {
@@ -64,16 +66,26 @@ function UserRegistration() {
       });
   }
 
-  async function addUser() {
+  async function addUser(userId) {
     try {
-      const usersCollection = collection(db, "users");
-      const userRef = doc(usersCollection, user);
+      console.log({ userId });
+      const salt = await bcrypt.genSalt();
+      let encryptedPass = await bcrypt.hash(userDetails.password, salt);
 
-      const docRef = await addDoc(userRef, {name:userDetails.name, surname: userDetails.surname, email:userDetails.email});
-      uploadFile(docRef.id, profilePic);
+      // const usersCollection = collection(db, "users");
+
+      // const userRef = doc(usersCollection, userId);
+      await setDoc(doc(db, "users", userId), {
+        name: userDetails.name,
+        surname: userDetails.surname,
+        email: userDetails.email,
+        password: encryptedPass,
+      });
+
+      uploadFile(userId, profilePic);
       alert("added user");
     } catch (err) {
-      console.log(err);
+      console.log(err.message);
     }
   }
   return (
