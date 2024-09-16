@@ -1,6 +1,8 @@
 import { useState } from "react";
-
-function Profile() {
+import { useSelector } from "react-redux";
+import { deleteDoc, updateDoc, collection, doc } from "firebase/firestore";
+import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
+function UserProfile() {
   const [userUpdate, setUserUpdate] = useState({
     name: "",
     surname: "",
@@ -11,7 +13,9 @@ function Profile() {
   const [update, setUpdate] = useState(false);
   const isLoading = false;
   //get user from firestore
-  const user = {};
+  const users = useSelector((state) => state.user.users);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const [user] = users.filter((user)=>user.id === currentUser);
   function handleDeleteAccount() {
     //delet user in firestore
     navigation("/");
@@ -128,6 +132,7 @@ function Profile() {
             </div>
 
             <div className="user-pass">
+             {JSON.stringify(user)}
               <div className="pass">
                 <h4>Password:</h4>
                 {update ? (
@@ -156,9 +161,9 @@ function Profile() {
                 {update ? "Submit" : "Update"}
               </button>
 
-              <button id="account-delete" onClick={handleDeleteAccount}>
+              {/* <button id="account-delete" onClick={handleDeleteAccount}>
                 Delete my account
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
@@ -166,4 +171,4 @@ function Profile() {
     </div>
   );
 }
-export default Profile;
+export default UserProfile;

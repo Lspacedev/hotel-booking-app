@@ -6,6 +6,7 @@ import UserDashboard from "./components/user/UserDashboard";
 import "./App.css";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import UserLogin from "./components/login/UserLogin";
+import UserProfile from "./components/profiles/UserProfile";
 import AdminLogin from "./components/login/AdminLogin";
 import UserRegistration from "./components/registration/UserRegistration";
 import Checkout from "./components/checkout/Checkout";
@@ -54,6 +55,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log('refresh -app')
     fetchAccomodations();
     fetchUsers();
   }, []);
@@ -87,6 +89,8 @@ function App() {
       console.log(error);
     }
   }
+
+  
   const user = useSelector((state) => state.user.currentUser);
 
   return (
@@ -119,8 +123,8 @@ function App() {
               />
               <Route path="lists" element={<DisplayLists />}>
                 <Route path=":list_name" element={<List />} />
-              </Route>
-              <Route path="profile" element={<Profile />} /> */}
+              </Route>*/}
+              <Route path="profile" element={<UserProfile />} /> 
             </Route>
           </Route>
 

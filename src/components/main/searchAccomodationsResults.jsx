@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { setSearchTerm, setCheckInOut } from "../../app/accomodationsSlice";
+import { setSearchTerm, setCheckInOut, setGuests } from "../../app/accomodationsSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 function SearchAccomodationsResults() {
@@ -8,6 +8,7 @@ function SearchAccomodationsResults() {
     checkIn: "",
     checkOut: "",
   });
+  const [guests, setGuestsNum] = useState(0)
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
   const dispatch = useDispatch();
@@ -27,13 +28,20 @@ function SearchAccomodationsResults() {
     const { name, value } = e.target;
     setCheckInCheckOut((prev) => ({ ...prev, [name]: value }));
   }
+
+  function handleGuestsChange(e) {
+    e.preventDefault();
+    setGuestsNum(e.target.value);
+  }
   function handleSearchSubmit(e) {
     e.preventDefault();
 
     //setSearchParams({ search: searchInput });
     dispatch(setSearchTerm({ title: searchInput }));
-    console.log({ checkInOut });
-    dispatch(setCheckInOut(checkInOut));
+    if(checkInOut.checkIn !== "" && checkInOut.checkOut !== ""){
+      dispatch(setCheckInOut(checkInOut));
+    }
+    dispatch(setGuests({num: guests}));
   }
 
   return (
@@ -45,7 +53,7 @@ function SearchAccomodationsResults() {
         Checkout
         <input type="date" name="checkOut" onChange={handleCheckInOut} />
       </label>
-      <input type="text" placeholder="Guests" />
+      <input type="number" name="guests" placeholder="guests" onChange={handleGuestsChange}/>
       <input type="submit" onClick={handleSearchSubmit} />
     </div>
   );

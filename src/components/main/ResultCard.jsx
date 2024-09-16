@@ -1,9 +1,36 @@
 import { useNavigate } from "react-router-dom";
 import { collection, doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
+import { useEffect, useRef, useState } from "react";
+
 import { db } from "../../config/firebase";
 import { useSelector } from "react-redux";
 function ResultCard({ result }) {
+  const [images, setImages] = useState([]);
+
   const navigation = useNavigate();
+
+  const storage = getStorage();
+  useEffect(() => {
+    const fetchImages = async () => {
+       const imagesRef = ref(storage, result.id);
+
+      let results = await listAll(imagesRef);
+          let urlPromises = results.items.map(imageRef => getDownloadURL(imageRef));
+      
+          return Promise.all(urlPromises);
+  
+      }
+      
+      const loadImages = async () => {
+          const urls = await fetchImages();
+          setImages(urls);
+      }
+      loadImages();
+
+  }, []);
+
+
   const user = useSelector((state) => state.user.currentUser);
   function handleNavigateSubPage() {
     navigation(`/results/${result.id}`);
@@ -27,7 +54,9 @@ function ResultCard({ result }) {
   }
   return (
     <div className="ResultCard">
-      <div className="img" onClick={handleNavigateSubPage}></div>
+      <div className="img" onClick={handleNavigateSubPage}>
+        <img src={images[0]}/>
+      </div>
       <div className="result-card-info">
         <div className="side-one">
           <h4>{result.room_name}</h4>

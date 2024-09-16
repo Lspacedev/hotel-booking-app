@@ -12,28 +12,35 @@ function AccomodationCard({ title }) {
   const { result_id } = useParams();
   const slidesRef = useRef(null);
   const [images, setImages] = useState([]);
-
+  const [activeImageNum, setCurrent] = useState(0);
+  const length = images.length;
+  const nextSlide = () => {
+     setCurrent(activeImageNum === length - 1 ? 0 : activeImageNum + 1);
+  };
+  const prevSlide = () => {
+     setCurrent(activeImageNum === 0 ? length - 1 : activeImageNum - 1);
+  };
+  // if (!Array.isArray(images) || images.length <= 0) {
+  //    return null;
+  // }
   const storage = getStorage();
-  const scrollAmount = 100;
   useEffect(() => {
-    const imagesRef = ref(storage, result_id);
-    listAll(imagesRef)
-      .then((res) => {
-        res.prefixes.forEach((folderRef) => {
-          console.log(folderRef);
-          // All the prefixes under listRef.
-          // You may call listAll() recursively on them.
-        });
-        console.log(res);
-        res.items.forEach(async (itemRef) => {
-          const url = await getDownloadURL(itemRef);
-          // All the items under listRef.
-          setImages((prev) => [...prev, url]);
-        });
-      })
-      .catch((error) => {
-        // Uh-oh, an error occurred!
-      });
+    const fetchImages = async () => {
+       const imagesRef = ref(storage, result_id);
+
+      let result = await listAll(imagesRef);
+          let urlPromises = result.items.map(imageRef => getDownloadURL(imageRef));
+      
+          return Promise.all(urlPromises);
+  
+      }
+      
+      const loadImages = async () => {
+          const urls = await fetchImages();
+          setImages(urls);
+      }
+      loadImages();
+
   }, []);
 
   //user id , acccomodation id
@@ -49,11 +56,14 @@ function AccomodationCard({ title }) {
   const checkInOut = useSelector((state) => state.accomodations.checkInOut);
 
   async function book() {
+    console.log(checkInOut)
     if (user === "") {
       alert("Please Login or Register an account.");
       //navigation("/login");
     } else {
       //Check if check in and out dates have been set
+      console.log({checkInOut});
+
       if (JSON.stringify(checkInOut) !== "{}") {
         console.log(accomodation.bookings.length > 0);
         if (accomodation.bookings.length > 0) {
@@ -87,7 +97,7 @@ function AccomodationCard({ title }) {
             } catch (err) {
               console.log(err);
             }
-            handleCheckout();
+           handleCheckout();
           } else {
             alert("Room is not available. Checkout our rooms");
           }
@@ -133,7 +143,7 @@ function AccomodationCard({ title }) {
     let checkOut = new Date(obj.checkOut);
 
     let availability = true;
-
+    console.log({obj})
     array.forEach((booking) => {
       let bookingCheckIn = new Date(booking.checkIn);
       let bookingCheckOut = new Date(booking.checkOut);
@@ -170,32 +180,33 @@ function AccomodationCard({ title }) {
     });
     console.warn(error.message);
   }
+
+  
   return (
     <div className="AccomodationCard">
-      {JSON.stringify(images)}
       <h3 className="acc-name">Name</h3>
       <p className="acc-address">Address</p>
       <div className="slides" ref={slidesRef}>
-        {images.map((image, i) => {
+        {images.map((image, ind) => {
           return (
-            <img key={i} className="image" alt="sliderImage" src={image} />
+            <div
+            className={ind === activeImageNum ? "currentSlide active" : "currentSlide"}
+            key={ind}
+         >
+            {ind === activeImageNum && <img src={image} className="image" />}
+         </div>
+            //<img key={i} className="image" alt="sliderImage" src={image} />
           );
         })}
         <button
           className="prev"
-          onClick={() => {
-            const container = slidesRef.current;
-            container.scrollLeft -= scrollAmount; // Scroll left by the specified amount
-          }}
+          onClick={prevSlide}
         >
           prev
         </button>
         <button
           className="next"
-          onClick={() => {
-            const container = slidesRef.current;
-            container.scrollLeft += scrollAmount; // Scroll right by the specified amount
-          }}
+        onClick={nextSlide}
         >
           next
         </button>

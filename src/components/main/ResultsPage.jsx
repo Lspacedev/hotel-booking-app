@@ -15,6 +15,8 @@ function ResultsPage() {
   const { result_id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
+  const guestsN = searchParams.get("guests") || "";
+
 
   const dispatch = useDispatch();
   const accomodations = useSelector(
@@ -22,12 +24,20 @@ function ResultsPage() {
   );
   const searchT =
     useSelector((state) => state.accomodations.searchTerm?.title) || "";
+    const guestsNum =
+    useSelector((state) => state.accomodations.guests?.num) || "";
   useEffect(() => {
     //if there is no sub page(:result_name)
     if (searchT !== "") {
+      if (guestsNum !== "") {
+        setSearchParams({ search: searchT, guests: guestsNum });
+      }else{
       setSearchParams({ search: searchT });
+      }
+    
     }
-  }, [searchT]);
+
+  }, [searchT, guestsNum]);
 
   useEffect(() => {
     console.log({ searchTerm, accomodations });
@@ -43,13 +53,22 @@ function ResultsPage() {
             .match(searchTerm.toLowerCase()) ||
           accomodation.room_type.toLowerCase().match(searchTerm.toLowerCase())
       );
-      dispatch(setSearchResults(filteredAccomodations));
+      if(guestsN !=='') {
+        console.log(guestsN)
+        let filteredAccomodationsGuests = filteredAccomodations.filter((accomodation) =>
+          accomodation.guests === guestsN);
+        console.log(filteredAccomodationsGuests)
+        dispatch(setSearchResults(filteredAccomodationsGuests));
+
+      }else {
+        dispatch(setSearchResults(filteredAccomodations));
+      }
     }
 
     return () => {
       //setSearchResults([]);
     };
-  }, [searchTerm, accomodations, dispatch]);
+  }, [searchTerm,guestsN, accomodations, dispatch]);
 
   return (
     <div className="ResultsPage">

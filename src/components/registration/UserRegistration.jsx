@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
+import { db } from "../../config/firebase";
+import { collection, doc, addDoc, arrayUnion } from "firebase/firestore";
+import {
+  getStorage,
+  getDownloadURL,
+  ref,
+  listAll,
+  uploadBytes,
+} from "firebase/storage";
+import { storage } from "../../config/firebase";
 
 function UserRegistration() {
   const [userDetails, setUserDetails] = useState({
@@ -8,25 +18,36 @@ function UserRegistration() {
     surname: "",
     email: "",
     password: "",
-    profilePic: "",
   });
+  const [profilePic, setProfilePic] = useState("");
+
 
   function handleChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
     setUserDetails((prev) => ({ ...prev, [name]: value }));
   }
-  function handleImageUpload(e) {
-    let input = document.getElementById("profile-pic");
-    var fReader = new FileReader();
-    fReader.readAsDataURL(input.files[0]);
-    fReader.onloadend = function (event) {
-      setUserDetails({
-        ...userDetails,
-        profilePic: event.target.result,
+  const uploadFile = (id, img) => {
+    if (img === null) {
+      alert("Please select an image");
+      return;
+    }
+    const imageRef = ref(storage, `${id}/${img.name}`);
+
+    uploadBytes(imageRef, img)
+      .then((snapshot) => {
+        getDownloadURL(snapshot.ref)
+          .then((url) => {
+            console.log(url);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    };
-  }
+  };
 
   function register() {
     createUserWithEmailAndPassword(
@@ -35,6 +56,7 @@ function UserRegistration() {
       userDetails.password
     )
       .then(() => {
+        addUser();
         alert("Registered successfully");
       })
       .catch((err) => {
@@ -42,6 +64,18 @@ function UserRegistration() {
       });
   }
 
+  async function addUser() {
+    try {
+      const usersCollection = collection(db, "users");
+      const userRef = doc(usersCollection, user);
+
+      const docRef = await addDoc(userRef, {name:userDetails.name, surname: userDetails.surname, email:userDetails.email});
+      uploadFile(docRef.id, profilePic);
+      alert("added user");
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="UserRegistration">
       <div className="register-img">
@@ -116,7 +150,9 @@ function UserRegistration() {
                 type="file"
                 id="profile-pic"
                 name="pic"
-                onChange={(e) => handleImageUpload(e)}
+                onChange={(e) => {
+                  setProfilePic(e.target.files[0]);
+                }}
               />
             </label>
           </div>
