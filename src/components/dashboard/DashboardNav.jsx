@@ -1,13 +1,20 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 function DashboardNav() {
+  const navigation = useNavigate();
+  function navigateDiscover() {
+    navigation("/");
+  }
+  function navigateProfile() {
+    navigation("/home/profile");
+  }
   return (
     <div className="DashboardNav">
-      <Link to="/">
-        <p>Discover</p>
-      </Link>
-      <Link to="/home/profile">
-        <div className="profile">profile</div>{" "}
-      </Link>
+      <p onClick={navigateDiscover}>Discover</p>
+      <div className="profile" onClick={navigateProfile}>
+        Profile
+      </div>
     </div>
   );
 }

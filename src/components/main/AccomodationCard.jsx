@@ -18,6 +18,7 @@ function AccomodationCard({ title }) {
   const slidesRef = useRef(null);
   const [images, setImages] = useState([]);
   const [activeImageNum, setCurrent] = useState(0);
+  const [isShared, setIsShared] = useState(false);
   const length = images.length;
   const nextSlide = () => {
     setCurrent(activeImageNum === length - 1 ? 0 : activeImageNum + 1);
@@ -189,10 +190,13 @@ function AccomodationCard({ title }) {
   function goBack() {
     navigation("/");
   }
+  function handleShare() {
+    setIsShared(!isShared);
+  }
 
   return (
     <div className="AccomodationCard">
-      <IoMdArrowBack onClick={goBack} />
+      <IoMdArrowBack onClick={goBack} className="back" />
       <h3 className="acc-name">{accomodation && accomodation.room_name}</h3>
       <p className="acc-address">{accomodation && accomodation.address}</p>
       <div className="slides" ref={slidesRef}>
@@ -216,7 +220,10 @@ function AccomodationCard({ title }) {
           <IoIosArrowForward />
         </button>
       </div>
-      <button className="share-btn">Share</button>
+      <button className="share-btn" onClick={handleShare}>
+        Share
+      </button>
+      {isShared && <code>{`http://localhost:5173/results/${result_id}`}</code>}
       <div className="accomodation-info">
         <h4>{accomodation && accomodation.price}</h4>
         <div className="acc-info-section">

@@ -1,23 +1,22 @@
 * {
   font-family: "Poppins", sans-serif;
 }
-
+.link {
+  text-decoration: none;
+  color: white;
+}
 body {
   margin: 0px;
+  background-color: #ebebeb;
 }
 
 /* Nav */
 .Nav {
   display: flex;
-  justify-content: space-between;
-  padding: 25px;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-
-  color: #626267;
+  justify-content: space-around;
+  gap: 400px;
+  padding: 15px 50px;
+  background-color: white;
 }
 
 .nav-links {
@@ -25,7 +24,13 @@ body {
   align-items: center;
   gap: 15px;
 
-  color: #36363a;
+  color: #626267;
+}
+.nav-links div {
+  cursor: pointer;
+}
+.nav-links button {
+  cursor: pointer;
 }
 
 .nav-links .register-btn {
@@ -38,7 +43,7 @@ body {
 
 /* ShowCase */
 .ShowCase {
-  height: 500px;
+  height: 450px;
   display: flex;
   flex-direction: column;
 
@@ -58,11 +63,17 @@ body {
   height: 100%;
   width: 100%;
   object-fit: cover;
-  opacity: 0.7;
+  opacity: 0.9;
 }
 .showcase-bottom {
-  flex: 10%;
-  background-color: #adadad;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 50px;
+  z-index: 1;
+  background: #36363a;
+  opacity: 0.7;
+  backdrop-filter: saturate(180%) blur(40px);
 }
 
 .ShowCase h3 {
@@ -73,6 +84,7 @@ body {
   width: 70%;
   font-size: 2.5rem;
   color: white;
+  text-align: center;
 }
 
 .SearchAccomodations {
@@ -89,10 +101,17 @@ body {
   background-color: white;
 
   border-radius: 5px;
+  z-index: 2;
+}
+.SearchAccomodations label {
+  color: #626267;
+  padding: 0px 15px;
+  display: flex;
+  align-items: center;
 }
 
 .SearchAccomodations input {
-  flex: 1;
+  flex: 2;
   padding: 15px 0px;
   border-radius: 5px;
   border: none;
@@ -102,16 +121,24 @@ body {
 }
 
 .SearchAccomodations input[type="submit"] {
+  flex: 1;
   padding: 15px 32px;
   border: 1px solid #a6a670;
-  background-color: white;
+  background-color: #a6a670;
+  color: white;
+  font-weight: 700;
 }
-
+.SearchAccomodations input[type="submit"]:hover {
+  background-color: #36363a;
+  cursor: pointer;
+}
 /* Categories */
 .Categories {
-  margin: 10px 0px 25px 0px;
+  margin: 10px 100px 25px 0px;
 }
-
+.Categories .heading {
+  margin-left: 150px;
+}
 .cards {
   display: flex;
   justify-content: space-evenly;
@@ -122,24 +149,37 @@ body {
 .Card .img {
   height: 300px;
   width: 300px;
-  background-color: #bbb;
 }
 .Card img {
   height: 100%;
   width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
 }
-
+.Card .title {
+  color: #36363a;
+  font-weight: 500;
+}
 .heading {
-  margin-left: 10%;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 25px;
+  color: #36363a;
 }
 
 /** RESULTS PAGE **/
+.ResultsPage {
+  height: calc(100% - 220px);
+}
 .search-div {
-  background-color: #36363a;
+  background: linear-gradient(#5c5c69, #36363a);
   height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  backdrop-filter: saturate(180%) blur(40px);
 }
 
 .SearchAccomodationsResults {
@@ -164,8 +204,13 @@ body {
 
 .SearchAccomodationsResults input[type="submit"] {
   padding: 15px 32px;
-  border: 1px solid #a6a670;
-  background-color: white;
+  background-color: #a6a670;
+  color: white;
+  font-weight: 400;
+  cursor: pointer;
+}
+.SearchAccomodationsResults input[type="submit"]:hover {
+  background-color: #626267;
 }
 
 /* Filters */
@@ -177,12 +222,13 @@ body {
 
 .Results {
   flex: 90%;
+
   padding-left: 5px;
 }
 .NavPath {
   margin-left: 15%;
 }
-.sort-map select{
+.sort-map select {
   width: 150px;
 }
 .Filters iframe {
@@ -192,7 +238,7 @@ body {
 .results-main {
   display: flex;
   width: 80%;
-  height: 700px;
+
   margin: 0px auto;
 }
 
@@ -204,12 +250,25 @@ body {
 .ResultCard {
   display: flex;
   gap: 15px;
-
+  background-color: white;
   box-shadow: 1px 1px 5px #bbb;
+  border-radius: 10px;
+}
+.like-btn {
+  background-color: #a6a670;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.like-btn:hover {
+  background-color: #777737;
 }
 .ResultCard .img {
   flex: 30%;
-  background-color: #bbb;
+  height: 200px;
+  cursor: pointer;
 }
 .ResultCard img {
   width: 100%;
@@ -219,6 +278,7 @@ body {
   flex: 70%;
   display: flex;
   justify-content: space-between;
+  padding: 0px 15px;
 }
 
 .side-two {
@@ -232,11 +292,17 @@ body {
   width: 70%;
   margin: 0px auto;
 
-  padding: 15px;
+  padding: 15px 250px;
+}
+.AccomodationCard .back {
+  cursor: pointer;
+}
+.AccomodationCard .back:hover {
+  color: #a6a670;
 }
 .AccomodationCard .slides {
   height: 400px;
-  width: 70%;
+  width: 800px;
 
   position: relative;
   display: flex;
@@ -245,15 +311,12 @@ body {
   scroll-behavior: smooth;
   transition: scroll 0.3s ease-in-out;
 }
-
-.slides div {
-  height: 100%;
-  width: 100%;
+.currentSlide {
+  width: 800px;
 }
-
 .slides img {
+  width: inherit;
   height: 100%;
-  width: 100%;
 }
 
 /* Next & previous buttons */
@@ -282,6 +345,7 @@ body {
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
+  background-color: #36363a;
 }
 
 .share-btn {
@@ -292,9 +356,16 @@ body {
   color: white;
   border: none;
   padding: 10px 15px;
+  cursor: pointer;
 }
-
+.book-btn:hover {
+  background-color: #626267;
+}
 /* User Dashboard */
+
+.UserProfile {
+  text-align: center;
+}
 
 .UserDashboard {
   height: 100vh;
@@ -318,7 +389,12 @@ body {
 
   box-shadow: 1px 0px 5px #bbb;
 }
-
+.DashboardNav p {
+  cursor: pointer;
+}
+.DashboardNav div {
+  cursor: pointer;
+}
 .Sidebar {
   flex: 2;
   width: 30%;
@@ -330,12 +406,15 @@ body {
   padding: 50px 5px;
   background-color: #626267;
 }
+.Sidebar .logo {
+  color: #a6a670;
+}
 
 .logo {
-  flex: 10%;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  color: #a6a670;
+
+  color: #36363a;
 }
 .logout {
   cursor: pointer;
@@ -665,9 +744,11 @@ body {
 .UserLogin {
   height: 100vh;
   display: flex;
+  justify-content: center;
   align-items: center;
 
   padding: 0px 50px;
+  background-color: white;
 }
 
 .login-to-register p {
@@ -686,6 +767,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0px;
 }
 
 .UserLogin .form {
@@ -993,13 +1075,30 @@ select {
 }
 
 input[type="date"] {
-  width: 25px;
-  margin-left: 2px;
+  padding: 0px;
+  margin-left: 15px;
 }
-input[type='date']:in-range::-webkit-datetime-edit-year-field,input[type='date']:in-range::-webkit-datetime-edit-month-field,input[type='date']:in-range::-webkit-datetime-edit-day-field,input[type='date']:in-range::-webkit-datetime-edit-text{  color: transparent;}
+input[type="date"]:in-range::-webkit-datetime-edit-year-field,
+input[type="date"]:in-range::-webkit-datetime-edit-month-field,
+input[type="date"]:in-range::-webkit-datetime-edit-day-field,
+input[type="date"]:in-range::-webkit-datetime-edit-text {
+  color: transparent;
+}
+code {
+  font-family: Consolas, "courier new";
 
+  background-color: #e4e4e4;
+  padding: 5px;
+  font-size: 105%;
+  box-shadow: 1px 1px 5px #bbb inset;
+  border-radius: 5px;
+}
 /* Footer */
-
+.footer-logo {
+  color: #a6a670;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
 .footer {
   height: 400px;
 

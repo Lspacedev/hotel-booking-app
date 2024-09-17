@@ -15,3 +15,4 @@ Currently, two official plugins are available:
   Derek Jensen (Tysto), Public domain, via Wikimedia Commons
   Photo by Eugenia Remark: https://www.pexels.com/photo/an-elegant-modern-hotel-room-design-16975987/
   Photo by Pixabay: https://www.pexels.com/photo/silver-and-white-desk-lamp-beside-bed-279805/
+  <a href="https://www.freepik.com/free-vector/planning-illustration_19635378.htm#fromView=author&page=2&position=48&uuid=9282d6e1-7d19-423f-9db3-7a65fadf192c">Image by vectorjuice on Freepik</a>

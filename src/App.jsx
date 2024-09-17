@@ -112,6 +112,7 @@ function App() {
 
           <Route element={<ProtectedRoutes auth={user} />}>
             <Route path="home" element={<UserDashboard />}>
+              <Route index element={<Bookings />} />
               <Route path="bookings" element={<Bookings />} />
               <Route path="reviews" element={<Reviews />} />
               <Route path="favourites" element={<Favourites />} />

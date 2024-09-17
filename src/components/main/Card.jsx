@@ -13,7 +13,7 @@ function Card({ title, url }) {
       <div className="img">
         <img src={url} />
       </div>
-      <div>{title}</div>
+      <div className="title">{title}</div>
     </div>
   );
 }

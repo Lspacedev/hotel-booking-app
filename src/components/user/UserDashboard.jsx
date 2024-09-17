@@ -19,19 +19,27 @@ function UserDashboard() {
       })
       .catch((err) => {});
   }
+
+  function navigateBookings() {
+    navigation("/home/bookings");
+  }
+  function navigateReviews() {
+    navigation("/home/reviews");
+  }
+  function navigateFavourites() {
+    navigation("/home/favourites");
+  }
   return (
     <div className="UserDashboard">
       <Sidebar>
-        <Link to="bookings">
-          <div>Bookings</div>{" "}
-        </Link>
+        <div onClick={navigateBookings}>Bookings</div>
+
         {/* <div>Reservations</div> */}
-        <Link to="reviews">
-          <div>Reviews</div>
-        </Link>
-        <Link to="favourites">
-          <div>Favourites</div>
-        </Link>
+
+        <div onClick={navigateReviews}>Reviews</div>
+
+        <div onClick={navigateFavourites}>Favourites</div>
+
         {/* <div>History</div> */}
         <div className="logout" onClick={logOut}>
           Logout

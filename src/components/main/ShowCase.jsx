@@ -5,9 +5,10 @@ function ShowCase() {
       <div className="showcase-img">
         <img src="images/showcase1.jpg" />
       </div>
-      <div className="showcase-bottom"></div>
+
       <h3>Find affordable, quality hotels.</h3>
       <SearchAccomodations />
+      <div className="showcase-bottom"></div>
     </div>
   );
 }
