@@ -182,9 +182,12 @@ body {
 .NavPath {
   margin-left: 15%;
 }
-.sort-map {
-  display: flex;
-  align-items: start;
+.sort-map select{
+  width: 150px;
+}
+.Filters iframe {
+  border: none;
+  outline: none;
 }
 .results-main {
   display: flex;
@@ -988,6 +991,13 @@ select {
   height: 30px;
   border-radius: 50%;
 }
+
+input[type="date"] {
+  width: 25px;
+  margin-left: 2px;
+}
+input[type='date']:in-range::-webkit-datetime-edit-year-field,input[type='date']:in-range::-webkit-datetime-edit-month-field,input[type='date']:in-range::-webkit-datetime-edit-day-field,input[type='date']:in-range::-webkit-datetime-edit-text{  color: transparent;}
+
 /* Footer */
 
 .footer {

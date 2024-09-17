@@ -26,6 +26,9 @@ function ResultsPage() {
   const guestsNum =
     useSelector((state) => state.accomodations.guests?.num) || "";
   const filters = useSelector((state) => state.accomodations.filters?.filter);
+
+  const sort =
+  useSelector((state) => state.accomodations.sort?.by) || "";
   useEffect(() => {
     //if there is no sub page(:result_name)
     if (searchT !== "") {
@@ -84,12 +87,25 @@ function ResultsPage() {
       } else {
         dispatch(setSearchResults(filteredAccomodations));
       }
+    
+        if(sort === "low"){
+          let arr = [...filteredAccomodations];
+          let sorted = arr.sort((a,b)=> a.price - b.price);
+          dispatch(setSearchResults(sorted));
+        }
+        if(sort === "high"){
+          let arr = [...filteredAccomodations];
+          let sorted = arr.sort((a,b)=> b.price - a.price);
+          dispatch(setSearchResults(sorted));
+
+        }
+    
     }
 
     return () => {
       //setSearchResults([]);
     };
-  }, [searchTerm, guestsN, accomodations, filterTerm, dispatch]);
+  }, [searchTerm, guestsN, accomodations, sort, filterTerm, dispatch]);
 
   return (
     <div className="ResultsPage">

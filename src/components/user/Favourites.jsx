@@ -11,7 +11,7 @@ function Favourites() {
       <div className="favourites-div">
         {typeof favourites !== "undefined" &&
           favourites.map((favourite, i) => (
-            <FavouriteCard key={i} favourite={favourite} />
+            <FavouriteCard key={i} favourite={favourite}  favourites={favourites}/>
           ))}
       </div>
     </div>
