@@ -1,17 +1,20 @@
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
+import { IoIosNotificationsOutline } from "react-icons/io";
 
 function DashboardNav() {
   const [profilePic, setProfilePic] = useState("");
-  const user = useSelector((state) => state.user.currentUser);
+  const userId = useSelector((state) => state.user.currentUser);
+  const users = useSelector((state) => state.user.users);
+
+  const [user] = users.filter((user) => user.id == userId);
   const storage = getStorage();
 
   useEffect(() => {
     const fetchImages = async () => {
-      const imagesRef = ref(storage, user);
+      const imagesRef = ref(storage, userId);
       let result = await listAll(imagesRef);
       if (typeof imagesRef.url !== "undefined") {
         let urlPromises = result.items.map((imageRef) =>
@@ -29,7 +32,7 @@ function DashboardNav() {
     if (typeof user !== "undefined") {
       loadImages();
     }
-  }, [user]);
+  }, []);
 
   const navigation = useNavigate();
   function navigateDiscover() {
@@ -42,7 +45,20 @@ function DashboardNav() {
   return (
     <div className="DashboardNav">
       <p onClick={navigateDiscover}>Discover</p>
-
+      <div className="dropdown">
+        <div className="dropbtn">
+          <IoIosNotificationsOutline />
+          <span>{user && user.notifications.length}</span>
+        </div>
+        <div className="notification-content">
+          <ul>
+            {user &&
+              user.notifications.map((notification, i) => (
+                <li key={i}>{notification.message}</li>
+              ))}
+          </ul>
+        </div>
+      </div>
       <div className="profile" onClick={navigateProfile}>
         <div className="profile-icon" onClick={navigateProfile}>
           <img src={profilePic !== "" ? profilePic : "/images/profile.png"} />

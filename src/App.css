@@ -392,9 +392,10 @@ body {
   display: flex;
   justify-content: end;
   align-items: center;
-  gap: 5px;
+  gap: 45px;
 
   box-shadow: 1px 0px 5px #bbb;
+  padding-right: 150px;
 }
 .DashboardNav p {
   cursor: pointer;
@@ -1241,7 +1242,39 @@ code {
   text-align: center;
   margin: 15px;
 }
+.dropbtn span {
+  color: #626267;
+}
 
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.notification-content {
+  display: none;
+  position: absolute;
+  background-color: whitesmoke;
+  width: 200px;
+  padding: 10px 5px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown:hover .notification-content {
+  display: block;
+}
+.notification-content ul {
+  margin: 0px;
+  padding: 0px;
+}
+.notification-content li {
+  font-size: 0.8rem;
+  margin: 5px 0px;
+  color: #626267;
+}
 /* Footer */
 .footer-logo {
   color: #a6a670;
