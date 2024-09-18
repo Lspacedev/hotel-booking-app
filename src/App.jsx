@@ -4,10 +4,8 @@ import ResultsPage from "./components/main/ResultsPage";
 import AccomodationCard from "./components/main/AccomodationCard";
 import UserDashboard from "./components/user/UserDashboard";
 import "./App.css";
-import AdminDashboard from "./components/admin/AdminDashboard";
 import UserLogin from "./components/login/UserLogin";
 import UserProfile from "./components/profiles/UserProfile";
-import AdminLogin from "./components/login/AdminLogin";
 import UserRegistration from "./components/registration/UserRegistration";
 import ResetPassword from "./components/registration/resetPassword";
 import Checkout from "./components/checkout/Checkout";
@@ -84,7 +82,6 @@ function App() {
         ...doc.data(),
       }));
 
-      console.log(data);
       dispatch(setUsers(data));
     } catch (error) {
       console.log(error);
@@ -92,7 +89,6 @@ function App() {
   }
 
   const user = useSelector((state) => state.user.currentUser);
-  console.log(user);
   return (
     <Router>
       <div className="App">
@@ -116,29 +112,12 @@ function App() {
               <Route path="bookings" element={<Bookings />} />
               <Route path="reviews" element={<Reviews />} />
               <Route path="favourites" element={<Favourites />} />
-              {/* <Route
-                index
-                element={
-                  <
-                  />
-                }
-              />
-              <Route path="lists" element={<DisplayLists />}>
-                <Route path=":list_name" element={<List />} />
-              </Route>*/}
+       
               <Route path="profile" element={<UserProfile userId={user} />} />
             </Route>
           </Route>
 
-          {/* <HomePage /> */}
-          {/* <ResultsPage /> */}
-          {/* <AccomodationCard /> */}
-          {/* <UserDashboard /> */}
-          {/* <AdminDashboard /> */}
-          {/* <UserLogin /> */}
-          {/* <AdminLogin /> */}
-          {/* <UserRegistration /> */}
-          {/* <Checkout /> */}
+      
         </Routes>
       </div>
     </Router>

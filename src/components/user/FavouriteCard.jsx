@@ -42,7 +42,7 @@ function FavouriteCard({ favourite, favourites }) {
       await updateDoc(userRef, {
         favourites: filteredFavourites,
       });
-      alert("updated favourites");
+      alert("removed favourite");
     } catch (err) {
       console.log(err);
     }

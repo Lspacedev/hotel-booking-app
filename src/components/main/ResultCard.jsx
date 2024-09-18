@@ -67,7 +67,7 @@ function ResultCard({ result }) {
           <p>{result.description}</p>
         </div>
         <div className="side-two">
-          <p>{result.price}</p>
+          <p>R{result.price}</p>
           <button
             className="like-btn"
             onClick={liked ? console.log("liked") : addToFavourites}

@@ -41,6 +41,10 @@ body {
   border: none;
 }
 
+
+.nav-links .register-btn:hover {
+background-color: #626267;
+}
 /* ShowCase */
 .ShowCase {
   height: 450px;
@@ -522,6 +526,89 @@ body {
 
   box-shadow: 1px 1px 5px #bbb;
 }
+
+.ReviewForm {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  cursor: pointer;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.ReviewForm .form-div {
+  margin: 20px 0px;
+}
+.ReviewForm .form-div form {
+  margin: 0 auto 0 auto;
+  padding: 15px;
+  width: 700px;
+ 
+  
+
+  background-color: white;
+}
+.ReviewForm form input[type="file"] {
+  font-size: 0.7rem;
+ 
+  outline: none;
+  border: none;
+}
+.ReviewForm form input {
+  margin: 0px 0px;
+  padding: 5px 0px;
+  outline: none;
+  border: 1px solid #bbb;
+  border-radius: 2px;
+}
+
+.ReviewForm form label {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  color: rgb(133, 133, 133);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+.ReviewForm .form-close {
+  text-align: end;
+  font-size: 1.5rem;
+  margin-top: 35px;
+  margin-right: -50px;
+  cursor: pointer;
+}
+.ReviewForm .form-close:hover {
+  color: #a6a670;
+}
+
+.ReviewForm input[type="submit"] {
+  padding: 7px 15px;
+  width: 100%;
+  background-color: #a6a670;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.ReviewForm input[type="submit"]:hover {
+  background-color: #626267;
+}
+
+.rating-guests {
+  display: flex;
+}
+
 .img-rating {
   flex: 30%;
   display: flex;
@@ -580,8 +667,17 @@ body {
 .FavouriteCard img {
   width: 100%;
   height: 100%;
+
+}
+.remove-fav {
+  font-size: 1.1rem;
+  cursor: pointer;
+
 }
 
+.remove-fav:hover {
+  color: #a6a670;
+}
 /* History */
 .history-div {
   display: flex;
@@ -914,7 +1010,7 @@ select {
   height: 100vh;
   display: flex;
   align-items: center;
-
+  background-color: white;
   padding: 0px 50px;
 }
 .register-to-login {
@@ -1077,6 +1173,7 @@ select {
 input[type="date"] {
   padding: 0px;
   margin-left: 15px;
+  width: 20px;
 }
 input[type="date"]:in-range::-webkit-datetime-edit-year-field,
 input[type="date"]:in-range::-webkit-datetime-edit-month-field,

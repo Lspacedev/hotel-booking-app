@@ -83,7 +83,7 @@ function UserRegistration() {
       });
 
       uploadFile(userId, profilePic);
-      alert("added user");
+    
     } catch (err) {
       console.log(err.message);
     }
@@ -91,12 +91,12 @@ function UserRegistration() {
   return (
     <div className="UserRegistration">
       <div className="register-img">
-        {/* <img src="images/shop.jpg" alt="register" /> */}
+      <img src="images/login-register.jpg" alt="login" />
       </div>
       <div className="register-form-container">
         <h2>Create new account</h2>
         <div className="register-to-login">
-          Already have an account?
+       
           {/* <p onClick={handleNavigateLogin}>Login</p> */}
         </div>
         <div id="error"></div>

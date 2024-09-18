@@ -88,22 +88,28 @@ function AccomodationCard({ title }) {
               paid: true,
               status: "pending",
             };
-            try {
-              const accomodationsCollection = collection(
-                db,
-                "admin",
-                "A2Kvj5vTHdfJde8Sl8KV8rw1e2v1",
-                "accomodations"
-              );
-              const accomodationRef = doc(accomodationsCollection, result_id);
-              console.log(accomodationRef);
-              await updateDoc(accomodationRef, {
-                bookings: arrayUnion(booking),
-              });
-            } catch (err) {
-              console.log(err);
+            let bookingConfirmation = window.confirm(
+              "You are about to book this accomodation. You'll be taken to a payment gateway. Continue?"
+            );
+        
+            if(bookingConfirmation) {
+              try {
+                const accomodationsCollection = collection(
+                  db,
+                  "admin",
+                  "A2Kvj5vTHdfJde8Sl8KV8rw1e2v1",
+                  "accomodations"
+                );
+                const accomodationRef = doc(accomodationsCollection, result_id);
+                console.log(accomodationRef);
+                await updateDoc(accomodationRef, {
+                  bookings: arrayUnion(booking),
+                });
+              } catch (err) {
+                console.log(err);
+              }
+              handleCheckout();
             }
-            handleCheckout();
           } else {
             alert("Room is not available. Checkout our rooms");
           }
@@ -117,24 +123,27 @@ function AccomodationCard({ title }) {
             paid: true,
             status: "pending",
           };
-          try {
-            const accomodationsCollection = collection(
-              db,
-              "admin",
-              "A2Kvj5vTHdfJde8Sl8KV8rw1e2v1",
-              "accomodations"
-            );
-            const accomodationRef = doc(accomodationsCollection, result_id);
-            console.log(accomodationRef);
+          let bookingConfirmation = window.confirm(
+            "You are about to book this accomodation. You'll be taken to a payment gateway. Continue?"
+          );
+          if(bookingConfirmation) {
+            try {
+              const accomodationsCollection = collection(
+                db,
+                "admin",
+                "A2Kvj5vTHdfJde8Sl8KV8rw1e2v1",
+                "accomodations"
+              );
+              const accomodationRef = doc(accomodationsCollection, result_id);
 
-            await updateDoc(accomodationRef, {
-              bookings: arrayUnion(booking),
-            });
-            handleCheckout();
+              await updateDoc(accomodationRef, {
+                bookings: arrayUnion(booking),
+              });
+              handleCheckout();
 
-            alert("added booking");
-          } catch (err) {
-            console.log(err);
+            } catch (err) {
+              console.log(err);
+            }
           }
         }
       } else {
@@ -142,7 +151,6 @@ function AccomodationCard({ title }) {
         alert("Please set checkin and checkout dates");
       }
     }
-    console.log({ user, result_id, checkInOut, accomodation });
   }
   function checkAvailability(obj, array) {
     let checkIn = new Date(obj.checkIn);

@@ -20,24 +20,30 @@ function ReviewForm({ toggleClicked }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    //add review to firestore
-    try {
-      const accomodationsCollection = collection(
-        db,
-        "admin",
-        "A2Kvj5vTHdfJde8Sl8KV8rw1e2v1",
-        "accomodations"
-      );
-      const accomodationRef = doc(accomodationsCollection, obj.room_name);
-      console.log(accomodationRef);
-      await updateDoc(accomodationRef, {
-        reviews: arrayUnion({ ...obj, userId: user }),
-      });
-      alert("added review");
-    } catch (err) {
-      console.log(err);
+    let reviewConfirmation = window.confirm(
+      "You are about to add a review. Continue?"
+    );
+    if(reviewConfirmation) {
+
+      //add review to firestore
+      try {
+        const accomodationsCollection = collection(
+          db,
+          "admin",
+          "A2Kvj5vTHdfJde8Sl8KV8rw1e2v1",
+          "accomodations"
+        );
+        const accomodationRef = doc(accomodationsCollection, obj.room_name);
+        console.log(accomodationRef);
+        await updateDoc(accomodationRef, {
+          reviews: arrayUnion({ ...obj, userId: user }),
+        });
+        alert("added review");
+      } catch (err) {
+        console.log(err);
+      }
+      toggleClicked();
     }
-    toggleClicked();
   }
 
   function handleFormClose() {
@@ -63,13 +69,14 @@ function ReviewForm({ toggleClicked }) {
     <div className="ReviewForm">
       <div className="form-div">
         <div className="form-title-close">
-          <h3>Enter Review Information</h3>
           <div className="form-close" onClick={handleFormClose}>
             x
           </div>
         </div>
         <form>
           <div className="room_name">
+          <h3>Enter Review Information</h3>
+
             <label htmlFor="room_name">
               Room Name
               <select
