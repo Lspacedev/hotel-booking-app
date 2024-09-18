@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { collection, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { db } from "../../config/firebase";
 import { useSelector } from "react-redux";
+import { IoStarSharp } from "react-icons/io5";
+
 function ResultCard({ result }) {
   const [images, setImages] = useState([]);
   const [liked, setLiked] = useState(false);
@@ -54,6 +56,13 @@ function ResultCard({ result }) {
     }
     setLiked(true);
   }
+  let arr = [];
+  function printStars(num) {
+    for (let i = 0; i < num; i++) {
+      arr.push(0);
+    }
+  }
+  printStars(Number(result.rating));
   return (
     <div className="ResultCard">
       <div className="img" onClick={handleNavigateSubPage}>
@@ -63,7 +72,7 @@ function ResultCard({ result }) {
         <div className="side-one">
           <h4>{result.room_name}</h4>
           <h6>{result.hotel_name}</h6>
-          <p>{result.rating}</p>
+          <p>{arr && arr.map(() => <IoStarSharp className="star" />)}</p>
           <p>{result.description}</p>
         </div>
         <div className="side-two">

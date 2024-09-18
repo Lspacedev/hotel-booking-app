@@ -257,6 +257,9 @@ body {
   box-shadow: 1px 1px 5px #bbb;
   border-radius: 10px;
 }
+.ResultCard .star {
+  color: orange;
+}
 .like-btn {
   background-color: #a6a670;
   border: none;
