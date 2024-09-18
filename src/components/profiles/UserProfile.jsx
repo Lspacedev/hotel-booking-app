@@ -3,24 +3,28 @@ import { useSelector } from "react-redux";
 import { auth } from "../../config/firebase";
 import { db } from "../../config/firebase";
 
-import { sendPasswordResetEmail, updateEmail, signOut } from "firebase/auth";
-import { deleteDoc, updateDoc, collection, doc } from "firebase/firestore";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { updateDoc, collection, doc } from "firebase/firestore";
 import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
-import bcrypt from "bcryptjs-react";
+
 function UserProfile({ userId }) {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchImages = async () => {
       const imagesRef = ref(storage, userId);
       let result = await listAll(imagesRef);
-      let urlPromises = result.items.map((imageRef) =>
-        getDownloadURL(imageRef)
-      );
-      console.log(urlPromises);
-      return Promise.all(urlPromises);
+      if (typeof imagesRef.url !== "undefined") {
+        let urlPromises = result.items.map((imageRef) =>
+          getDownloadURL(imageRef)
+        );
+        return Promise.all(urlPromises);
+      } else {
+        return [""];
+      }
     };
     const loadImages = async () => {
-      const url = await fetchImages();
-      console.log(url);
+      const url = await fetchImages().finally(() => setLoading(false));
       setProfilePic(url[0]);
     };
     if (typeof userId !== "undefined") {
@@ -43,17 +47,11 @@ function UserProfile({ userId }) {
 
   const storage = getStorage();
 
-  function handleDeleteAccount() {
-    //delet user in firestore
-    navigation("/");
-  }
-
   async function handleSubmit() {
     //update firestore with obj
     //check if properties are empty
 
     let updatedObj = {};
-    let encryptedPass;
     if (userUpdate.name !== "") {
       updatedObj.name = userUpdate.name;
     }
@@ -62,21 +60,6 @@ function UserProfile({ userId }) {
     }
     if (userUpdate.email !== "") {
       updatedObj.email = userUpdate.email;
-      // updateEmail(auth.currentUser, userUpdate.email)
-      //   .then(() => {
-      //     // Email updated!
-      //     alert("Please re login");
-      //     signOut(auth)
-      //       .then(() => {
-      //         navigation("/");
-      //       })
-      //       .catch((err) => {});
-      //     // ...
-      //   })
-      //   .catch((error) => {
-      //     // An error occurred
-      //     // ...
-      //   });
     }
 
     //update users to firestore
@@ -109,13 +92,8 @@ function UserProfile({ userId }) {
       .catch((err) => {});
   }
 
-  function getProfilePic(pic) {
-    if (pic === "") {
-      return "/images/profile.png";
-    } else {
-      return pic;
-    }
-  }
+  if (loading) return <div className="Loading">Loading...</div>;
+
   return (
     <div className="UserProfile">
       {isLoading === true ? (
@@ -125,22 +103,17 @@ function UserProfile({ userId }) {
           <div className="profile-picture">
             {update ? (
               <div className="profile-pic2">
-                {/* <label htmlFor="profile-pic2">
-                  Profile picture:
-                  <input
-                    type="file"
-                    id="profile-pic2"
-                    name="pic"
-                    onChange={(e) => handleImageUpload(e)}
-                  />
-                </label> */}
                 <button className="close" onClick={() => setUpdate(false)}>
                   x
                 </button>
               </div>
             ) : (
               <div className="profile-pic">
-                {profilePic !== "" && <img src={profilePic} />}
+                {
+                  <img
+                    src={profilePic !== "" ? profilePic : "/images/profile.png"}
+                  />
+                }
               </div>
             )}
           </div>
@@ -185,13 +158,6 @@ function UserProfile({ userId }) {
               {update ? (
                 <div className="email">
                   <div>{user && user.email}</div>
-                  {/* <input
-                    type="text"
-                    id="email"
-                    name="email"
-                    onChange={(e) => handleChange(e)}
-                    value={userUpdate.email}
-                  /> */}
                 </div>
               ) : (
                 <div>{user && user.email}</div>
@@ -204,13 +170,6 @@ function UserProfile({ userId }) {
                 {update ? (
                   <div>
                     <div className="password">
-                      {/* <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        onChange={(e) => handleChange(e)}
-                        value={userUpdate.password}
-                      /> */}
                       <button onClick={resetPassword}>reset password</button>
                     </div>
                   </div>
@@ -219,16 +178,12 @@ function UserProfile({ userId }) {
                 )}
               </div>
             </div>
-            <div className="account-delete-update">
+            <div className="account-update">
               <button
                 onClick={() => (update ? handleSubmit() : setUpdate(true))}
               >
                 {update ? "Submit" : "Update"}
               </button>
-
-              {/* <button id="account-delete" onClick={handleDeleteAccount}>
-                Delete my account
-              </button> */}
             </div>
           </div>
         </div>

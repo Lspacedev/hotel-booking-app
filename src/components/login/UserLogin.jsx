@@ -14,9 +14,13 @@ function UserLogin() {
         alert("Log in successfully");
         navigation("/home");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        alert(err.message);
+      });
   }
-
+  function handleNavigateRegister() {
+    navigation("/registration");
+  }
   return (
     <div className="UserLogin">
       <div className="login-img">
@@ -56,7 +60,7 @@ function UserLogin() {
         </div>
         <div className="login-to-register">
           Don't have an account?
-          {/* <p onClick={handleNavigateRegister}>Register here</p> */}
+          <p onClick={handleNavigateRegister}>Register here</p>
         </div>
         <Link to="/forgotPassword">Forgot password</Link>
       </div>

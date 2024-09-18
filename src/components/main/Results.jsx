@@ -1,10 +1,8 @@
 import ResultCard from "./ResultCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { setSort} from "../../app/accomodationsSlice";
+import { setSort } from "../../app/accomodationsSlice";
 function Results() {
-  //const [sort, setSort] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
   const searchFilters = searchParams.get("filters") || "";
@@ -19,8 +17,8 @@ function Results() {
   );
   const dispatch = useDispatch();
 
-  function handleSort(e){
-    dispatch(setSort({by: e.target.value}));
+  function handleSort(e) {
+    dispatch(setSort({ by: e.target.value }));
   }
 
   return (
@@ -29,9 +27,7 @@ function Results() {
         {searchResults.length} rooms found for {searchTerm}
       </div>
       <div className="sort-map">
-        <select name="sort"
-                onChange={(e) => handleSort(e)}
-               >
+        <select name="sort" onChange={(e) => handleSort(e)}>
           <option></option>
           <option value="low">Low to High</option>
           <option value="high">High to Low</option>

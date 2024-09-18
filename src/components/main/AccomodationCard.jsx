@@ -11,7 +11,9 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoMdArrowBack } from "react-icons/io";
 
-function AccomodationCard({ title }) {
+function AccomodationCard() {
+  const [loading, setLoading] = useState(true);
+
   const navigation = useNavigate();
 
   const { result_id } = useParams();
@@ -26,9 +28,7 @@ function AccomodationCard({ title }) {
   const prevSlide = () => {
     setCurrent(activeImageNum === 0 ? length - 1 : activeImageNum - 1);
   };
-  // if (!Array.isArray(images) || images.length <= 0) {
-  //    return null;
-  // }
+
   const storage = getStorage();
   useEffect(() => {
     const fetchImages = async () => {
@@ -43,7 +43,7 @@ function AccomodationCard({ title }) {
     };
 
     const loadImages = async () => {
-      const urls = await fetchImages();
+      const urls = await fetchImages().finally(() => setLoading(false));
       setImages(urls);
     };
     loadImages();
@@ -62,16 +62,12 @@ function AccomodationCard({ title }) {
   const checkInOut = useSelector((state) => state.accomodations.checkInOut);
 
   async function book() {
-    console.log(checkInOut);
     if (user === "") {
       alert("Please Login or Register an account.");
-      //navigation("/login");
     } else {
       //Check if check in and out dates have been set
-      console.log({ checkInOut });
 
       if (JSON.stringify(checkInOut) !== "{}") {
-        console.log(accomodation.bookings.length > 0);
         if (accomodation.bookings.length > 0) {
           //check if date is available
           let isAvailable = checkAvailability(
@@ -91,8 +87,8 @@ function AccomodationCard({ title }) {
             let bookingConfirmation = window.confirm(
               "You are about to book this accomodation. You'll be taken to a payment gateway. Continue?"
             );
-        
-            if(bookingConfirmation) {
+
+            if (bookingConfirmation) {
               try {
                 const accomodationsCollection = collection(
                   db,
@@ -101,14 +97,14 @@ function AccomodationCard({ title }) {
                   "accomodations"
                 );
                 const accomodationRef = doc(accomodationsCollection, result_id);
-                console.log(accomodationRef);
                 await updateDoc(accomodationRef, {
                   bookings: arrayUnion(booking),
                 });
               } catch (err) {
                 console.log(err);
               }
-              handleCheckout();
+              let quantity = Math.round(Number(accomodation.price) / 800);
+              handleCheckout(quantity);
             }
           } else {
             alert("Room is not available. Checkout our rooms");
@@ -126,7 +122,7 @@ function AccomodationCard({ title }) {
           let bookingConfirmation = window.confirm(
             "You are about to book this accomodation. You'll be taken to a payment gateway. Continue?"
           );
-          if(bookingConfirmation) {
+          if (bookingConfirmation) {
             try {
               const accomodationsCollection = collection(
                 db,
@@ -139,8 +135,8 @@ function AccomodationCard({ title }) {
               await updateDoc(accomodationRef, {
                 bookings: arrayUnion(booking),
               });
-              handleCheckout();
-
+              let quantity = Math.round(Number(accomodation.price) / 800);
+              handleCheckout(quantity);
             } catch (err) {
               console.log(err);
             }
@@ -157,11 +153,9 @@ function AccomodationCard({ title }) {
     let checkOut = new Date(obj.checkOut);
 
     let availability = true;
-    console.log({ obj });
     array.forEach((booking) => {
       let bookingCheckIn = new Date(booking.checkIn);
       let bookingCheckOut = new Date(booking.checkOut);
-      console.log(bookingCheckIn, checkIn);
       //check if checkout date is within any date range
       if (checkOut > bookingCheckIn && checkOut < bookingCheckOut) {
         availability = false;
@@ -178,13 +172,13 @@ function AccomodationCard({ title }) {
 
     return availability;
   }
-  async function handleCheckout() {
+  async function handleCheckout(qty) {
     const stripe = await getStripe();
     const { error } = await stripe.redirectToCheckout({
       lineItems: [
         {
           price: import.meta.env.VITE_NEXT_PUBLIC_STRIPE_PRICE_ID,
-          quantity: 1,
+          quantity: qty,
         },
       ],
       mode: "payment",
@@ -201,6 +195,7 @@ function AccomodationCard({ title }) {
   function handleShare() {
     setIsShared(!isShared);
   }
+  if (loading) return <div className="Loading">Loading...</div>;
 
   return (
     <div className="AccomodationCard">
@@ -208,17 +203,16 @@ function AccomodationCard({ title }) {
       <h3 className="acc-name">{accomodation && accomodation.room_name}</h3>
       <p className="acc-address">{accomodation && accomodation.address}</p>
       <div className="slides" ref={slidesRef}>
-        {images.map((image, ind) => {
+        {images.map((image, i) => {
           return (
             <div
               className={
-                ind === activeImageNum ? "currentSlide active" : "currentSlide"
+                i === activeImageNum ? "currentSlide active" : "currentSlide"
               }
-              key={ind}
+              key={i}
             >
-              {ind === activeImageNum && <img src={image} />}
+              {i === activeImageNum && <img src={image} />}
             </div>
-            //<img key={i} className="image" alt="sliderImage" src={image} />
           );
         })}
         <button className="prev" onClick={prevSlide}>
@@ -233,7 +227,7 @@ function AccomodationCard({ title }) {
       </button>
       {isShared && <code>{`http://localhost:5173/results/${result_id}`}</code>}
       <div className="accomodation-info">
-        <h4>{accomodation && accomodation.price}</h4>
+        <h4>R{accomodation && accomodation.price}</h4>
         <div className="acc-info-section">
           <h5>Description</h5>
           <p>{accomodation && accomodation.description}</p>

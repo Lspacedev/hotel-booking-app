@@ -1,13 +1,7 @@
 import Sidebar from "../dashboard/Sidebar";
 import DashboardNav from "../dashboard/DashboardNav";
-import Bookings from "./Bookings";
-import Pending from "./Pending";
-import Reviews from "./Reviews";
-import Favourites from "./Favourites";
-import History from "./History";
-import UserProfile from "../profiles/UserProfile";
-import { Link, Outlet } from "react-router-dom";
-import { getAuth, signOut } from "firebase/auth";
+import { Outlet } from "react-router-dom";
+import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
 function UserDashboard() {
@@ -16,6 +10,7 @@ function UserDashboard() {
     signOut(auth)
       .then(() => {
         navigation("/");
+        navigation(0);
       })
       .catch((err) => {});
   }
@@ -34,13 +29,10 @@ function UserDashboard() {
       <Sidebar>
         <div onClick={navigateBookings}>Bookings</div>
 
-        {/* <div>Reservations</div> */}
-
         <div onClick={navigateReviews}>Reviews</div>
 
         <div onClick={navigateFavourites}>Favourites</div>
 
-        {/* <div>History</div> */}
         <div className="logout" onClick={logOut}>
           Logout
         </div>
@@ -48,12 +40,6 @@ function UserDashboard() {
       <div className="Main">
         <DashboardNav />
         <Outlet />
-        {/* <Bookings /> */}
-        {/* <Pending /> */}
-        {/* <Reviews /> */}
-        {/* <Favourites /> */}
-        {/* <History /> */}
-        {/* <UserProfile /> */}
       </div>
     </div>
   );

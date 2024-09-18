@@ -12,15 +12,18 @@ function Nav() {
     const fetchImages = async () => {
       const imagesRef = ref(storage, user);
       let result = await listAll(imagesRef);
-      let urlPromises = result.items.map((imageRef) =>
-        getDownloadURL(imageRef)
-      );
-      console.log(urlPromises);
-      return Promise.all(urlPromises);
+      if (typeof imagesRef.url !== "undefined") {
+        let urlPromises = result.items.map((imageRef) =>
+          getDownloadURL(imageRef)
+        );
+        return Promise.all(urlPromises);
+      } else {
+        return [""];
+      }
     };
     const loadImages = async () => {
       const url = await fetchImages();
-      console.log(url);
+
       setProfilePic(url[0]);
     };
     if (typeof user !== "undefined") {
@@ -52,7 +55,7 @@ function Nav() {
           </>
         ) : (
           <div className="profile-icon" onClick={navigateProfile}>
-            <img src={profilePic} />
+            <img src={profilePic !== "" ? profilePic : "/images/profile.png"} />
           </div>
         )}
       </div>

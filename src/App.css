@@ -41,9 +41,8 @@ body {
   border: none;
 }
 
-
 .nav-links .register-btn:hover {
-background-color: #626267;
+  background-color: #626267;
 }
 /* ShowCase */
 .ShowCase {
@@ -296,7 +295,7 @@ background-color: #626267;
   width: 70%;
   margin: 0px auto;
 
-  padding: 15px 250px;
+  padding: 15px 0px;
 }
 .AccomodationCard .back {
   cursor: pointer;
@@ -306,8 +305,8 @@ background-color: #626267;
 }
 .AccomodationCard .slides {
   height: 400px;
-  width: 800px;
-
+  width: 45vw;
+  margin: 0px auto;
   position: relative;
   display: flex;
 
@@ -316,7 +315,7 @@ background-color: #626267;
   transition: scroll 0.3s ease-in-out;
 }
 .currentSlide {
-  width: 800px;
+  width: inherit;
 }
 .slides img {
   width: inherit;
@@ -354,6 +353,10 @@ background-color: #626267;
 
 .share-btn {
   text-align: end;
+  background-color: #a6a670;
+  padding: 7px 15px;
+  border: none;
+  color: white;
 }
 .book-btn {
   background-color: #a6a670;
@@ -553,14 +556,12 @@ background-color: #626267;
   margin: 0 auto 0 auto;
   padding: 15px;
   width: 700px;
- 
-  
 
   background-color: white;
 }
 .ReviewForm form input[type="file"] {
   font-size: 0.7rem;
- 
+
   outline: none;
   border: none;
 }
@@ -667,12 +668,10 @@ background-color: #626267;
 .FavouriteCard img {
   width: 100%;
   height: 100%;
-
 }
 .remove-fav {
   font-size: 1.1rem;
   cursor: pointer;
-
 }
 
 .remove-fav:hover {
@@ -1190,6 +1189,59 @@ code {
   box-shadow: 1px 1px 5px #bbb inset;
   border-radius: 5px;
 }
+
+.Success {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+.Success div div {
+  color: #a6a670;
+  cursor: pointer;
+}
+.Success div div:hover {
+  color: #36363a;
+}
+
+.Cancel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+.Cancel div div {
+  color: #a6a670;
+  cursor: pointer;
+}
+.Cancel div div:hover {
+  color: #36363a;
+}
+
+.account-update button {
+  padding: 5px 15px;
+  background-color: #a6a670;
+  border: none;
+  color: white;
+}
+
+.error {
+  padding: 0px;
+  margin: 0px;
+
+  font-size: 0.8rem;
+  color: #900;
+}
+
+/*Loading*/
+.Loading {
+  height: calc(100vh - 220px);
+  text-align: center;
+  margin: 15px;
+}
+
 /* Footer */
 .footer-logo {
   color: #a6a670;
@@ -1197,8 +1249,6 @@ code {
   font-weight: 700;
 }
 .footer {
-  height: 400px;
-
   color: white;
   background-color: #36363a;
 
@@ -1212,7 +1262,7 @@ code {
   display: flex;
   justify-content: space-evenly;
 
-  margin-bottom: 100px;
+  padding-bottom: 50px;
 }
 
 /* Support Section - Footer */
@@ -1288,21 +1338,30 @@ code {
 }
 
 @media screen and (max-width: 768px) {
+  /* Nav */
+  .Nav {
+    justify-content: space-around;
+    gap: 0px;
+  }
   .SearchAccomodations {
     flex-direction: column;
   }
   .SearchAccomodations input {
     width: 100%;
   }
-
+  .SearchAccomodations label {
+    display: flex;
+    flex-direction: column;
+  }
   .ShowCase h3 {
-    top: 80px;
+    top: 20px;
+    margin: 0px;
     left: 50%;
 
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   .search-div {
-    padding: 50px 0px;
+    padding: 100px 0px;
   }
   .SearchAccomodationsResults {
     width: 70%;
@@ -1323,14 +1382,100 @@ code {
     display: flex;
     align-items: center;
   }
+  .UserDashboard {
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .Main {
+    flex: 8;
+    height: inherit;
+    width: 100%;
+    background-color: white;
+  }
+
+  .Sidebar {
+    flex: 2;
+    width: 100%;
+  }
+  .sidebar-links {
+    flex: 90%;
+    flex-direction: row;
+    gap: 0px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  .ReviewForm {
+    padding: 0px;
+  }
+  .ReviewForm .form-div {
+    width: 80%;
+    padding: 0px;
+  }
+  .ReviewForm .form-div form {
+    margin: 0 auto 0 auto;
+    width: 100%;
+    overflow-y: hidden;
+  }
+
+  .ReviewForm form input {
+    width: 100%;
+    margin: 5px 0px;
+    float: right;
+  }
+  .ReviewForm .form-close {
+    margin-left: -205px;
+  }
+  .AccomodationCard .slides {
+    width: 80vw;
+  }
+  .cards {
+    justify-content: center;
+  }
+  .Categories {
+    width: 100%;
+  }
+  .Categories .heading {
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .ResultCard {
+    flex-direction: column;
+  }
+  .footer-info {
+    margin-bottom: 0px;
+    text-align: center;
+  }
+  .section-one {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-one-title {
+    text-align: start;
+    padding-left: 28px;
+  }
+
+  .section-three {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-three-para2 {
+    margin-bottom: 50px;
+  }
+  .BookingCard {
+    flex-direction: column;
+  }
+  .ReviewCard {
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 425px) {
-  .ShowCase h3 {
-    top: 80px;
-    left: 50%;
-    width: 80%;
-  }
   .cards {
     text-align: center;
   }
@@ -1343,6 +1488,9 @@ code {
   }
   .Card .img {
     width: 80%;
+  }
+  .footer-info {
+    flex-direction: column;
   }
 }
 @media screen and (max-width: 375px) {
@@ -1357,10 +1505,7 @@ code {
   .logo {
     text-align: center;
   }
-
   .ShowCase h3 {
-    top: 60px;
-    left: 50%;
-    width: 80%;
+    font-size: 1.4rem;
   }
 }

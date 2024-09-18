@@ -39,13 +39,26 @@ function SearchAccomodationsResults() {
   }
   function handleSearchSubmit(e) {
     e.preventDefault();
-
-    //setSearchParams({ search: searchInput });
-    dispatch(setSearchTerm({ title: searchInput }));
-    if (checkInOut.checkIn !== "" && checkInOut.checkOut !== "") {
-      dispatch(setCheckInOut(checkInOut));
+    if (
+      searchInput === "" &&
+      checkInOut.checkIn === "" &&
+      checkInOut.checkOut === "" &&
+      guests == 0
+    ) {
+      alert("No inputs entered");
+    } else {
+      //setSearchParams({ search: searchInput });
+      if (searchInput !== "") {
+        dispatch(setSearchTerm({ title: searchInput }));
+      }
+      if (checkInOut.checkIn !== "" && checkInOut.checkOut !== "") {
+        dispatch(setCheckInOut(checkInOut));
+        alert("Added check in and check out dates");
+      }
+      if (guests !== 0) {
+        dispatch(setGuests({ num: guests }));
+      }
     }
-    dispatch(setGuests({ num: guests }));
   }
 
   return (
