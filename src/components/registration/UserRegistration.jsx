@@ -31,7 +31,7 @@ function UserRegistration() {
     const { name, value } = e.target;
     setUserDetails((prev) => ({ ...prev, [name]: value }));
   }
-  const uploadFile = (id, img) => {
+  const uploadFile = async (id, img) => {
     if (img === null) {
       alert("Please select an image");
       return;
@@ -42,7 +42,7 @@ function UserRegistration() {
       .then((snapshot) => {
         getDownloadURL(snapshot.ref)
           .then((url) => {
-            console.log(url);
+            addUser(id, url);
           })
           .catch((error) => {
             console.log(error);
@@ -61,8 +61,7 @@ function UserRegistration() {
     )
       .then((res) => {
         const userId = res.user.uid;
-
-        addUser(userId);
+        uploadFile(userId, profilePic);
         alert("Registered successfully");
         navigation("/login");
       })
@@ -71,7 +70,7 @@ function UserRegistration() {
       });
   }
 
-  async function addUser(userId) {
+  async function addUser(userId, url) {
     try {
       const salt = await bcrypt.genSalt();
       let encryptedPass = await bcrypt.hash(userDetails.password, salt);
@@ -81,10 +80,9 @@ function UserRegistration() {
         surname: userDetails.surname,
         email: userDetails.email,
         password: encryptedPass,
+        profilePic: url,
         notifications: [],
       });
-
-      uploadFile(userId, profilePic);
     } catch (err) {
       console.log(err.message);
     }

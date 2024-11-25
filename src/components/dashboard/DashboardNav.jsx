@@ -12,27 +12,6 @@ function DashboardNav() {
   const [user] = users.filter((user) => user.id == userId);
   const storage = getStorage();
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      const imagesRef = ref(storage, userId);
-      let result = await listAll(imagesRef);
-
-      let urlPromises = result.items.map((imageRef) =>
-        getDownloadURL(imageRef)
-      );
-
-      return Promise.all(urlPromises);
-    };
-    const loadImages = async () => {
-      const url = await fetchImages();
-      setProfilePic(url[0]);
-    };
-
-    if (typeof user !== "undefined") {
-      loadImages();
-    }
-  }, []);
-
   const navigation = useNavigate();
   function navigateDiscover() {
     navigation("/");
@@ -40,7 +19,6 @@ function DashboardNav() {
   function navigateProfile() {
     navigation("/home/profile");
   }
-  console.log({ user });
   return (
     <div className="DashboardNav">
       <p onClick={navigateDiscover}>Discover</p>
@@ -60,7 +38,13 @@ function DashboardNav() {
       </div>
       <div className="profile" onClick={navigateProfile}>
         <div className="profile-icon" onClick={navigateProfile}>
-          <img src={profilePic !== "" ? profilePic : "/images/profile.png"} />
+          {user && (
+            <img
+              src={
+                user.profilePic !== "" ? user.profilePic : "/images/profile.png"
+              }
+            />
+          )}
         </div>
       </div>
     </div>

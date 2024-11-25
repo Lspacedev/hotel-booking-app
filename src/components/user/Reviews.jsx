@@ -21,9 +21,11 @@ function Reviews() {
     <div className="Reviews">
       <AddReview />
       <div className="reviews-div">
-        {typeof reviews !== "undefined" &&
-          reviews.length > 0 &&
-          reviews.map((review, i) => <ReviewCard key={i} review={review} />)}
+        {typeof reviews !== "undefined" && reviews.length > 0 ? (
+          reviews.map((review, i) => <ReviewCard key={i} review={review} />)
+        ) : (
+          <div>You have not made any reviews</div>
+        )}
       </div>
     </div>
   );

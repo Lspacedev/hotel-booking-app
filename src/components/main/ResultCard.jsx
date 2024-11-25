@@ -10,6 +10,7 @@ import { IoStarSharp } from "react-icons/io5";
 function ResultCard({ result }) {
   const [images, setImages] = useState([]);
   const [liked, setLiked] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const navigation = useNavigate();
 
@@ -27,7 +28,7 @@ function ResultCard({ result }) {
     };
 
     const loadImages = async () => {
-      const urls = await fetchImages();
+      const urls = await fetchImages().finally(() => setLoading(false));
       setImages(urls);
     };
     loadImages();
@@ -63,6 +64,8 @@ function ResultCard({ result }) {
     }
   }
   printStars(Number(result.rating));
+  if (loading) return <div className="Loading">Loading...</div>;
+
   return (
     <div className="ResultCard">
       <div className="img" onClick={handleNavigateSubPage}>

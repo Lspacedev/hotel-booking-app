@@ -5,27 +5,11 @@ import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
 
 function Nav() {
   const [profilePic, setProfilePic] = useState("");
-  const user = useSelector((state) => state.user.currentUser);
-  const storage = getStorage();
+  const userId = useSelector((state) => state.user.currentUser);
+  const users = useSelector((state) => state.user.users);
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      const imagesRef = ref(storage, user);
-      let result = await listAll(imagesRef);
-      let urlPromises = result.items.map((imageRef) =>
-        getDownloadURL(imageRef)
-      );
-      return Promise.all(urlPromises);
-    };
-    const loadImages = async () => {
-      const url = await fetchImages();
+  const [user] = users.filter((user) => user.id == userId);
 
-      setProfilePic(url[0]);
-    };
-    if (typeof user !== "undefined") {
-      loadImages();
-    }
-  }, [user]);
   const navigation = useNavigate();
   function navigateLogin() {
     navigation("/login");
@@ -36,13 +20,12 @@ function Nav() {
   function navigateProfile() {
     navigation("/home/profile");
   }
-  console.log({ user });
   return (
     <div className="Nav">
       <div className="logo">ZaHotels.com</div>
       <div className="nav-links">
         <div>Discover</div>
-        {user === "" ? (
+        {userId === "" ? (
           <>
             <div onClick={navigateLogin}>Login</div>
 
@@ -52,7 +35,15 @@ function Nav() {
           </>
         ) : (
           <div className="profile-icon" onClick={navigateProfile}>
-            <img src={profilePic !== "" ? profilePic : "/images/profile.png"} />
+            {user && (
+              <img
+                src={
+                  user.profilePic !== ""
+                    ? user.profilePic
+                    : "/images/profile.png"
+                }
+              />
+            )}
           </div>
         )}
       </div>

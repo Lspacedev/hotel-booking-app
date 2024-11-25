@@ -68,11 +68,9 @@ function ResultsPage() {
           accomodation.room_type.toLowerCase().match(searchTerm.toLowerCase())
       );
       if (guestsN !== "") {
-        console.log(guestsN);
         let filteredAccomodationsGuests = filteredAccomodations.filter(
           (accomodation) => accomodation.guests === guestsN
         );
-        console.log(filteredAccomodationsGuests);
         dispatch(setSearchResults(filteredAccomodationsGuests));
       } else {
         dispatch(setSearchResults(filteredAccomodations));

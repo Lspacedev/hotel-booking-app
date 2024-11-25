@@ -8,31 +8,8 @@ import { updateDoc, collection, doc } from "firebase/firestore";
 import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
 
 function UserProfile({ userId }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      const imagesRef = ref(storage, userId);
-      let result = await listAll(imagesRef);
-      //if (typeof imagesRef.url !== "undefined") {
-      let urlPromises = result.items.map((imageRef) =>
-        getDownloadURL(imageRef)
-      );
-
-      return Promise.all(urlPromises);
-      // } else {
-      //return [""];
-      // }
-    };
-    const loadImages = async () => {
-      const url = await fetchImages();
-      setProfilePic(url[0]);
-      setLoading(false);
-    };
-    if (typeof userId !== "undefined") {
-      loadImages();
-    }
-  }, [userId]);
   const [userUpdate, setUserUpdate] = useState({
     name: "",
     surname: "",
@@ -111,11 +88,15 @@ function UserProfile({ userId }) {
               </div>
             ) : (
               <div className="profile-pic">
-                {
+                {user && (
                   <img
-                    src={profilePic !== "" ? profilePic : "/images/profile.png"}
+                    src={
+                      user.profilePic !== ""
+                        ? user.profilePic
+                        : "/images/profile.png"
+                    }
                   />
-                }
+                )}
               </div>
             )}
           </div>

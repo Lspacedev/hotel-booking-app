@@ -107,7 +107,9 @@ function AccomodationCard() {
               handleCheckout(quantity);
             }
           } else {
-            alert("Room is not available. Checkout our rooms");
+            alert(
+              "Room is not available on those dates. Change date or check out our other rooms"
+            );
           }
         } else {
           let booking = {
@@ -186,6 +188,7 @@ function AccomodationCard() {
       cancelUrl: `http://localhost:5173/cancel`,
       customerEmail: "customer@email.com",
     });
+
     console.warn(error.message);
   }
 

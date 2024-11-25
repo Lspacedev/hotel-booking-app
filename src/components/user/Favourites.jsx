@@ -9,10 +9,17 @@ function Favourites() {
   return (
     <div className="Favourites">
       <div className="favourites-div">
-        {typeof favourites !== "undefined" &&
+        {typeof favourites !== "undefined" && favourites.length > 0 ? (
           favourites.map((favourite, i) => (
-            <FavouriteCard key={i} favourite={favourite}  favourites={favourites}/>
-          ))}
+            <FavouriteCard
+              key={i}
+              favourite={favourite}
+              favourites={favourites}
+            />
+          ))
+        ) : (
+          <div>You do not have any favourites</div>
+        )}
       </div>
     </div>
   );
