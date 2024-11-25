@@ -14,18 +14,20 @@ function UserProfile({ userId }) {
     const fetchImages = async () => {
       const imagesRef = ref(storage, userId);
       let result = await listAll(imagesRef);
-      if (typeof imagesRef.url !== "undefined") {
-        let urlPromises = result.items.map((imageRef) =>
-          getDownloadURL(imageRef)
-        );
-        return Promise.all(urlPromises);
-      } else {
-        return [""];
-      }
+      //if (typeof imagesRef.url !== "undefined") {
+      let urlPromises = result.items.map((imageRef) =>
+        getDownloadURL(imageRef)
+      );
+
+      return Promise.all(urlPromises);
+      // } else {
+      //return [""];
+      // }
     };
     const loadImages = async () => {
-      const url = await fetchImages().finally(() => setLoading(false));
+      const url = await fetchImages();
       setProfilePic(url[0]);
+      setLoading(false);
     };
     if (typeof userId !== "undefined") {
       loadImages();

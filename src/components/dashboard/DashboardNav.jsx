@@ -16,19 +16,18 @@ function DashboardNav() {
     const fetchImages = async () => {
       const imagesRef = ref(storage, userId);
       let result = await listAll(imagesRef);
-      if (typeof imagesRef.url !== "undefined") {
-        let urlPromises = result.items.map((imageRef) =>
-          getDownloadURL(imageRef)
-        );
-        return Promise.all(urlPromises);
-      } else {
-        return [""];
-      }
+
+      let urlPromises = result.items.map((imageRef) =>
+        getDownloadURL(imageRef)
+      );
+
+      return Promise.all(urlPromises);
     };
     const loadImages = async () => {
       const url = await fetchImages();
       setProfilePic(url[0]);
     };
+
     if (typeof user !== "undefined") {
       loadImages();
     }
@@ -41,7 +40,7 @@ function DashboardNav() {
   function navigateProfile() {
     navigation("/home/profile");
   }
-
+  console.log({ user });
   return (
     <div className="DashboardNav">
       <p onClick={navigateDiscover}>Discover</p>

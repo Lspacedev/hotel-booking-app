@@ -12,14 +12,10 @@ function Nav() {
     const fetchImages = async () => {
       const imagesRef = ref(storage, user);
       let result = await listAll(imagesRef);
-      if (typeof imagesRef.url !== "undefined") {
-        let urlPromises = result.items.map((imageRef) =>
-          getDownloadURL(imageRef)
-        );
-        return Promise.all(urlPromises);
-      } else {
-        return [""];
-      }
+      let urlPromises = result.items.map((imageRef) =>
+        getDownloadURL(imageRef)
+      );
+      return Promise.all(urlPromises);
     };
     const loadImages = async () => {
       const url = await fetchImages();
@@ -40,6 +36,7 @@ function Nav() {
   function navigateProfile() {
     navigation("/home/profile");
   }
+  console.log({ user });
   return (
     <div className="Nav">
       <div className="logo">ZaHotels.com</div>

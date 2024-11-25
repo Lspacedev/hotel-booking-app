@@ -40,6 +40,7 @@ function App() {
       } else {
         // User is signed out
         // ...
+        dispatch(setUser(""));
       }
     });
   }, []);

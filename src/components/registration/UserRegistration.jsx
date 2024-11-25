@@ -81,6 +81,7 @@ function UserRegistration() {
         surname: userDetails.surname,
         email: userDetails.email,
         password: encryptedPass,
+        notifications: [],
       });
 
       uploadFile(userId, profilePic);
