@@ -18,36 +18,9 @@ function AccomodationCard() {
 
   const { result_id } = useParams();
   const slidesRef = useRef(null);
-  const [images, setImages] = useState([]);
   const [activeImageNum, setCurrent] = useState(0);
-  const [isShared, setIsShared] = useState(false);
-  const length = images.length;
-  const nextSlide = () => {
-    setCurrent(activeImageNum === length - 1 ? 0 : activeImageNum + 1);
-  };
-  const prevSlide = () => {
-    setCurrent(activeImageNum === 0 ? length - 1 : activeImageNum - 1);
-  };
 
   const storage = getStorage();
-  useEffect(() => {
-    const fetchImages = async () => {
-      const imagesRef = ref(storage, result_id);
-
-      let result = await listAll(imagesRef);
-      let urlPromises = result.items.map((imageRef) =>
-        getDownloadURL(imageRef)
-      );
-
-      return Promise.all(urlPromises);
-    };
-
-    const loadImages = async () => {
-      const urls = await fetchImages().finally(() => setLoading(false));
-      setImages(urls);
-    };
-    loadImages();
-  }, []);
 
   //user id , acccomodation id
   const user = useSelector((state) => state.user.currentUser);
@@ -59,6 +32,14 @@ function AccomodationCard() {
   const [accomodation] = accomodations.filter(
     (acccomodation) => acccomodation.id === result_id
   );
+  const [isShared, setIsShared] = useState(false);
+  const length = accomodation?.images.length;
+  const nextSlide = () => {
+    setCurrent(activeImageNum === length - 1 ? 0 : activeImageNum + 1);
+  };
+  const prevSlide = () => {
+    setCurrent(activeImageNum === 0 ? length - 1 : activeImageNum - 1);
+  };
   const checkInOut = useSelector((state) => state.accomodations.checkInOut);
 
   async function book() {
@@ -198,7 +179,7 @@ function AccomodationCard() {
   function handleShare() {
     setIsShared(!isShared);
   }
-  if (loading) return <div className="Loading">Loading...</div>;
+  //if (loading) return <div className="Loading">Loading...</div>;
 
   return (
     <div className="AccomodationCard">
@@ -206,18 +187,20 @@ function AccomodationCard() {
       <h3 className="acc-name">{accomodation && accomodation.room_name}</h3>
       <p className="acc-address">{accomodation && accomodation.address}</p>
       <div className="slides" ref={slidesRef}>
-        {images.map((image, i) => {
-          return (
-            <div
-              className={
-                i === activeImageNum ? "currentSlide active" : "currentSlide"
-              }
-              key={i}
-            >
-              {i === activeImageNum && <img src={image} />}
-            </div>
-          );
-        })}
+        {accomodation &&
+          accomodation.images.length > 0 &&
+          accomodation.images.map((image, i) => {
+            return (
+              <div
+                className={
+                  i === activeImageNum ? "currentSlide active" : "currentSlide"
+                }
+                key={i}
+              >
+                {i === activeImageNum && <img src={image} />}
+              </div>
+            );
+          })}
         <button className="prev" onClick={prevSlide}>
           <IoIosArrowBack />
         </button>

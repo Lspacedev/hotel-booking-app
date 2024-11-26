@@ -15,24 +15,6 @@ function ResultCard({ result }) {
   const navigation = useNavigate();
 
   const storage = getStorage();
-  useEffect(() => {
-    const fetchImages = async () => {
-      const imagesRef = ref(storage, result.id);
-
-      let results = await listAll(imagesRef);
-      let urlPromises = results.items.map((imageRef) =>
-        getDownloadURL(imageRef)
-      );
-
-      return Promise.all(urlPromises);
-    };
-
-    const loadImages = async () => {
-      const urls = await fetchImages().finally(() => setLoading(false));
-      setImages(urls);
-    };
-    loadImages();
-  }, []);
 
   const user = useSelector((state) => state.user.currentUser);
   function handleNavigateSubPage() {
@@ -64,12 +46,12 @@ function ResultCard({ result }) {
     }
   }
   printStars(Number(result.rating));
-  if (loading) return <div className="Loading">Loading...</div>;
+  // if (loading) return <div className="Loading">Loading...</div>;
 
   return (
     <div className="ResultCard">
       <div className="img" onClick={handleNavigateSubPage}>
-        <img src={images[0]} />
+        {result && result.images.length > 0 && <img src={result.images[0]} />}
       </div>
       <div className="result-card-info">
         <div className="side-one">
