@@ -29,10 +29,13 @@ function DashboardNav() {
         </div>
         <div className="notification-content">
           <ul>
-            {user &&
+            {user && user.notifications.length > 0 ? (
               user.notifications.map((notification, i) => (
                 <li key={i}>{notification.message}</li>
-              ))}
+              ))
+            ) : (
+              <div>No notifications</div>
+            )}
           </ul>
         </div>
       </div>

@@ -1,11 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { auth } from "../../config/firebase";
 import { db } from "../../config/firebase";
 
-import { sendPasswordResetEmail } from "firebase/auth";
+import {
+  EmailAuthProvider,
+  reauthenticateWithCredential,
+  sendPasswordResetEmail,
+  updateEmail,
+} from "firebase/auth";
 import { updateDoc, collection, doc } from "firebase/firestore";
-import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
+import { getStorage } from "firebase/storage";
 
 function UserProfile({ userId }) {
   const [loading, setLoading] = useState(false);
@@ -17,6 +22,7 @@ function UserProfile({ userId }) {
   });
   const [profilePic, setProfilePic] = useState("");
   const [update, setUpdate] = useState(false);
+  const [newEmail, setNewEmail] = useState("");
 
   const isLoading = false;
   //get user from firestore
@@ -37,17 +43,20 @@ function UserProfile({ userId }) {
     if (userUpdate.surname !== "") {
       updatedObj.surname = userUpdate.name;
     }
-    if (userUpdate.email !== "") {
-      updatedObj.email = userUpdate.email;
+    if (newEmail !== "") {
+      updatedObj.email = newEmail;
+
+      updateEmail();
     }
 
-    //update users to firestore
+    // update users to firestore
     try {
       const usersCollection = collection(db, "users");
       const userRef = doc(usersCollection, currentUser);
 
       if (JSON.stringify(updatedObj) !== "{}") {
         await updateDoc(userRef, updatedObj);
+
         alert("Updated successfully");
       } else {
         alert("Nothing to update");
@@ -71,6 +80,20 @@ function UserProfile({ userId }) {
       .catch((err) => {});
   }
 
+  async function updateEmail() {
+    // const credential = EmailAuthProvider.credential(
+    //   auth.currentUser.email,
+    //   userProvidedPassword
+    // );
+    // updateEmail(auth.currentUser, newEmail)
+    //   .then((res) => {
+    //     console.log({ res });
+    //     //alert("Email updated successfully");
+    //   })
+    //   .catch((err) => {
+    //     alert("An error occured while updating email", err.message);
+    //   });
+  }
   if (loading) return <div className="Loading">Loading...</div>;
 
   return (
@@ -137,10 +160,16 @@ function UserProfile({ userId }) {
             </div>
 
             <div className="email-div">
-              <h4>Email</h4>
+              {!update && <h4>Email</h4>}
               {update ? (
                 <div className="email">
-                  <div>{user && user.email}</div>
+                  {/* <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    onChange={(e) => setNewEmail(e.target.value)}
+                    value={newEmail}
+                  /> */}
                 </div>
               ) : (
                 <div>{user && user.email}</div>

@@ -12,7 +12,7 @@ function SearchAccomodationsResults() {
     checkIn: "",
     checkOut: "",
   });
-  const [guests, setGuestsNum] = useState(0);
+  const [guests, setGuestsNum] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
   const dispatch = useDispatch();
@@ -50,6 +50,9 @@ function SearchAccomodationsResults() {
       //setSearchParams({ search: searchInput });
       if (searchInput !== "") {
         dispatch(setSearchTerm({ title: searchInput }));
+      } else {
+        alert("Please enter hotel destination to search");
+        return;
       }
       if (checkInOut.checkIn !== "" && checkInOut.checkOut !== "") {
         dispatch(setCheckInOut(checkInOut));

@@ -57,7 +57,10 @@ function ResultCard({ result }) {
         <div className="side-one">
           <h4>{result.room_name}</h4>
           <h6>{result.hotel_name}</h6>
-          <p>{arr && arr.map(() => <IoStarSharp className="star" />)}</p>
+          <p>
+            {arr &&
+              arr.map((elem, i) => <IoStarSharp key={i} className="star" />)}
+          </p>
           <p>{result.description}</p>
         </div>
         <div className="side-two">

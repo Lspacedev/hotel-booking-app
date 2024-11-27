@@ -7,7 +7,7 @@
 }
 body {
   margin: 0px;
-  background-color: #ebebeb;
+  background-color: #e4e4e4;
 }
 
 /* Nav */
@@ -24,7 +24,7 @@ body {
   align-items: center;
   gap: 15px;
 
-  color: #626267;
+  color: #1c1c1f;
 }
 .nav-links div {
   cursor: pointer;
@@ -185,6 +185,9 @@ body {
   backdrop-filter: saturate(180%) blur(40px);
 }
 
+.all-results {
+  margin-left: 15%;
+}
 .SearchAccomodationsResults {
   display: flex;
   gap: 5px;
@@ -376,6 +379,30 @@ body {
 .UserProfile {
   text-align: center;
 }
+.UserProfile .close {
+  background-color: transparent;
+  border: none;
+  margin-left: 50%;
+  margin-top: 40px;
+  font-size: 1.7rem;
+}
+.UserProfile input {
+  width: 60%;
+}
+.UserProfile .password button {
+  background-color: #d42727;
+  padding: 7px 2px;
+  outline: none;
+  border: none;
+  color: white;
+}
+.UserProfile .account-update {
+  margin-top: 25px;
+}
+.UserProfile .account-update button {
+  background-color: #1c1c1f;
+  padding: 5px 30px;
+}
 
 .UserDashboard {
   height: 100vh;
@@ -415,7 +442,7 @@ body {
 
   text-align: center;
   padding: 50px 5px;
-  background-color: #626267;
+  background-color: #1c1c1f;
 }
 .Sidebar .logo {
   color: #a6a670;
@@ -1163,9 +1190,13 @@ select {
   height: 80%;
   border: 1px dashed black;
 }
+.profile-pic {
+  margin-top: 25px;
+}
 .profile-pic img {
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 }
 .profile-icon img {
   width: 30px;
@@ -1265,7 +1296,9 @@ code {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-
+.notification-content div {
+  text-align: center;
+}
 .dropdown:hover .notification-content {
   display: block;
 }
@@ -1286,7 +1319,7 @@ code {
 }
 .footer {
   color: white;
-  background-color: #36363a;
+  background-color: #1c1c1f;
 
   font-family: "Ubuntu";
 

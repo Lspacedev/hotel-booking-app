@@ -1,16 +1,17 @@
 import { useSearchParams } from "react-router-dom";
-import { setFilters, setSearchResults } from "../../app/accomodationsSlice";
-import { useState, useEffect } from "react";
+import { setTags } from "../../app/accomodationsSlice";
 import { useDispatch } from "react-redux";
 function Filters() {
-  const [filterTerm, setFilterTerm] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const filtersParams = searchParams.get("filters") || "";
   const searchTerm = searchParams.get("search") || "";
   const dispatch = useDispatch();
+
   function handleAddFilter(e) {
-    setFilterTerm(e.target.value);
-    dispatch(setFilters({ filter: e.target.value }));
+    if (e.target.checked) {
+      dispatch(setTags({ type: "ADD", filter: e.target.value }));
+    } else {
+      dispatch(setTags({ type: "REMOVE", filter: e.target.value }));
+    }
   }
   function getMap() {
     if (searchTerm === "Pretoria") {
