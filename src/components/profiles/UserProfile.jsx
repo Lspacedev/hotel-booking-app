@@ -48,12 +48,7 @@ function UserProfile({ userId }) {
       updatedObj.name = userUpdate.name;
     }
     if (userUpdate.surname !== "") {
-      updatedObj.surname = userUpdate.name;
-    }
-    if (newEmail !== "") {
-      updatedObj.email = newEmail;
-
-      updateEmail();
+      updatedObj.surname = userUpdate.surname;
     }
 
     // update users to firestore
