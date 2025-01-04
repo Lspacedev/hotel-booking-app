@@ -18,51 +18,71 @@ function UserLogin() {
         alert(err.message);
       });
   }
+  function guestLogin() {
+    signInWithEmailAndPassword(
+      auth,
+      import.meta.env.VITE_GUEST_EMAIL,
+      import.meta.env.VITE_GUEST_PASSWORD
+    )
+      .then(() => {
+        alert("Log in successfully");
+        navigation("/home");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }
   function handleNavigateRegister() {
     navigation("/registration");
   }
+
   return (
     <div className="UserLogin">
-      <div className="login-img">
-        <img src="images/login-register.jpg" alt="login" />
-      </div>
-      <div className="login-form-container">
-        <h2>ZaHotels.com</h2>
-        <p>Log in to your account.</p>
-        <div className="form">
-          <div className="email">
-            <label htmlFor="email">
-              Email:
-              <input
-                type="email"
-                id="email"
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </label>
-          </div>
-
-          <div className="password">
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                id="password"
-                name="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-          </div>
-
-          <button className="submit-btn" onClick={login}>
-            Login
-          </button>
+      <div className="login-register-container">
+        <div className="login-img">
+          <img src="images/login-register.jpg" alt="login" />
         </div>
-        <div className="login-to-register">
-          Don't have an account?
-          <p onClick={handleNavigateRegister}>Register here</p>
+        <div className="login-form-container">
+          <h2>ZaHotels.com</h2>
+          <p>Log in to your account.</p>
+          <div className="form">
+            <div className="email">
+              <label htmlFor="email">
+                Email:
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </label>
+            </div>
+
+            <div className="password">
+              <label htmlFor="password">
+                Password:
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
+            </div>
+
+            <button className="submit-btn" onClick={login}>
+              Login
+            </button>
+            <button className="guest-submit-btn" onClick={guestLogin}>
+              Guest log in
+            </button>
+          </div>
+          <div className="login-to-register">
+            Don't have an account?
+            <p onClick={handleNavigateRegister}>Register here</p>
+          </div>
+          <Link to="/forgotPassword">Forgot password</Link>
         </div>
-        <Link to="/forgotPassword">Forgot password</Link>
       </div>
     </div>
   );

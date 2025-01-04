@@ -31,3 +31,9 @@ Photo by Pixabay: https://www.pexels.com/photo/silver-and-white-desk-lamp-beside
 ```python
 https://www.figma.com/board/CJ0hyIKh69osFRaYgrpzGJ/Hotel-App-User-Flow?node-id=0-1&node-type=canvas
 ```
+
+## Stipe Test Cards:
+
+```python
+https://docs.stripe.com/testing
+```

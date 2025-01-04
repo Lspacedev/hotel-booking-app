@@ -1,10 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { setSearchTerm } from "../../app/accomodationsSlice";
+import {
+  setSearchTerm,
+  setTags,
+  setGuests,
+} from "../../app/accomodationsSlice";
 import { useDispatch } from "react-redux";
 function Card({ title, url }) {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   function searchCard() {
+    dispatch(setTags({ type: "RESET", filter: "" }));
+    dispatch(setGuests({ num: "" }));
     dispatch(setSearchTerm({ title }));
     navigation("/results");
   }

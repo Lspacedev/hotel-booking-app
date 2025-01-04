@@ -18,7 +18,7 @@ function Favourites() {
             />
           ))
         ) : (
-          <div>You do not have any favourites</div>
+          <div className="no-favs">You do not have any favourites</div>
         )}
       </div>
     </div>

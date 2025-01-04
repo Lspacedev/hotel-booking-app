@@ -1,7 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
-import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
+import { useState } from "react";
+import { FaHotel } from "react-icons/fa";
 
 function Nav() {
   const [profilePic, setProfilePic] = useState("");
@@ -22,12 +22,17 @@ function Nav() {
   }
   return (
     <div className="Nav">
-      <div className="logo">ZaHotels.com</div>
+      <div className="logo-container" onClick={() => navigation("/")}>
+        <FaHotel className="icon" />
+        <h3 className="logo">ZaHotels.com</h3>
+      </div>
       <div className="nav-links">
-        <div>Discover</div>
+        <div className="discover">Discover</div>
         {userId === "" ? (
           <>
-            <div onClick={navigateLogin}>Login</div>
+            <div className="login-btn" onClick={navigateLogin}>
+              Login
+            </div>
 
             <button className="register-btn" onClick={navigateRegister}>
               Register

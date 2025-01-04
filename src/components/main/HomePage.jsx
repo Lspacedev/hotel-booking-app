@@ -7,8 +7,10 @@ import Footer from "./Footer";
 function HomePage() {
   return (
     <div className="HomePage">
-      <Nav />
-      <ShowCase />
+      <div className="background-image">
+        <Nav />
+        <ShowCase />
+      </div>
       <Categories heading="Hotels">
         <Card title="Pretoria" url="images/pretoria.jpg" />
         <Card title="Johannesburg" url="images/jozi.jpg" />

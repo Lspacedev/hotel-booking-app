@@ -1,40 +1,35 @@
-import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
-import { useState, useEffect } from "react";
+import { IoStarSharp } from "react-icons/io5";
+
 function ReviewCard({ review }) {
-  const [images, setImages] = useState([]);
-
-  const storage = getStorage();
-  useEffect(() => {
-    const fetchImages = async () => {
-      const imagesRef = ref(storage, review.roomId);
-
-      let results = await listAll(imagesRef);
-      let urlPromises = results.items.map((imageRef) =>
-        getDownloadURL(imageRef)
-      );
-
-      return Promise.all(urlPromises);
-    };
-
-    const loadImages = async () => {
-      const urls = await fetchImages();
-      setImages(urls);
-    };
-    loadImages();
-  }, []);
+  function printStars(num) {
+    let arr = [];
+    for (let i = 0; i < num; i++) {
+      arr.push(0);
+    }
+    return arr;
+  }
   return (
     <div className="ReviewCard">
       <div className="img-rating">
         <div className="img">
-          <img src={images[0]} />
+          <img src={review.reviewUrl} />
         </div>
-        <p>
-          {review.room_name} {review.rating}
-        </p>
       </div>
       <div className="review-text">
-        {review.reviewText}
-        <p>{review.date}</p>
+        <div className="review-header">
+          <p>{review.room_name}</p>
+          <p>{review.date}</p>
+        </div>
+
+        <div>
+          <p>
+            {printStars(review.rating) &&
+              printStars(review.rating).map((elem, i) => (
+                <IoStarSharp key={i} className="star" />
+              ))}
+          </p>
+        </div>
+        <p>{review.reviewText}</p>
       </div>
     </div>
   );

@@ -9,16 +9,28 @@ body {
   margin: 0px;
   background-color: #e4e4e4;
 }
-
+.background-image {
+  background: url("/images/showcase1.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 /* Nav */
 .Nav {
   display: flex;
   justify-content: space-around;
   gap: 400px;
   padding: 15px 50px;
-  background-color: #1c1c1f;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: saturate(180%) blur(4px);
+  z-index: 2;
 }
-
+.Nav .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
 .nav-links {
   display: flex;
   align-items: center;
@@ -31,6 +43,19 @@ body {
 }
 .nav-links button {
   cursor: pointer;
+}
+.nav-links .login-btn {
+  border: 1px solid #a6a670;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 5px;
+}
+.nav-links .discover:hover {
+  color: #626267;
+}
+
+.nav-links .login-btn:hover {
+  border: 1px solid #626267;
 }
 
 .nav-links .register-btn {
@@ -74,9 +99,8 @@ body {
   width: 100%;
   height: 50px;
   z-index: 1;
-  background: #36363a;
-  opacity: 0.4;
-  backdrop-filter: saturate(180%) blur(40px);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: saturate(180%) blur(4px);
 }
 
 .ShowCase h3 {
@@ -103,10 +127,11 @@ body {
   padding: 15px;
   background-color: white;
 
-  border-radius: 5px;
+  border-radius: 25px;
   z-index: 2;
 }
 .SearchAccomodations label {
+  flex: 5;
   color: #626267;
   padding: 0px 15px;
   display: flex;
@@ -116,7 +141,7 @@ body {
 .SearchAccomodations input {
   flex: 2;
   padding: 15px 0px;
-  border-radius: 5px;
+  border-radius: 25px;
   border: none;
   background-color: #ebebeb;
 
@@ -156,12 +181,12 @@ body {
   height: 300px;
   width: 300px;
   box-shadow: 1px 1px 5px #aaaaaa;
-  border-radius: 2%;
+  border-radius: 25px;
 }
 .Card img {
   height: 100%;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
 }
 .Card .title {
@@ -179,6 +204,31 @@ body {
 /** RESULTS PAGE **/
 .ResultsPage {
   height: calc(100% - 220px);
+}
+.ResultsPage .Nav {
+  display: flex;
+  justify-content: space-around;
+  gap: 400px;
+  padding: 15px 50px;
+  background-color: #e4e4e4;
+}
+
+.ResultsPage .Nav .nav-links .login-btn {
+  border: 1px solid #a6a670;
+  color: #1c1c1f;
+  padding: 10px 25px;
+  border-radius: 5px;
+  border: none;
+}
+.ResultsPage .Nav .nav-links .discover:hover {
+  color: #777737;
+}
+
+.ResultsPage .Nav .nav-links .login-btn:hover {
+  border: 1px solid #777737;
+}
+.ResultsPage .Nav .nav-links div {
+  color: #1c1c1f;
 }
 .search-div {
   background: linear-gradient(#5c5c69, #36363a);
@@ -201,7 +251,16 @@ body {
   padding: 15px;
   background-color: white;
 
-  border-radius: 5px;
+  border-radius: 25px;
+  width: 70%;
+}
+
+.SearchAccomodationsResults label {
+  flex: 15;
+  color: #626267;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
 }
 
 .SearchAccomodationsResults input {
@@ -209,15 +268,17 @@ body {
   padding: 15px 0px;
   border-radius: 5px;
   border: none;
-
+  background-color: #ebebeb;
   text-align: center;
+  border-radius: 25px;
 }
 
 .SearchAccomodationsResults input[type="submit"] {
+  flex: 1;
   padding: 15px 32px;
   background-color: #a6a670;
   color: white;
-  font-weight: 400;
+  font-weight: 700;
   cursor: pointer;
 }
 .SearchAccomodationsResults input[type="submit"]:hover {
@@ -236,8 +297,25 @@ body {
 
   padding-left: 5px;
 }
+.Results select {
+  outline: none;
+  border-radius: 25px;
+}
 .NavPath {
-  margin-left: 15%;
+  margin: 25px 0px 25px 12%;
+  font-size: 1.3rem;
+  display: flex;
+}
+
+.NavPath .link {
+  color: #7a7a83;
+  text-decoration: none;
+}
+.NavPath div {
+  color: #626267;
+}
+.NavPath .link:hover {
+  color: #585851;
 }
 .sort-map select {
   width: 150px;
@@ -245,6 +323,7 @@ body {
 .Filters iframe {
   border: none;
   outline: none;
+  border-radius: 25px;
 }
 .results-main {
   display: flex;
@@ -263,30 +342,36 @@ body {
   gap: 15px;
   background-color: white;
   box-shadow: 1px 1px 5px #bbb;
-  border-radius: 10px;
+  border-radius: 25px;
 }
 .ResultCard .star {
   color: orange;
 }
 .like-btn {
-  background-color: #a6a670;
+  background-color: transparent;
   border: none;
+  outline: none;
   color: white;
-  padding: 5px 10px;
   cursor: pointer;
-  border-radius: 2px;
 }
-.like-btn:hover {
-  background-color: #777737;
+
+.like-btn .icon {
+  font-size: 32px;
+  color: #1c1c1f;
+}
+.like-btn .icon:hover {
+  color: #777737;
 }
 .ResultCard .img {
   flex: 30%;
   height: 200px;
   cursor: pointer;
+  border-radius: 25px;
 }
 .ResultCard img {
   width: 100%;
   height: 100%;
+  border-radius: 25px;
 }
 .result-card-info {
   flex: 70%;
@@ -309,21 +394,25 @@ body {
   padding: 15px 0px;
 }
 .AccomodationCard .back {
+  font-size: 1.8rem;
   cursor: pointer;
+  padding: 5px;
 }
 .AccomodationCard .back:hover {
-  color: #a6a670;
+  background-color: #c2c2c271;
+  border-radius: 50%;
 }
 .AccomodationCard .slides {
   height: 400px;
   width: 45vw;
-  margin: 0px auto;
   position: relative;
+  margin: 25px 0px;
   display: flex;
 
   /* Add the following lines for smooth scrolling */
   scroll-behavior: smooth;
   transition: scroll 0.3s ease-in-out;
+  border-radius: 25px;
 }
 .currentSlide {
   width: inherit;
@@ -331,6 +420,7 @@ body {
 .slides img {
   width: inherit;
   height: 100%;
+  border-radius: 25px;
 }
 
 /* Next & previous buttons */
@@ -340,45 +430,81 @@ body {
   position: absolute;
   top: 50%;
   width: auto;
-  margin-top: -22px;
-  padding: 5px;
   color: white;
-
-  font-size: 2rem;
+  font-size: 2.4rem;
+  padding: 0px;
   border: none;
   background-color: transparent;
-  border: 1px solid #a6a670;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }
 
 /* Position the "next button" to the right */
 .next {
   right: 0;
-  border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
-  background-color: #36363a;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: saturate(180%) blur(4px);
 }
 
 .share-btn {
   text-align: end;
-  background-color: #a6a670;
+  background-color: #1c1c1f;
   padding: 7px 15px;
   border: none;
   color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-right: 15px;
 }
 .book-btn {
-  background-color: #a6a670;
+  background-color: #1c1c1f;
   color: white;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
+  border-radius: 25px;
+}
+.share-btn:hover {
+  background-color: #626267;
 }
 .book-btn:hover {
   background-color: #626267;
 }
+.AccomodationCard .accomodation-reviews {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+.AccomodationCard .review-card {
+  flex: 1;
+  background-color: whitesmoke;
+  border-radius: 25px;
+  padding: 5px 25px;
+  margin: 15px 0px;
+}
+.AccomodationCard .star {
+  color: yellow;
+}
+
+.name-pic {
+  display: flex;
+  gap: 15px;
+  margin: 15px 0px;
+}
+.name-pic img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
 /* User Dashboard */
 
 .UserProfile {
@@ -390,9 +516,14 @@ body {
   margin-left: 50%;
   margin-top: 40px;
   font-size: 1.7rem;
+  cursor: pointer;
 }
 .UserProfile input {
-  width: 60%;
+  width: 25%;
+  padding: 10px;
+  border-radius: 25px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.521);
 }
 .UserProfile .password button {
   background-color: #d42727;
@@ -400,15 +531,22 @@ body {
   outline: none;
   border: none;
   color: white;
+  cursor: pointer;
+  border-radius: 15px;
 }
 .UserProfile .account-update {
   margin-top: 25px;
 }
 .UserProfile .account-update button {
   background-color: #1c1c1f;
-  padding: 5px 30px;
+  padding: 10px 30px;
+  cursor: pointer;
+  border-radius: 25px;
+  width: 25%;
 }
-
+.UserProfile .account-update button:hover {
+  background-color: #1c1c1fe7;
+}
 .UserDashboard {
   height: 100vh;
   display: flex;
@@ -435,6 +573,9 @@ body {
 .DashboardNav p {
   cursor: pointer;
 }
+.DashboardNav p:hover {
+  color: #777737;
+}
 .DashboardNav div {
   cursor: pointer;
 }
@@ -446,18 +587,27 @@ body {
   flex-direction: column;
 
   text-align: center;
-  padding: 50px 5px;
+  padding: 10px 5px;
   background-color: #1c1c1f;
+  gap: 50px;
 }
-.Sidebar .logo {
-  color: #a6a670;
+.Sidebar .logo-container {
+  flex: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-container .icon {
+  font-size: 34px;
+  color: #585851;
 }
 
 .logo {
   font-size: 1.3rem;
   font-weight: bold;
-
-  color: #ececec;
+  color: #b2bd7e;
 }
 .logout {
   cursor: pointer;
@@ -476,17 +626,28 @@ body {
   gap: 25px;
 }
 
-.sidebar-links div {
+.sidebar-links .link {
   cursor: pointer;
-  margin: 0px 25px;
+  margin: 0px 80px;
   padding: 10px 0px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.sidebar-links div:hover {
+.sidebar-links .link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+.link .icon {
+  font-size: 32px;
+}
+.link .text {
+}
+.sidebar-links .link:hover {
   background-color: #a6a670;
-  border-radius: 2px;
+  border-radius: 25px;
 }
 
 /* Bookings */
@@ -503,21 +664,23 @@ body {
   gap: 15px;
 
   box-shadow: 1px 1px 5px #bbb;
+  border-radius: 25px;
 }
 .BookingCard .img {
   flex: 30%;
-  background-color: #bbb;
+  border-radius: 25px;
 }
 
 .BookingCard img {
   width: 100%;
   height: 100%;
+  border-radius: 25px;
 }
 .booking-card-info {
   flex: 70%;
   display: flex;
   justify-content: space-between;
-  padding: 0px 5px;
+  padding: 0px 15px;
 }
 
 /* Pending */
@@ -545,6 +708,7 @@ body {
   color: white;
   background-color: #a6a670;
   margin: 2px;
+  cursor: pointer;
 }
 
 /* Reviews */
@@ -564,8 +728,22 @@ body {
   gap: 15px;
 
   box-shadow: 1px 1px 5px #bbb;
+  border-radius: 25px;
 }
-
+.ReviewCard .img {
+  border-radius: 25px;
+}
+.ReviewCard .img img {
+  border-radius: 25px;
+}
+.ReviewCard .review-header {
+  display: flex;
+  justify-content: space-between;
+}
+.ReviewCard .review-text {
+  display: flex;
+  flex-direction: column;
+}
 .ReviewForm {
   position: fixed;
   width: 100%;
@@ -576,7 +754,6 @@ body {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 2;
-  cursor: pointer;
   padding: 0px;
   margin: 0px;
   display: flex;
@@ -588,12 +765,23 @@ body {
 .ReviewForm .form-div {
   margin: 20px 0px;
 }
+.ReviewForm .form-div .no-bookings {
+  padding: 15px;
+  width: 700px;
+  height: 500px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+}
 .ReviewForm .form-div form {
   margin: 0 auto 0 auto;
   padding: 15px;
   width: 700px;
 
   background-color: white;
+  border-radius: 25px;
 }
 .ReviewForm form input[type="file"] {
   font-size: 0.7rem;
@@ -602,11 +790,11 @@ body {
   border: none;
 }
 .ReviewForm form input {
-  margin: 0px 0px;
-  padding: 5px 0px;
+  margin: 10px 0px;
+  padding: 5px;
   outline: none;
   border: 1px solid #bbb;
-  border-radius: 2px;
+  border-radius: 25px;
 }
 
 .ReviewForm form label {
@@ -628,6 +816,7 @@ body {
 }
 .ReviewForm .form-close:hover {
   color: #a6a670;
+  cursor: pointer;
 }
 
 .ReviewForm input[type="submit"] {
@@ -637,9 +826,11 @@ body {
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 25px;
 }
 .ReviewForm input[type="submit"]:hover {
   background-color: #626267;
+  cursor: pointer;
 }
 
 .rating-guests {
@@ -681,13 +872,22 @@ body {
   border: none;
   padding: 5px 15px;
   color: white;
+  cursor: pointer;
+  margin: 0px 25px 0px 0px;
+  border-radius: 25px;
 }
-
+.AddReview button:hover {
+  background-color: #777737;
+}
 /* Favourites */
 .Favourites {
   padding: 15px 25px;
 }
-
+.no-favs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .favourites-div {
   display: flex;
   gap: 25px;
@@ -695,15 +895,16 @@ body {
 .FavouriteCard {
   padding: 5px;
   box-shadow: 1px 1px 5px #bbb;
+  border-radius: 25px;
 }
 .FavouriteCard .img {
   width: 200px;
   height: 200px;
-  background-color: #bbb;
 }
 .FavouriteCard img {
   width: 100%;
   height: 100%;
+  border-radius: 25px;
 }
 .remove-fav {
   font-size: 1.1rem;
@@ -761,6 +962,7 @@ body {
   color: white;
   background-color: #a6a670;
   margin: 0px;
+  cursor: pointer;
 }
 .ReservationCard p {
   margin: 0px;
@@ -848,6 +1050,7 @@ body {
   padding: 5px 15px;
   margin: 5px;
   color: white;
+  cursor: pointer;
 }
 
 /* AccomodationDetails */
@@ -869,19 +1072,31 @@ body {
   border: none;
   padding: 10px 15px;
   margin: 2px;
+  cursor: pointer;
 }
 
+.login-register-container {
+  width: 70%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* User Login */
 .UserLogin {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-
   padding: 0px 50px;
   background-color: white;
 }
 
+.login-to-register {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 .login-to-register p {
   color: #1e2f23;
   cursor: pointer;
@@ -913,11 +1128,11 @@ select {
   border: 1px solid #bbb;
 
   margin: 15px 0;
-  padding: 5px 0px;
-  width: 100%;
+  padding: 5px;
+  width: 98%;
   outline: none;
   border: 1px solid #bbb;
-  border-radius: 5px;
+  border-radius: 25px;
   display: inline-block;
 }
 .UserLogin .form div label {
@@ -930,24 +1145,38 @@ select {
 
 .UserLogin .submit-btn {
   margin: 5px 0px;
-  padding: 5px 0px;
+  padding: 5px;
   width: 100%;
   background-color: #a6a670;
   color: white;
   outline: none;
   border: none;
   cursor: pointer;
+  border-radius: 25px;
 }
-
+.UserLogin .guest-submit-btn {
+  margin: 5px 0px;
+  padding: 5px;
+  width: 100%;
+  background-color: #5c5c69;
+  color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+}
+.UserLogin .guest-submit-btn:hover {
+  background-color: #1c1c1f;
+}
 .UserLogin .submit-btn:hover {
   background-color: #626267;
 }
 
 .login-img {
   flex: 40%;
-
   height: 500px;
-  background-color: #bbb;
+  border-radius: 25px;
+  box-shadow: -2px 0px 3px 0px #bbbbbb67;
 }
 
 .login-img img {
@@ -955,6 +1184,7 @@ select {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: 25px;
 }
 
 /* Admin Login */
@@ -1044,6 +1274,7 @@ select {
 .UserRegistration {
   height: 100vh;
   display: flex;
+  justify-content: center;
   align-items: center;
   background-color: white;
   padding: 0px 50px;
@@ -1083,11 +1314,11 @@ select {
   border: 1px solid #bbb;
 
   margin: 15px 0px 5px 0px;
-  padding: 5px 0px;
-  width: 100%;
+  padding: 5px;
+  width: 98%;
   outline: none;
   border: 1px solid #bbb;
-  border-radius: 5px;
+  border-radius: 25px;
   display: inline-block;
 }
 .UserRegistration .form div label {
@@ -1100,9 +1331,9 @@ select {
 
 .UserRegistration .submit-btn {
   margin: 5px 0px;
-  padding: 5px 0px;
+  padding: 5px 7px;
   width: 100%;
-  border-radius: 5px;
+  border-radius: 25px;
   background-color: #a6a670;
   color: white;
   outline: none;
@@ -1115,7 +1346,8 @@ select {
 .register-img {
   flex: 40%;
   height: 500px;
-  background-color: #bbb;
+  box-shadow: -2px 0px 3px 0px #bbbbbb67;
+  border-radius: 25px;
 }
 
 .register-img img {
@@ -1123,6 +1355,7 @@ select {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  border-radius: 25px;
 }
 
 /* Checkout */
@@ -1265,6 +1498,7 @@ code {
   background-color: #a6a670;
   border: none;
   color: white;
+  cursor: pointer;
 }
 
 .error {
@@ -1284,7 +1518,10 @@ code {
 .dropbtn span {
   color: #626267;
 }
-
+.dropbtn .icon {
+  color: #626267;
+  font-size: 32px;
+}
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
@@ -1297,9 +1534,10 @@ code {
   position: absolute;
   background-color: whitesmoke;
   width: 200px;
-  padding: 10px 5px;
+  padding: 10px 25px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  border-radius: 25px;
 }
 .notification-content div {
   text-align: center;
@@ -1478,6 +1716,7 @@ code {
     justify-content: space-evenly;
     flex-wrap: wrap;
   }
+
   .ReviewForm {
     padding: 0px;
   }

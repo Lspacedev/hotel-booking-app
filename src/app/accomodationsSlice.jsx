@@ -45,6 +45,8 @@ export const accomodationsSlice = createSlice({
         state.tags.tags = [...tags, action.payload.filter];
       } else if (type === "REMOVE") {
         state.tags.tags = tags.filter((tag) => tag !== action.payload.filter);
+      } else {
+        state.tags.tags = [];
       }
     },
   },

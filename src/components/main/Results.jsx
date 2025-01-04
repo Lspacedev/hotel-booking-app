@@ -40,14 +40,7 @@ function Results() {
           ))}
         </div>
       ) : (
-        <div>
-          Accomodation not found
-          {/* {typeof accomodations !== "undefined" &&
-            accomodations.length > 0 &&
-            accomodations.map((accomodation, i) => (
-              <ResultCard key={i} result={accomodation} />
-            ))} */}
-        </div>
+        <div>Accomodation not found</div>
       )}
     </div>
   );

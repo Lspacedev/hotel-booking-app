@@ -74,35 +74,32 @@ function ResultsPage() {
         dispatch(setSearchResults(filteredAccomodations));
       }
 
-      // if (tags.length > 0) {
-      //   console.log({ filteredAccomodations });
-      //   let filteredAccomodationsFilter = [];
-      //   tags.map((tag) => {
-      //     let arr = filteredAccomodations.filter(
-      //       (accomodation) => accomodation.room_type === tag
-      //     );
+      if (tags.length > 0) {
+        let filteredAccomodationsFilter = [];
+        tags.map((tag) => {
+          let arr = filteredAccomodations.filter(
+            (accomodation) => accomodation.room_type === tag
+          );
 
-      //     filteredAccomodationsFilter = filteredAccomodationsFilter.concat(arr);
-      //   });
+          filteredAccomodationsFilter = filteredAccomodationsFilter.concat(arr);
+        });
 
-      //   dispatch(setSearchResults(filteredAccomodationsFilter));
-      // } else {
-      //   dispatch(setSearchResults(filteredAccomodations));
-      // }
-      // if (sort === "low") {
-      //   let arr = [...filteredAccomodations];
-      //   let sorted = arr.sort((a, b) => a.price - b.price);
-      //   dispatch(setSearchResults(sorted));
-      // }
-      // if (sort === "high") {
-      //   let arr = [...filteredAccomodations];
-      //   let sorted = arr.sort((a, b) => b.price - a.price);
-      //   dispatch(setSearchResults(sorted));
-      // }
+        dispatch(setSearchResults(filteredAccomodationsFilter));
+      }
+      if (sort === "low") {
+        let arr = [...filteredAccomodations];
+        let sorted = arr.sort((a, b) => a.price - b.price);
+        dispatch(setSearchResults(sorted));
+      }
+      if (sort === "high") {
+        let arr = [...filteredAccomodations];
+        let sorted = arr.sort((a, b) => b.price - a.price);
+        dispatch(setSearchResults(sorted));
+      }
     }
 
     return () => {
-      //setSearchResults([]);
+      setSearchResults([]);
     };
   }, [searchTerm, guestsNum, accomodations, sort, tags, dispatch]);
 
@@ -114,8 +111,13 @@ function ResultsPage() {
       </div>
       {searchTerm !== "" && (
         <NavPath>
-          <Link to="/">Home</Link> /
-          <Link to={`/results?search=${searchTerm}`}>{searchTerm}</Link>
+          <Link to="/" className="link">
+            Home
+          </Link>{" "}
+          <div>/</div>
+          <Link to={`/results?search=${searchTerm}`} className="link">
+            {searchTerm}
+          </Link>
         </NavPath>
       )}
       {result_id !== "" && typeof result_id !== "undefined" ? (

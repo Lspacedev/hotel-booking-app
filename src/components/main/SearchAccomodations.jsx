@@ -3,6 +3,7 @@ import {
   setSearchTerm,
   setCheckInOut,
   setGuests,
+  setTags,
 } from "../../app/accomodationsSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -41,6 +42,8 @@ function SearchAccomodations() {
   }
   function handleSearchSubmit(e) {
     e.preventDefault();
+    dispatch(setTags({ type: "RESET", filter: "" }));
+
     if (searchInput === "") {
       alert("Please enter hotel destination to search");
       return;
@@ -72,6 +75,7 @@ function SearchAccomodations() {
       <input
         type="number"
         name="guests"
+        max="15"
         placeholder="Guests"
         onChange={handleGuestsChange}
       />

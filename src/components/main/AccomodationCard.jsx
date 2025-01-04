@@ -10,6 +10,7 @@ import { v4 as uuid } from "uuid";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoMdArrowBack } from "react-icons/io";
+import { IoStarSharp } from "react-icons/io5";
 
 function AccomodationCard() {
   const [loading, setLoading] = useState(true);
@@ -24,6 +25,8 @@ function AccomodationCard() {
 
   //user id , acccomodation id
   const user = useSelector((state) => state.user.currentUser);
+  const users = useSelector((state) => state.user.users);
+
   //const bookings = useSelector((state) => state.accomodations.bookings);
   const accomodations = useSelector(
     (state) => state.accomodations.accomodations
@@ -179,8 +182,19 @@ function AccomodationCard() {
   function handleShare() {
     setIsShared(!isShared);
   }
+  function printStars(num) {
+    let arr = [];
+    for (let i = 0; i < num; i++) {
+      arr.push(0);
+    }
+    return arr;
+  }
+  function getReviewer(id) {
+    const [user] = users.filter((user) => user.id === id);
+    return user;
+  }
+  console.log({ users, accomodation });
   //if (loading) return <div className="Loading">Loading...</div>;
-
   return (
     <div className="AccomodationCard">
       <IoMdArrowBack onClick={goBack} className="back" />
@@ -228,14 +242,42 @@ function AccomodationCard() {
         </div>
         <div className="acc-info-section">
           <h5>Reviews</h5>
-          {accomodation &&
-            accomodation.reviews.map((review, i) => (
-              <div key={i}>
-                <h5>{review.rating}</h5>
-                <h5>{review.reviewText}</h5>
-                <p>Reviewed on: {review.date}</p>
-              </div>
-            ))}
+          <div className="accomodation-reviews">
+            {accomodation &&
+              accomodation.reviews &&
+              accomodation.reviews.map((review, i) => (
+                <div key={i} className="review-card">
+                  <div className="user-rating">
+                    <div className="name-pic">
+                      <img
+                        src={
+                          getReviewer(review.userId) &&
+                          typeof getReviewer(review.userId).profilePic ===
+                            "undefined"
+                            ? "/images/profile.png"
+                            : getReviewer(review.userId) &&
+                              getReviewer(review.userId).profilePic
+                        }
+                      />
+
+                      <p>
+                        {getReviewer(review.userId) &&
+                          getReviewer(review.userId).name}
+                      </p>
+                    </div>
+                    <p>
+                      {printStars(review.rating) &&
+                        printStars(review.rating).map((elem, i) => (
+                          <IoStarSharp key={i} className="star" />
+                        ))}
+                    </p>
+                  </div>
+
+                  <p>{review.reviewText}</p>
+                  <p>Reviewed on: {review.date}</p>
+                </div>
+              ))}
+          </div>
         </div>
 
         <div className="acc-btns">

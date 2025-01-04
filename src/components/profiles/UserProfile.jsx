@@ -1,19 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { auth } from "../../config/firebase";
 import { db } from "../../config/firebase";
 
-import {
-  EmailAuthProvider,
-  reauthenticateWithCredential,
-  sendPasswordResetEmail,
-  updateEmail,
-} from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 import { updateDoc, collection, doc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { CgClose } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
 
 function UserProfile({ userId }) {
   const [loading, setLoading] = useState(false);
+  const navigation = useNavigate();
 
   const [userUpdate, setUserUpdate] = useState({
     name: "",
@@ -29,7 +27,16 @@ function UserProfile({ userId }) {
   const users = useSelector((state) => state.user.users);
   const currentUser = useSelector((state) => state.user.currentUser);
   const [user] = users.filter((user) => user.id === currentUser);
-
+  useEffect(() => {
+    if (typeof user !== "undefined") {
+      setLoading(false);
+      setUserUpdate((prev) => ({ ...prev, name: user.name }));
+      setUserUpdate((prev) => ({ ...prev, surname: user.surname }));
+      setUserUpdate((prev) => ({ ...prev, email: user.email }));
+    } else {
+      setLoading(true);
+    }
+  }, [user]);
   const storage = getStorage();
 
   async function handleSubmit() {
@@ -65,6 +72,7 @@ function UserProfile({ userId }) {
       console.log(err);
     }
     setUpdate(false);
+    navigation(0);
   }
 
   function handleChange(e) {
@@ -77,28 +85,16 @@ function UserProfile({ userId }) {
       .then(() => {
         alert("Check your email");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  async function updateEmail() {
-    // const credential = EmailAuthProvider.credential(
-    //   auth.currentUser.email,
-    //   userProvidedPassword
-    // );
-    // updateEmail(auth.currentUser, newEmail)
-    //   .then((res) => {
-    //     console.log({ res });
-    //     //alert("Email updated successfully");
-    //   })
-    //   .catch((err) => {
-    //     alert("An error occured while updating email", err.message);
-    //   });
-  }
   if (loading) return <div className="Loading">Loading...</div>;
 
   return (
     <div className="UserProfile">
-      {isLoading === true ? (
+      {loading === true ? (
         <div>Loading...</div>
       ) : (
         <div className="contact-details">
@@ -106,7 +102,7 @@ function UserProfile({ userId }) {
             {update ? (
               <div className="profile-pic2">
                 <button className="close" onClick={() => setUpdate(false)}>
-                  x
+                  <CgClose />
                 </button>
               </div>
             ) : (
@@ -162,15 +158,7 @@ function UserProfile({ userId }) {
             <div className="email-div">
               {!update && <h4>Email</h4>}
               {update ? (
-                <div className="email">
-                  {/* <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    onChange={(e) => setNewEmail(e.target.value)}
-                    value={newEmail}
-                  /> */}
-                </div>
+                <div className="email"></div>
               ) : (
                 <div>{user && user.email}</div>
               )}
@@ -178,15 +166,15 @@ function UserProfile({ userId }) {
 
             <div className="user-pass">
               <div className="pass">
-                <h4>Password:</h4>
                 {update ? (
                   <div>
+                    <h4>Password:</h4>
                     <div className="password">
                       <button onClick={resetPassword}>reset password</button>
                     </div>
                   </div>
                 ) : (
-                  <div className="password-text">{user && user.password}</div>
+                  <div className="password-text"></div>
                 )}
               </div>
             </div>

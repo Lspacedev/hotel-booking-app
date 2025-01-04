@@ -21,7 +21,7 @@ function UserRegistration() {
     email: "",
     password: "",
   });
-  const [profilePic, setProfilePic] = useState("");
+  const [profilePic, setProfilePic] = useState(null);
   const storage = getStorage();
   //navigation
   const navigation = useNavigate();
@@ -32,10 +32,6 @@ function UserRegistration() {
     setUserDetails((prev) => ({ ...prev, [name]: value }));
   }
   const uploadFile = async (id, img) => {
-    if (img === null) {
-      alert("Please select an image");
-      return;
-    }
     const imageRef = ref(storage, `${id}/${img.name}`);
 
     uploadBytes(imageRef, img)
@@ -54,6 +50,10 @@ function UserRegistration() {
   };
 
   function register() {
+    if (profilePic === null) {
+      alert("Please select an image");
+      return;
+    }
     createUserWithEmailAndPassword(
       auth,
       userDetails.email,
@@ -82,6 +82,7 @@ function UserRegistration() {
         password: encryptedPass,
         profilePic: url,
         notifications: [],
+        favourites: [],
       });
     } catch (err) {
       console.log(err.message);
@@ -138,87 +139,91 @@ function UserRegistration() {
   }
   return (
     <div className="UserRegistration">
-      <div className="register-img">
-        <img src="images/login-register.jpg" alt="login" />
-      </div>
-      <div className="register-form-container">
-        <h2>Create new account</h2>
-        <div className="register-to-login">
-          {/* <p onClick={handleNavigateLogin}>Login</p> */}
+      <div className="login-register-container">
+        <div className="register-img">
+          <img src="images/login-register.jpg" alt="login" />
         </div>
-        <div id="error"></div>
-        <div className="form" id="register-form">
-          <div className="name">
-            <label htmlFor="name">
-              Name:
-              <input
-                type="text"
-                id="name"
-                name="name"
-                onChange={(e) => handleChange(e)}
-                value={userDetails.name}
-              />
-            </label>
-            <span className="error"></span>
-          </div>
-          <div className="surname">
-            <label htmlFor="surname">
-              Surname:
-              <input
-                type="text"
-                id="surname"
-                name="surname"
-                onChange={(e) => handleChange(e)}
-                value={userDetails.surname}
-              />
-            </label>
-            <span className="error"></span>
-          </div>
-          <div className="email">
-            <label htmlFor="email">
-              Email:
-              <input
-                type="email"
-                id="email"
-                name="email"
-                onChange={(e) => handleChange(e)}
-                value={userDetails.email}
-                required
-              />
-            </label>
-            <span className="error"></span>
+        <div className="register-form-container">
+          <h2>Create new account</h2>
+          <div className="login-to-register">
+            Already have an account?
+            <p onClick={() => navigation("/login")}>Login</p>
           </div>
 
-          <div className="password">
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                id="password"
-                name="password"
-                onChange={(e) => handleChange(e)}
-                value={userDetails.password}
-              />
-            </label>
-            <span className="error"></span>
-          </div>
-          <div className="profile-pic">
-            <label htmlFor="profile-pic">
-              Profile picture:
-              <input
-                type="file"
-                id="profile-pic"
-                name="pic"
-                onChange={(e) => {
-                  setProfilePic(e.target.files[0]);
-                }}
-              />
-            </label>
-          </div>
+          <div id="error"></div>
+          <div className="form" id="register-form">
+            <div className="name">
+              <label htmlFor="name">
+                Name:
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  onChange={(e) => handleChange(e)}
+                  value={userDetails.name}
+                />
+              </label>
+              <span className="error"></span>
+            </div>
+            <div className="surname">
+              <label htmlFor="surname">
+                Surname:
+                <input
+                  type="text"
+                  id="surname"
+                  name="surname"
+                  onChange={(e) => handleChange(e)}
+                  value={userDetails.surname}
+                />
+              </label>
+              <span className="error"></span>
+            </div>
+            <div className="email">
+              <label htmlFor="email">
+                Email:
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  onChange={(e) => handleChange(e)}
+                  value={userDetails.email}
+                  required
+                />
+              </label>
+              <span className="error"></span>
+            </div>
 
-          <button className="submit-btn" onClick={handleSubmit}>
-            Register
-          </button>
+            <div className="password">
+              <label htmlFor="password">
+                Password:
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  onChange={(e) => handleChange(e)}
+                  value={userDetails.password}
+                />
+              </label>
+              <span className="error"></span>
+            </div>
+            <div className="profile-pic">
+              <label htmlFor="profile-pic">
+                Profile picture:
+                <input
+                  type="file"
+                  id="profile-pic"
+                  name="pic"
+                  onChange={(e) => {
+                    setProfilePic(e.target.files[0]);
+                  }}
+                />
+              </label>
+            </div>
+
+            <button className="submit-btn" onClick={handleSubmit}>
+              Register
+            </button>
+          </div>
         </div>
       </div>
     </div>

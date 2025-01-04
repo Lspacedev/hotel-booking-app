@@ -24,7 +24,7 @@ function DashboardNav() {
       <p onClick={navigateDiscover}>Discover</p>
       <div className="dropdown">
         <div className="dropbtn">
-          <IoIosNotificationsOutline />
+          <IoIosNotificationsOutline className="icon" />
           <span>{user && user.notifications.length}</span>
         </div>
         <div className="notification-content">
