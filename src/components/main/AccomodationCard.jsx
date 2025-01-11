@@ -193,7 +193,6 @@ function AccomodationCard() {
     const [user] = users.filter((user) => user.id === id);
     return user;
   }
-  console.log({ users, accomodation });
   //if (loading) return <div className="Loading">Loading...</div>;
   return (
     <div className="AccomodationCard">

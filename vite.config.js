@@ -42,6 +42,7 @@ export default defineConfig(({ mode }) => {
       "process.env.GUEST_EMAIL": JSON.stringify(env.GUEST_EMAIL),
 
       "process.env.GUEST_PASSWORD": JSON.stringify(env.GUEST_PASSWORD),
+      "process.env.CLIENT_URL": JSON.stringify(env.CLIENT_URL),
     },
   };
 });
