@@ -660,6 +660,7 @@ body {
 }
 .BookingCard {
   width: 80%;
+  height: 250px;
   display: flex;
   gap: 15px;
 
@@ -668,6 +669,7 @@ body {
 }
 .BookingCard .img {
   flex: 30%;
+  height: 100%;
   border-radius: 25px;
 }
 
@@ -724,6 +726,8 @@ body {
 }
 .ReviewCard {
   width: 80%;
+
+  height: 200px;
   display: flex;
   gap: 15px;
 
@@ -732,9 +736,11 @@ body {
 }
 .ReviewCard .img {
   border-radius: 25px;
+  height: 200px;
 }
 .ReviewCard .img img {
   border-radius: 25px;
+  height: 200px;
 }
 .ReviewCard .review-header {
   display: flex;
@@ -893,9 +899,9 @@ body {
   gap: 25px;
 }
 .FavouriteCard {
-  padding: 5px;
+  padding: 5px 0px;
   box-shadow: 1px 1px 5px #bbb;
-  border-radius: 25px;
+  border-radius: 5px;
 }
 .FavouriteCard .img {
   width: 200px;
@@ -904,7 +910,6 @@ body {
 .FavouriteCard img {
   width: 100%;
   height: 100%;
-  border-radius: 25px;
 }
 .remove-fav {
   font-size: 1.1rem;
