@@ -37,7 +37,6 @@ function ResultCard({ result }) {
     navigation(`/results/${result.id}`);
   }
   async function addToFavourites() {
-    console.log({ user });
     if (user === "" || typeof user === "undefined") {
       alert("Please Login or Register an account.");
       return;

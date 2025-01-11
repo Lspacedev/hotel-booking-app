@@ -163,13 +163,13 @@ function AccomodationCard() {
     const { error } = await stripe.redirectToCheckout({
       lineItems: [
         {
-          price: import.meta.env.VITE_NEXT_PUBLIC_STRIPE_PRICE_ID,
+          price: process.env.STRIPE_PRICE_ID,
           quantity: qty,
         },
       ],
       mode: "payment",
-      successUrl: `http://localhost:5173/success`,
-      cancelUrl: `http://localhost:5173/cancel`,
+      successUrl: `${process.env.CLIENT_URL}/success`,
+      cancelUrl: `${process.env.CLIENT_URL}/cancel`,
       customerEmail: "customer@email.com",
     });
 

@@ -112,6 +112,7 @@ function ReviewForm({ toggleClicked }) {
                   id="rating"
                   name="rating"
                   max="5"
+                  min="1"
                   onChange={(e) => handleChange(e)}
                   value={obj.rating}
                 />

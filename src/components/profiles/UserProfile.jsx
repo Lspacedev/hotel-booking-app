@@ -85,6 +85,14 @@ function UserProfile({ userId }) {
       });
   }
 
+  function handleToggleUpdate() {
+    if (user.name === "Guest") {
+      alert("Cannot update a guest account");
+      return;
+    }
+    setUpdate(true);
+  }
+
   if (loading) return <div className="Loading">Loading...</div>;
 
   return (
@@ -175,7 +183,7 @@ function UserProfile({ userId }) {
             </div>
             <div className="account-update">
               <button
-                onClick={() => (update ? handleSubmit() : setUpdate(true))}
+                onClick={() => (update ? handleSubmit() : handleToggleUpdate())}
               >
                 {update ? "Submit" : "Update"}
               </button>

@@ -76,10 +76,12 @@ function SearchAccomodationsResults() {
       <input
         type="number"
         name="guests"
+        max="15"
+        min="1"
         placeholder="Guests"
         onChange={handleGuestsChange}
       />
-      <input type="submit" onClick={handleSearchSubmit} />
+      <input type="submit" value="Search" onClick={handleSearchSubmit} />
     </div>
   );
 }

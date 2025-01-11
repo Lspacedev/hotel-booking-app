@@ -74,7 +74,7 @@ function ResultsPage() {
         dispatch(setSearchResults(filteredAccomodations));
       }
 
-      if (tags.length > 0) {
+      if (tags && tags.length > 0) {
         let filteredAccomodationsFilter = [];
         tags.map((tag) => {
           let arr = filteredAccomodations.filter(
@@ -83,7 +83,7 @@ function ResultsPage() {
 
           filteredAccomodationsFilter = filteredAccomodationsFilter.concat(arr);
         });
-
+        console.log();
         dispatch(setSearchResults(filteredAccomodationsFilter));
       }
       if (sort === "low") {
