@@ -22,7 +22,7 @@ function UserLogin() {
     signInWithEmailAndPassword(
       auth,
       process.env.GUEST_EMAIL,
-      process.env.VITE_GUEST_PASSWORD
+      process.env.GUEST_PASSWORD
     )
       .then(() => {
         alert("Log in successfully");
