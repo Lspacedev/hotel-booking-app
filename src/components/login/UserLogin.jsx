@@ -21,8 +21,8 @@ function UserLogin() {
   function guestLogin() {
     signInWithEmailAndPassword(
       auth,
-      import.meta.env.VITE_GUEST_EMAIL,
-      import.meta.env.VITE_GUEST_PASSWORD
+      process.env.GUEST_EMAIL,
+      process.env.VITE_GUEST_PASSWORD
     )
       .then(() => {
         alert("Log in successfully");
