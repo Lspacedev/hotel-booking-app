@@ -16,7 +16,6 @@ export default defineConfig(({ mode }) => {
     // vite config
     plugins: [react()],
     define: {
-      __APP_ENV__: JSON.stringify(env.APP_ENV),
       "process.env.API_KEY": JSON.stringify(env.API_KEY),
 
       "process.env.AUTH_DOMAIN": JSON.stringify(env.AUTH_DOMAIN),

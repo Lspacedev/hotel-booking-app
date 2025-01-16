@@ -29,15 +29,15 @@ function Nav() {
       <div className="nav-links">
         <div className="discover">Discover</div>
         {userId === "" ? (
-          <>
-            <div className="login-btn" onClick={navigateLogin}>
+          <div className="auth-btn">
+            <button className="login-btn" onClick={navigateLogin}>
               Login
-            </div>
+            </button>
 
             <button className="register-btn" onClick={navigateRegister}>
               Register
             </button>
-          </>
+          </div>
         ) : (
           <div className="profile-icon" onClick={navigateProfile}>
             {user && (

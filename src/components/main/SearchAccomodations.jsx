@@ -62,15 +62,18 @@ function SearchAccomodations() {
     <div className="SearchAccomodations">
       <input type="text" placeholder="Hotel" onChange={handleSearchChange} />
       <label>
-        Check in
+        <div>CheckIn</div>
         <input
           type="date"
           name="checkIn"
           placeholder=""
           onChange={handleCheckInOut}
         />
-        Check out
-        <input type="date" name="checkOut" onChange={handleCheckInOut} />
+      </label>
+
+      <label>
+        <div>Checkout</div>
+        <input type="date" name="checkOut" onChange={handleCheckInOut} />{" "}
       </label>
       <input
         type="number"

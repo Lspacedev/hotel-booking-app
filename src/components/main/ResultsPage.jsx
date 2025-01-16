@@ -109,12 +109,13 @@ function ResultsPage() {
       <div className="search-div">
         <SearchAccomodationsResults />
       </div>
-      {searchTerm !== "" && (
+      {searchTerm !== "" && typeof result_id === "undefined" && (
         <NavPath>
           <Link to="/" className="link">
             Home
-          </Link>{" "}
-          <div>/</div>
+          </Link>
+          <div className="arrow">{">"}</div>
+
           <Link to={`/results?search=${searchTerm}`} className="link">
             {searchTerm}
           </Link>

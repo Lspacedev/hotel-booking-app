@@ -5,7 +5,7 @@ import {
   setGuests,
 } from "../../app/accomodationsSlice";
 import { useDispatch } from "react-redux";
-function Card({ title, url }) {
+function Card({ title, url, room_number }) {
   const dispatch = useDispatch();
   const navigation = useNavigate();
   function searchCard() {
@@ -20,6 +20,9 @@ function Card({ title, url }) {
         <img src={url} />
       </div>
       <div className="title">{title}</div>
+      {room_number && (
+        <div className="room-number">{room_number + " rooms"}</div>
+      )}
     </div>
   );
 }

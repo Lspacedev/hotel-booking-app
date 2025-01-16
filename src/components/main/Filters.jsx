@@ -27,8 +27,8 @@ function Filters() {
 
   return (
     <div className="Filters">
-      <iframe src={getMap()} width="200" height="200"></iframe>
-      <div>Filter By:</div>
+      <iframe src={getMap()} width="250" height="200"></iframe>
+      <div className="title">Filter By:</div>
       <div className="filter-section">
         <div className="filter-h">Popular Filters</div>
         {/* <input
