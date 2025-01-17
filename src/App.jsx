@@ -22,6 +22,7 @@ import { setAccomodations } from "./app/accomodationsSlice";
 import { setUser, setUsers } from "./app/userSlice";
 import Bookings from "./components/user/Bookings";
 import Reviews from "./components/user/Reviews";
+import Welcome from "./components/dashboard/Welcome";
 import Favourites from "./components/user/Favourites";
 import Success from "./components/checkout/Sucess";
 import Cancel from "./components/checkout/Cancel";
@@ -98,7 +99,7 @@ function App() {
 
           <Route element={<ProtectedRoutes auth={user} />}>
             <Route path="home" element={<UserDashboard />}>
-              <Route index element={<Bookings />} />
+              <Route index element={<Welcome />} />
               <Route path="bookings" element={<Bookings />} />
               <Route path="reviews" element={<Reviews />} />
               <Route path="favourites" element={<Favourites />} />

@@ -58,7 +58,7 @@ function FavouriteCard({ favourite, favourites }) {
       </div>
       <p>
         {favourite.room_name}
-        {favourite.rating}
+        {/* {favourite.rating} */}
       </p>
     </div>
   );

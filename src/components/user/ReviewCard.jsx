@@ -18,7 +18,7 @@ function ReviewCard({ review }) {
       <div className="review-text">
         <div className="review-header">
           <p>{review.room_name}</p>
-          <p>{review.date}</p>
+          <p>{review && new Date(review.date).toDateString()}</p>
         </div>
 
         <div>

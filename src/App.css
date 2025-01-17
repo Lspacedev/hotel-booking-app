@@ -16,6 +16,53 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.ResetPassword {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+.ResetPassword input {
+  width: 30%;
+  box-sizing: border-box;
+  padding: 7px;
+  border-radius: 7px;
+  border: 1px solid #bbb;
+  outline: none;
+}
+.ResetPassword button {
+  width: 30%;
+  box-sizing: border-box;
+  padding: 7px;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  background-color: #1b1b1d;
+  color: white;
+}
+.ResetPassword button:hover {
+  background-color: #36363a;
+  cursor: pointer;
+}
+.Welcome {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  height: calc(100% - 70px);
+}
+.Welcome .title {
+  font-size: 2rem;
+  margin-top: 50px;
+  text-align: center;
+}
+.Welcome .text {
+  text-align: center;
+}
+
 /* Nav */
 .Nav {
   display: flex;
@@ -968,6 +1015,7 @@ input[type="text"] {
 
   box-shadow: 1px 1px 5px #bbb;
   border-radius: 25px;
+  padding: 0px 5px 0px 0px;
 }
 .ReviewCard .img {
   border-radius: 25px;
@@ -1137,6 +1185,9 @@ input[type="text"] {
   padding: 5px 0px;
   box-shadow: 1px 1px 5px #bbb;
   border-radius: 5px;
+}
+.FavouriteCard P {
+  padding: 0px 5px;
 }
 .FavouriteCard .img {
   width: 200px;
@@ -1331,7 +1382,9 @@ input[type="text"] {
   padding: 0px 50px;
   background-color: white;
 }
-
+.UserLogin .logo-container {
+  cursor: pointer;
+}
 .login-to-register {
   display: flex;
   align-items: center;
@@ -1529,6 +1582,12 @@ select {
   cursor: pointer;
 }
 
+.UserRegistration h3 {
+  margin: 0px;
+}
+.UserRegistration .logo-container {
+  cursor: pointer;
+}
 .register-to-login p:hover {
   color: #34632f;
 }
@@ -2085,6 +2144,57 @@ code {
   .booking-card-div {
     height: fit-content;
   }
+  .login-register-container {
+    flex-direction: column;
+  }
+  .UserLogin {
+    overflow-y: auto;
+  }
+  .UserLogin .form {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+  }
+  .login-img {
+    background-color: white;
+    box-shadow: none;
+  }
+  .login-form-container {
+    width: 100%;
+  }
+  .login-to-register {
+    flex-direction: column;
+  }
+  .UserRegistration {
+    overflow-y: auto;
+  }
+  .UserRegistration .form {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+  }
+  .register-img {
+    background-color: white;
+    box-shadow: none;
+  }
+  .register-form-container {
+    width: 100%;
+  }
+  .login-to-register {
+    flex-direction: column;
+    width: 100vw;
+  }
+  .UserRegistration h3 {
+    font-size: 1rem;
+    width: 100vw;
+  }
+  .UserProfile input {
+    width: 40%;
+  }
+
+  .UserProfile .account-update button {
+    width: 40%;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -2254,6 +2364,9 @@ code {
 @media screen and (max-width: 480px) {
   .ResultCard {
     flex-direction: column;
+  }
+  .footer-logo {
+    justify-content: center;
   }
   .footer-info {
     margin-bottom: 0px;

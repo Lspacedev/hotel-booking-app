@@ -28,10 +28,10 @@ function Nav() {
         <h3 className="logo">ZaHotels.com</h3>
       </div>
       <div className="nav-links">
-        <p className="discover" onClick={() => navigation("/")}>
+        <div className="discover" onClick={() => navigation("/")}>
           <IoCompassOutline className="icon" />
           <div>Discover</div>
-        </p>
+        </div>
         {userId === "" ? (
           <div className="auth-btn">
             <button className="login-btn" onClick={navigateLogin}>

@@ -22,10 +22,10 @@ function DashboardNav() {
   }
   return (
     <div className="DashboardNav">
-      <p className="discover" onClick={navigateDiscover}>
+      <div className="discover" onClick={navigateDiscover}>
         <IoCompassOutline className="icon" />
         <div>Discover</div>
-      </p>
+      </div>
       <div className="dropdown">
         <div className="dropbtn">
           <IoIosNotificationsOutline className="icon" />

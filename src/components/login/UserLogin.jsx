@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
+import { FaHotel } from "react-icons/fa";
 
 function UserLogin() {
   const [email, setEmail] = useState("");
@@ -43,7 +44,10 @@ function UserLogin() {
           <img src="images/login-register.jpg" alt="login" />
         </div>
         <div className="login-form-container">
-          <h2>ZaHotels.com</h2>
+          <div className="logo-container" onClick={() => navigation("/")}>
+            <FaHotel className="icon" />
+            <h3 className="logo">ZaHotels.com</h3>
+          </div>
           <p>Log in to your account.</p>
           <div className="form">
             <div className="email">

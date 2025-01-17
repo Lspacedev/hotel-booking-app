@@ -22,9 +22,9 @@ function Bookings() {
       <div className="bookings-div">
         {typeof bookings !== "undefined" && bookings.length > 0 ? (
           bookings.map((booking, i) => (
-            <div className="booking-card-div">
+            <div className="booking-card-div" key={i}>
               <span>{i + 1}</span>
-              <BookingCard key={i} booking={booking} />
+              <BookingCard booking={booking} />
             </div>
           ))
         ) : (

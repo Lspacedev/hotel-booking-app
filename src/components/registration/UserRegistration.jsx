@@ -13,6 +13,7 @@ import {
   listAll,
   uploadBytes,
 } from "firebase/storage";
+import { FaHotel } from "react-icons/fa";
 
 function UserRegistration() {
   const [userDetails, setUserDetails] = useState({
@@ -144,7 +145,11 @@ function UserRegistration() {
           <img src="images/login-register.jpg" alt="login" />
         </div>
         <div className="register-form-container">
-          <h2>Create new account</h2>
+          <div className="logo-container" onClick={() => navigation("/")}>
+            <FaHotel className="icon" />
+            <h3 className="logo">ZaHotels.com</h3>
+          </div>
+          <h3>Create new account</h3>
           <div className="login-to-register">
             Already have an account?
             <p onClick={() => navigation("/login")}>Login</p>
