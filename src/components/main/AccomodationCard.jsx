@@ -304,7 +304,9 @@ function AccomodationCard() {
       <button className="share-btn" onClick={handleShare}>
         <CiShare2 className="icon" />
       </button>
-      {isShared && <code>{`http://localhost:5173/results/${result_id}`}</code>}
+      {isShared && (
+        <code>{`${process.env.CLIENT_URL}/results/${result_id}`}</code>
+      )}
       <div className="accomodation-info">
         <h4>R{accomodation && accomodation.price}</h4>
         <div className="acc-info-section">
@@ -323,7 +325,8 @@ function AccomodationCard() {
           <h5>Reviews</h5>
           <div className="accomodation-reviews">
             {accomodation &&
-              accomodation.reviews &&
+            accomodation.reviews &&
+            accomodation.reviews.length > 0 ? (
               accomodation.reviews.map((review, i) => (
                 <div key={i} className="review-card">
                   <div className="user-rating">
@@ -355,7 +358,12 @@ function AccomodationCard() {
                   <p>{review.reviewText}</p>
                   <p>Reviewed on: {review.date}</p>
                 </div>
-              ))}
+              ))
+            ) : (
+              <div style={{ textAlign: "start" }}>
+                No reviews yet for this accomodation
+              </div>
+            )}
           </div>
         </div>
 

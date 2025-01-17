@@ -56,6 +56,12 @@ body {
   border-radius: 5px;
   background-color: transparent;
 }
+.nav-links .discover {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .nav-links .discover:hover {
   color: rgb(179, 179, 179);
 }
@@ -83,6 +89,7 @@ body {
   flex-direction: column;
 
   position: relative;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
 }
 
 .showcase-img {
@@ -249,8 +256,8 @@ input[type="text"] {
 .ResultsPage .Nav .nav-links .login-btn {
   color: #1b1b1d;
 }
-.ResultsPage .Nav .nav-links .discover:hover {
-  color: #777737;
+.ResultsPage .Nav .nav-links .discover {
+  color: #1b1b1d;
 }
 
 .ResultsPage .Nav .nav-links .login-btn:hover {
@@ -258,9 +265,11 @@ input[type="text"] {
   border: 1px solid #5c5c69;
   color: white;
 }
-.ResultsPage .Nav .nav-links div {
-  color: #1c1c1f;
+
+.ResultsPage .nav-links .discover:hover {
+  color: #777737;
 }
+
 .search-div {
   background: linear-gradient(#5c5c69, #36363a);
   height: 150px;
@@ -464,6 +473,15 @@ input[type="text"] {
 
   padding: 15px 0px;
 }
+.AccomodationCard h4 {
+  font-size: 1.4rem;
+
+  font-weight: 600;
+}
+.AccomodationCard h5 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
 .AccomodationCard .acc-name {
   font-size: 1.6rem;
 }
@@ -475,6 +493,9 @@ input[type="text"] {
 .AccomodationCard .back:hover {
   background-color: #acacaca4;
   border-radius: 50%;
+}
+.acc-info-section p {
+  line-height: 1.6rem;
 }
 .accomodation-icon {
   display: flex;
@@ -519,7 +540,7 @@ input[type="text"] {
   color: whitesmoke;
   font-size: 1.1rem;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: 5px 5px 5px 0px;
 }
 .book-map iframe {
   border: none;
@@ -719,6 +740,14 @@ input[type="text"] {
 .DashboardNav div {
   cursor: pointer;
 }
+.DashboardNav .discover {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.DashboardNav .discover .icon {
+  font-size: 1.3rem;
+}
 .Sidebar {
   flex: 2;
   width: 30%;
@@ -734,9 +763,10 @@ input[type="text"] {
 .Sidebar .logo-container {
   flex: 10%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 0px;
 }
 
 .logo-container .icon {
@@ -748,6 +778,7 @@ input[type="text"] {
   font-size: 1.3rem;
   font-weight: bold;
   color: #b2bd7e;
+  margin: 0px;
 }
 .logout {
   cursor: pointer;
@@ -770,20 +801,21 @@ input[type="text"] {
   cursor: pointer;
   margin: 0px 80px;
   padding: 10px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .sidebar-links .link {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 5px;
 }
 .link .icon {
+  flex: 5%;
   font-size: 32px;
 }
 .link .text {
+  flex: 25%;
+
+  display: flex;
 }
 .sidebar-links .link:hover {
   background-color: #a6a670;
@@ -795,17 +827,41 @@ input[type="text"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 30px;
   padding: 15px 25px;
 }
+.booking-card-div {
+  display: flex;
+  align-items: center;
+  width: 60%;
+  height: 200px;
+
+  background-color: #eeeeee63;
+  border-radius: 25px;
+}
+.booking-card-div span {
+  width: 10%;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 200;
+  color: #b9b9b9;
+}
+.booking-card-div:hover {
+  background-color: #c0c0c04d;
+}
+.booking-card-div:hover span {
+  color: rgb(100, 100, 100);
+}
+
 .BookingCard {
-  width: 80%;
-  height: 250px;
+  width: 90%;
+  height: 100%;
   display: flex;
   gap: 15px;
 
   box-shadow: 1px 1px 5px #bbb;
   border-radius: 25px;
+  background-color: white;
 }
 .BookingCard .img {
   flex: 30%;
@@ -823,6 +879,45 @@ input[type="text"] {
   display: flex;
   justify-content: space-between;
   padding: 0px 15px;
+  text-align: start;
+}
+.booking-card-info h5 {
+  margin: 0px;
+  padding: 0px;
+  text-align: start;
+  font-weight: 600;
+}
+.booking-card-info h4 {
+  font-weight: 700;
+}
+.booking-card-info .description {
+  word-wrap: break-all;
+  width: 80%;
+}
+.booking-card-info .status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+.booking-card-info .status p {
+  text-align: start;
+  padding: 0px;
+  margin: 0px;
+}
+.booking-card-info .stars {
+  color: goldenrod;
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0px 5px;
+}
+.BookingCard .side-one {
+  flex: 4;
+  justify-content: space-evenly;
+}
+.BookingCard .side-two {
+  flex: 1;
+  justify-content: space-evenly;
 }
 
 /* Pending */
@@ -861,11 +956,11 @@ input[type="text"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 30px;
   padding: 15px 25px;
 }
 .ReviewCard {
-  width: 80%;
+  width: 60%;
 
   height: 200px;
   display: flex;
@@ -1704,6 +1799,21 @@ code {
   color: #a6a670;
   font-size: 1.2rem;
   font-weight: 700;
+  display: flex;
+  align-items: start;
+  gap: 15px;
+  cursor: pointer;
+}
+.footer-logo .icon {
+  font-size: 34px;
+  color: #585851;
+}
+
+.footer-logo .logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #b2bd7e;
+  margin: 0px;
 }
 .footer {
   color: white;
@@ -1966,6 +2076,15 @@ code {
 
     text-align: center;
   }
+  .BookingCard {
+    flex-direction: column;
+  }
+  .booking-card-info {
+    padding: 15px;
+  }
+  .booking-card-div {
+    height: fit-content;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -2048,6 +2167,7 @@ code {
   .ReviewForm .form-div {
     width: 80%;
     padding: 0px;
+    margin-left: -20px;
   }
   .ReviewForm .form-div form {
     margin: 0 auto 0 auto;
@@ -2098,6 +2218,37 @@ code {
     height: 60%;
     width: 100%;
   }
+  .booking-card-div {
+    width: 95%;
+  }
+  .BookingCard {
+    width: 90%;
+  }
+  .DashboardNav {
+    justify-content: space-evenly;
+
+    gap: 0px;
+
+    padding-right: 0px;
+  }
+  .ReviewCard {
+    width: 95%;
+
+    height: auto;
+    gap: 50px;
+    flex-direction: column;
+  }
+  .ReviewCard .review-header {
+    justify-content: center;
+  }
+  .ReviewCard .review-header p {
+    padding: 0px;
+    margin: 0px;
+    word-break: break-all;
+  }
+  .notification-content {
+    left: -120px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -2127,12 +2278,6 @@ code {
 
   .section-three-para2 {
     margin-bottom: 50px;
-  }
-  .BookingCard {
-    flex-direction: column;
-  }
-  .ReviewCard {
-    flex-direction: column;
   }
 }
 

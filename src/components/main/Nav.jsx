@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { FaHotel } from "react-icons/fa";
+import { IoCompassOutline } from "react-icons/io5";
 
 function Nav() {
   const [profilePic, setProfilePic] = useState("");
@@ -27,7 +28,10 @@ function Nav() {
         <h3 className="logo">ZaHotels.com</h3>
       </div>
       <div className="nav-links">
-        <div className="discover">Discover</div>
+        <p className="discover" onClick={() => navigation("/")}>
+          <IoCompassOutline className="icon" />
+          <div>Discover</div>
+        </p>
         {userId === "" ? (
           <div className="auth-btn">
             <button className="login-btn" onClick={navigateLogin}>

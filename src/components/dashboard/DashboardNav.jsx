@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import { IoCompassOutline } from "react-icons/io5";
 
 function DashboardNav() {
   const [profilePic, setProfilePic] = useState("");
@@ -21,7 +22,10 @@ function DashboardNav() {
   }
   return (
     <div className="DashboardNav">
-      <p onClick={navigateDiscover}>Discover</p>
+      <p className="discover" onClick={navigateDiscover}>
+        <IoCompassOutline className="icon" />
+        <div>Discover</div>
+      </p>
       <div className="dropdown">
         <div className="dropbtn">
           <IoIosNotificationsOutline className="icon" />
