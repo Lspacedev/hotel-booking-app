@@ -1962,6 +1962,14 @@ code {
 .connect-links > a:hover {
   text-decoration: underline;
 }
+@media screen and (min-width: 1287px) and (max-width: 1440px) {
+  .SearchAccomodations {
+    width: 80%;
+  }
+  .SearchAccomodationsResults {
+    width: 80%;
+  }
+}
 @media screen and (min-width: 1025px) and (max-width: 1286px) {
   .SearchAccomodations {
     flex-direction: column;
