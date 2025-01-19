@@ -13,6 +13,7 @@ function UserDashboard() {
   function logOut() {
     signOut(auth)
       .then(() => {
+        localStorage.removeItem("uid");
         navigation("/");
         navigation(0);
       })
