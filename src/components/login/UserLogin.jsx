@@ -7,29 +7,41 @@ import { FaHotel } from "react-icons/fa";
 function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigate();
 
   function login() {
+    if (email === "" || password === "") {
+      alert("Fields are required");
+      return;
+    }
+    setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
+        setLoading(false);
         alert("Log in successfully");
         navigation("/home");
       })
       .catch((err) => {
+        setLoading(false);
         alert(err.message);
       });
   }
   function guestLogin() {
+    setLoading(true);
+
     signInWithEmailAndPassword(
       auth,
       process.env.GUEST_EMAIL,
       process.env.GUEST_PASSWORD
     )
       .then(() => {
+        setLoading(false);
         alert("Log in successfully");
         navigation("/home");
       })
       .catch((err) => {
+        setLoading(false);
         alert(err.message);
       });
   }
@@ -74,11 +86,17 @@ function UserLogin() {
               </label>
             </div>
 
-            <button className="submit-btn" onClick={login}>
-              Login
+            <button
+              className="submit-btn"
+              onClick={loading ? console.log() : login}
+            >
+              {loading ? "Loading..." : "Submit"}
             </button>
-            <button className="guest-submit-btn" onClick={guestLogin}>
-              Guest log in
+            <button
+              className="guest-submit-btn"
+              onClick={loading ? console.log() : guestLogin}
+            >
+              {loading ? "Loading..." : "Guest"}
             </button>
           </div>
           <div className="login-to-register">

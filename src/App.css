@@ -1424,9 +1424,10 @@ select {
   padding: 5px;
   width: 98%;
   outline: none;
-  border: 1px solid #bbb;
+
   border-radius: 25px;
   display: inline-block;
+  box-sizing: border-box;
 }
 .UserLogin .form div label {
   display: flex;
@@ -1522,7 +1523,7 @@ select {
   padding: 5px 0px;
   width: 100%;
   outline: none;
-  border: 1px solid #bbb;
+
   border-radius: 5px;
   display: inline-block;
 }
@@ -1582,8 +1583,10 @@ select {
   cursor: pointer;
 }
 
-.UserRegistration h3 {
-  margin: 0px;
+.UserRegistration .create {
+  margin-top: 15px;
+  padding: 0px;
+  font-weight: 600;
 }
 .UserRegistration .logo-container {
   cursor: pointer;
@@ -1614,11 +1617,12 @@ select {
 
   margin: 15px 0px 5px 0px;
   padding: 5px;
-  width: 98%;
+  width: 100%;
   outline: none;
-  border: 1px solid #bbb;
   border-radius: 25px;
   display: inline-block;
+  box-sizing: border-box;
+  background-color: white;
 }
 .UserRegistration .form div label {
   display: flex;
@@ -1626,6 +1630,7 @@ select {
   font-size: 14px;
   color: rgb(133, 133, 133);
   cursor: pointer;
+  margin: 15px 0px;
 }
 
 .UserRegistration .submit-btn {
@@ -2154,6 +2159,7 @@ code {
   }
   .login-register-container {
     flex-direction: column;
+    width: 80%;
   }
   .UserLogin {
     overflow-y: auto;
@@ -2203,6 +2209,9 @@ code {
   .UserProfile .account-update button {
     width: 40%;
   }
+  .sidebar-links .link {
+    margin: 0px 50px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -2215,8 +2224,16 @@ code {
   .nav-links {
     width: 100%;
     justify-content: space-between;
+    margin-top: 7px;
+  }
+  .nav-links .discover {
+    flex-direction: column;
+    gap: 0px;
   }
 
+  .sidebar-links .link .text {
+    font-size: 0.8rem;
+  }
   .SearchAccomodations {
     flex-direction: column;
   }
@@ -2274,18 +2291,19 @@ code {
   .sidebar-links {
     flex: 90%;
     flex-direction: row;
-    gap: 0px;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
   }
-
+  .sidebar-links .link {
+    margin: 0px;
+  }
   .ReviewForm {
     padding: 0px;
   }
   .ReviewForm .form-div {
     width: 80%;
     padding: 0px;
-    margin-left: -20px;
+    margin-left: -30px;
   }
   .ReviewForm .form-div form {
     margin: 0 auto 0 auto;
@@ -2370,6 +2388,24 @@ code {
 }
 
 @media screen and (max-width: 480px) {
+  .Sidebar {
+    gap: 10px;
+  }
+  .Sidebar .logo-container {
+  }
+  .sidebar-links {
+    justify-content: space-evenly;
+    gap: 5px;
+  }
+  .sidebar-links .link {
+    flex-direction: column;
+  }
+  .sidebar-links .link .text {
+    font-size: 0.7rem;
+  }
+  /* .sidebar-links .link .icon {
+    display: none;
+  } */
   .ResultCard {
     flex-direction: column;
   }

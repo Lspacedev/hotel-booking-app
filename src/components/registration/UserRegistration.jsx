@@ -23,6 +23,8 @@ function UserRegistration() {
     password: "",
   });
   const [profilePic, setProfilePic] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const storage = getStorage();
   //navigation
   const navigation = useNavigate();
@@ -55,6 +57,8 @@ function UserRegistration() {
       alert("Please select an image");
       return;
     }
+    setLoading(true);
+
     createUserWithEmailAndPassword(
       auth,
       userDetails.email,
@@ -63,10 +67,12 @@ function UserRegistration() {
       .then((res) => {
         const userId = res.user.uid;
         uploadFile(userId, profilePic);
+        setLoading(false);
         alert("Registered successfully");
         navigation("/login");
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err.message);
       });
   }
@@ -149,12 +155,7 @@ function UserRegistration() {
             <FaHotel className="icon" />
             <h3 className="logo">ZaHotels.com</h3>
           </div>
-          <h3>Create new account</h3>
-          <div className="login-to-register">
-            Already have an account?
-            <p onClick={() => navigation("/login")}>Login</p>
-          </div>
-
+          <div className="create">Create a new account</div>
           <div id="error"></div>
           <div className="form" id="register-form">
             <div className="name">
@@ -225,9 +226,16 @@ function UserRegistration() {
               </label>
             </div>
 
-            <button className="submit-btn" onClick={handleSubmit}>
-              Register
+            <button
+              className="submit-btn"
+              onClick={loading ? console.log() : handleSubmit}
+            >
+              {loading ? "Loading..." : "Register"}
             </button>
+          </div>
+          <div className="login-to-register">
+            Already have an account?
+            <p onClick={() => navigation("/login")}>Login</p>
           </div>
         </div>
       </div>

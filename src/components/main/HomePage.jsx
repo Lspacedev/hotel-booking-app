@@ -10,7 +10,6 @@ function HomePage() {
   const accomodations = useSelector(
     (state) => state.accomodations.accomodations
   );
-  console.log({ accomodations });
   function getRoomNumber(name) {
     let rooms = [];
     if (accomodations && accomodations.length > 0) {
