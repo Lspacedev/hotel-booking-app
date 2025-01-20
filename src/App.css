@@ -2230,7 +2230,9 @@ code {
     flex-direction: column;
     gap: 0px;
   }
-
+  .nav-links .discover div {
+    font-size: 0.9rem;
+  }
   .sidebar-links .link .text {
     font-size: 0.8rem;
   }
