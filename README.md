@@ -11,6 +11,12 @@ Run project:
 npm run dev
 ```
 
+## Admin
+
+```bash
+https://github.com/Lspacedev/hotel-booking-app-admin/tree/main
+```
+
 ## Credits:
 
 ```python
