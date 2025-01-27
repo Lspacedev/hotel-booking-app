@@ -1,5 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function ProtectedRouteReg({ auth }) {
-  return auth.currentUser != null ? <Navigate to="/home" /> : <Outlet />;
+  const uid = localStorage.getItem("uid");
+
+  return uid !== null && uid !== "" ? <Navigate to="/home" /> : <Outlet />;
 }

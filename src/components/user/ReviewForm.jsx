@@ -134,7 +134,7 @@ function ReviewForm({ toggleClicked }) {
             <input
               id="task-add-submit"
               type="submit"
-              value="submit"
+              value="Submit"
               onClick={handleSubmit}
             ></input>
           </form>

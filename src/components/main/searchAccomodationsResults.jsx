@@ -58,8 +58,8 @@ function SearchAccomodationsResults() {
           // alert("Results set");
         }
       } else {
-        alert("Please enter hotel destination to search");
-        return;
+        // alert("Please enter hotel destination to search");
+        // return;
       }
       if (checkInOut.checkIn !== "" && checkInOut.checkOut !== "") {
         dispatch(setCheckInOut(checkInOut));
