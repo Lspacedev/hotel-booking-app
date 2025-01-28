@@ -13,7 +13,8 @@ import { IoMdArrowBack } from "react-icons/io";
 import { IoStarSharp } from "react-icons/io5";
 import { FaLocationDot } from "react-icons/fa6";
 import { CiShare2 } from "react-icons/ci";
-
+import { LiaBedSolid } from "react-icons/lia";
+import { GoPerson } from "react-icons/go";
 function AccomodationCard() {
   const [loading, setLoading] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -308,7 +309,25 @@ function AccomodationCard() {
         <code>{`${process.env.CLIENT_URL}/results/${result_id}`}</code>
       )}
       <div className="accomodation-info">
-        <h4>R{accomodation && accomodation.price}</h4>
+        <div className="overview">
+          <h4>R{accomodation && accomodation.price}</h4>
+          <div className="guests-type">
+            <div>
+              <div className="h">Room Type</div>
+              <div className="value">
+                <LiaBedSolid />
+                {accomodation && accomodation.room_type}
+              </div>
+            </div>
+            <div>
+              <div className="h">Guests</div>
+              <div className="value">
+                <GoPerson />
+                {accomodation && accomodation.guests}
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="acc-info-section">
           <h5>Description</h5>
           <p>{accomodation && accomodation.description}</p>

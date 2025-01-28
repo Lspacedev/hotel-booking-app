@@ -81,7 +81,11 @@ function ResultCard({ result }) {
             {arr &&
               arr.map((elem, i) => <IoStarSharp key={i} className="star" />)}
           </p>
-          <p>{result.description}</p>
+          <p>
+            {result && result.description.length > 25
+              ? result.description.slice(0, 45) + "..."
+              : result.description}
+          </p>
         </div>
         <div className="side-two">
           <p>R{result.price}</p>

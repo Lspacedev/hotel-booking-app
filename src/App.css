@@ -541,6 +541,20 @@ input[type="text"] {
   background-color: #acacaca4;
   border-radius: 50%;
 }
+.AccomodationCard .guests-type {
+  display: flex;
+  gap: 50px;
+}
+.guests-type .h {
+  font-weight: 500;
+}
+.guests-type .value {
+  display: flex;
+  align-items: center;
+}
+.AccomodationCard .overview h4 {
+  font-weight: 400;
+}
 .acc-info-section p {
   line-height: 1.6rem;
 }
@@ -682,14 +696,13 @@ input[type="text"] {
 }
 .AccomodationCard .accomodation-reviews {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 25px;
 }
 .AccomodationCard .review-card {
-  flex: 1;
+  width: 220px;
   /* background-color: whitesmoke; */
-  background-color: white;
   border-radius: 25px;
   padding: 5px 25px;
   margin: 15px 0px;
@@ -847,7 +860,7 @@ input[type="text"] {
 .sidebar-links .link {
   cursor: pointer;
   margin: 0px 80px;
-  padding: 10px 0px;
+  padding: 10px 15px;
 }
 .sidebar-links .link {
   display: flex;
@@ -1179,6 +1192,7 @@ input[type="text"] {
 }
 .favourites-div {
   display: flex;
+  flex-wrap: wrap;
   gap: 25px;
 }
 .FavouriteCard {
@@ -2375,6 +2389,7 @@ code {
     height: auto;
     gap: 50px;
     flex-direction: column;
+    padding: 0px;
   }
   .ReviewCard .review-header {
     justify-content: center;
@@ -2401,6 +2416,7 @@ code {
   }
   .sidebar-links .link {
     flex-direction: column;
+    padding: 10px 0px;
   }
   .sidebar-links .link .text {
     font-size: 0.7rem;
@@ -2472,5 +2488,8 @@ code {
   }
   .ShowCase h3 {
     font-size: 1.4rem;
+  }
+  .AccomodationCard .slides {
+    height: 300px;
   }
 }
