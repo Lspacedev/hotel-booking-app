@@ -93,9 +93,6 @@ function App() {
           <Route element={<ProtectedRouteReg auth={user} />}>
             <Route exact path="registration" element={<UserRegistration />} />
             <Route exact path="login" element={<UserLogin />} />
-            <Route path="checkout" element={<Checkout />} />
-            <Route path="success" element={<Success />} />
-            <Route path="cancel" element={<Cancel />} />
           </Route>
 
           <Route element={<ProtectedRoutes auth={user} />}>
@@ -107,6 +104,9 @@ function App() {
 
               <Route path="profile" element={<UserProfile userId={user} />} />
             </Route>
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="success" element={<Success />} />
+            <Route path="cancel" element={<Cancel />} />
           </Route>
         </Routes>
       </div>
