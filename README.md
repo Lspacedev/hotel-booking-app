@@ -1,15 +1,88 @@
-# React + Firebase Hotel Booking App
+# React + Firebase Hotel Booking App | CLIENT
 
-React hotel booking/management app using firebase as storage and database.
+React hotel booking/management app using firebase as storage and database. This is the client side of the web app, where users can create an account and book hotel rooms in different locations.
 
 ## Installation
 
-npm install
+1. Clone the repository
 
 ```bash
-Run project:
+git@github.com:Lspacedev/hotel-booking-app.git
+```
+
+2. Navigate to the project folder
+
+```bash
+cd hotel-booking-app
+```
+
+3.  Install all dependencies
+
+```bash
+npm install
+```
+
+4. Create an env file and add Firebase SDK config keys (go to /src/config/firebase.jsx for variable naming), STRIPE_PUBLISHABLE_KEY, STRIPE_PRICE_ID
+
+5. Run the project
+
+````bash
 npm run dev
 ```
+
+## Screenshot
+
+![landing](images/screenshot.png)
+![landing](images/screenshot2.png)
+
+## Features
+
+Users
+
+- Authentication: Create a user account.
+- Authentication: Login to your account.
+
+- Track your room bookings.
+- View notifications.
+- Add and view hotel room reviews.
+- Add and remove likes/favourites.
+- Update account information.
+
+Hotels
+
+- Search hotel rooms based on location or room type.
+- Filter hotels based on room types i.e Standard, Deluxe, Suite.
+- Sort search results by price, highest to lowest and lowest to highest
+- View location on map
+- View hotel room gallery/images.
+- View hotel room details i.e decription, amenties, policies, rating and reviews.
+- Like hotel room.
+- Share hotel room.
+- Book hotel room.
+
+Payment
+
+- Users can pay for their bookings, using Stripe Payment.
+
+## Usage
+
+1. Open the live site in your browser.
+2. Search hotel using one of 3 locations, i.e Pretoria, Johannesburg and Cape Town.
+3. You can also search for hotels using guests and checkin and out dates.
+4. Find a hotel you like, and book. If you have not set checkin and out dates, it will prompt you to do so. If you have not logged in, you'll be prompted to do so.
+5. After pressing book, you'll be taken to a payment gateway, use one of the Stripe fake cards to test.
+6. After a succesfull payment, track the booked room in your dashboard.
+
+## Stipe Test Cards:
+
+```python
+https://docs.stripe.com/testing
+````
+
+## Tech Stack
+
+- ReactJs
+- Firebase
 
 ## Credits:
 
@@ -30,10 +103,4 @@ Photo by Pixabay: https://www.pexels.com/photo/silver-and-white-desk-lamp-beside
 
 ```python
 https://www.figma.com/board/CJ0hyIKh69osFRaYgrpzGJ/Hotel-App-User-Flow?node-id=0-1&node-type=canvas
-```
-
-## Stipe Test Cards:
-
-```python
-https://docs.stripe.com/testing
 ```
