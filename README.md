@@ -2,6 +2,10 @@
 
 React hotel booking/management app using firebase as storage and database. This is the client side of the web app, where users can create an account and book hotel rooms in different locations.
 
+### Hotel Booking App | Admin
+
+[https://github.com/Lspacedev/hotel-booking-app-admin](https://github.com/Lspacedev/hotel-booking-app-admin)
+
 ## Installation
 
 1. Clone the repository
