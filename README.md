@@ -26,7 +26,7 @@ npm install
 
 5. Run the project
 
-````bash
+```bash
 npm run dev
 ```
 
@@ -77,7 +77,7 @@ Payment
 
 ```python
 https://docs.stripe.com/testing
-````
+```
 
 ## Tech Stack
 
