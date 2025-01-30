@@ -43,6 +43,7 @@ APP_ID="Firebase App Id"
 MEASUREMENT_ID="Firebase Measurement Id"
 STRIPE_PUBLISHABLE_KEY="Stripe Publishable Key"
 STRIPE_PRICE_ID="Stripe Price Id"
+CLIENT_URL="Deployed hotel app url or localhost"
 ```
 
 5. Run the project
