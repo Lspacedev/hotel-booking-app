@@ -32,8 +32,8 @@ npm run dev
 
 ## Screenshot
 
-![landing](images/screenshot.png)
-![landing](images/screenshot2.png)
+![landing](public/images/screenshot.png)
+![landing](public/images/screenshot2.png)
 
 ## Features
 
