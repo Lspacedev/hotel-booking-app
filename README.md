@@ -6,6 +6,11 @@ React hotel booking/management app using firebase as storage and database. This 
 
 [https://github.com/Lspacedev/hotel-booking-app-admin](https://github.com/Lspacedev/hotel-booking-app-admin)
 
+## Prerequisites
+
+- ReactJs
+- A Firebase account, follow the link [here](https://firebase.google.com/)
+
 ## Installation
 
 1. Clone the repository
@@ -26,7 +31,19 @@ cd hotel-booking-app
 npm install
 ```
 
-4. Create an env file and add Firebase SDK config keys (go to /src/config/firebase.jsx for variable naming), STRIPE_PUBLISHABLE_KEY, STRIPE_PRICE_ID
+4. Create an env file and add the following:
+
+```bash
+API_KEY="Firebase Api key"
+AUTH_DOMAIN="Firebase Auth Domain"
+PROJECT_ID="Firebase Project Id"
+STORAGE_BUCKET="Firebase Storage Bucket"
+MESSAGING_SENDER_ID="Firebase Messaging Sender Id"
+APP_ID="Firebase App Id"
+MEASUREMENT_ID="Firebase Measurement Id"
+STRIPE_PUBLISHABLE_KEY="Stripe Publishable Key"
+STRIPE_PRICE_ID="Stripe Price Id"
+```
 
 5. Run the project
 
