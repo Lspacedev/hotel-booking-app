@@ -1,21 +1,115 @@
-# React + Firebase Hotel Booking App
+# React + Firebase Hotel Booking App | CLIENT
 
-React hotel booking/management app using firebase as storage and database.
+React hotel booking/management app using firebase as storage and database. This is the client side of the web app, where users can create an account and book hotel rooms in different locations.
+
+### Hotel Booking App | Admin
+
+[https://github.com/Lspacedev/hotel-booking-app-admin](https://github.com/Lspacedev/hotel-booking-app-admin)
+
+## Prerequisites
+
+- ReactJs
+- A Firebase account, follow the link [here](https://firebase.google.com/)
 
 ## Installation
 
-npm install
+1. Clone the repository
 
 ```bash
-Run project:
+git@github.com:Lspacedev/hotel-booking-app.git
+```
+
+2. Navigate to the project folder
+
+```bash
+cd hotel-booking-app
+```
+
+3. Navigate to the git branch
+
+```bash
+git checkout development
+```
+
+4.  Install all dependencies
+
+```bash
+npm install
+```
+
+5. Create an env file and add the following:
+
+```bash
+VITE_API_KEY="Firebase Api key"
+VITE_AUTH_DOMAIN="Firebase Auth Domain"
+VITE_PROJECT_ID="Firebase Project Id"
+VITE_STORAGE_BUCKET="Firebase Storage Bucket"
+VITE_MESSAGING_SENDER_ID="Firebase Messaging Sender Id"
+VITE_APP_ID="Firebase App Id"
+VITE_MEASUREMENT_ID="Firebase Measurement Id"
+VITE_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="Stripe Publishable Key"
+VITE_NEXT_PUBLIC_STRIPE_PRICE_ID="Stripe Price Id"
+```
+
+5. Run the project
+
+```bash
 npm run dev
 ```
 
-## Admin
+## Screenshot
 
-```bash
-https://github.com/Lspacedev/hotel-booking-app-admin/tree/main
+![landing](public/images/screenshot.png)
+![landing](public/images/screenshot2.png)
+
+## Features
+
+Users
+
+- Authentication: Create a user account.
+- Authentication: Login to your account.
+
+- Track your room bookings.
+- View notifications.
+- Add and view hotel room reviews.
+- Add and remove likes/favourites.
+- Update account information.
+
+Hotels
+
+- Search hotel rooms based on location or room type.
+- Filter hotels based on room types i.e Standard, Deluxe, Suite.
+- Sort search results by price, highest to lowest and lowest to highest
+- View location on map
+- View hotel room gallery/images.
+- View hotel room details i.e decription, amenties, policies, rating and reviews.
+- Like hotel room.
+- Share hotel room.
+- Book hotel room.
+
+Payment
+
+- Users can pay for their bookings, using Stripe Payment.
+
+## Usage
+
+1. Open the live site in your browser.
+2. Search hotel using one of 3 locations, i.e Pretoria, Johannesburg and Cape Town.
+3. You can also search for hotels using guests and checkin and out dates.
+4. Find a hotel you like, and book. If you have not set checkin and out dates, it will prompt you to do so. If you have not logged in, you'll be prompted to do so.
+5. After pressing book, you'll be taken to a payment gateway, use one of the Stripe fake cards to test.
+6. After a succesfull payment, track the booked room in your dashboard.
+
+## Stipe Test Cards:
+
+```python
+https://docs.stripe.com/testing
 ```
+
+## Tech Stack
+
+- ReactJs
+- Firebase
 
 ## Credits:
 
