@@ -57,11 +57,6 @@ VITE_NEXT_PUBLIC_STRIPE_PRICE_ID="Stripe Price Id"
 npm run dev
 ```
 
-## Screenshot
-
-![landing](public/images/screenshot.png)
-![landing](public/images/screenshot2.png)
-
 ## Features
 
 Users
