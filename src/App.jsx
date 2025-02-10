@@ -22,6 +22,7 @@ import { setAccomodations } from "./app/accomodationsSlice";
 import { setUser, setUsers } from "./app/userSlice";
 import Bookings from "./components/user/Bookings";
 import Reviews from "./components/user/Reviews";
+import Welcome from "./components/dashboard/Welcome";
 import Favourites from "./components/user/Favourites";
 import Success from "./components/checkout/Sucess";
 import Cancel from "./components/checkout/Cancel";
@@ -35,6 +36,7 @@ function App() {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
+        localStorage.setItem("uid", JSON.stringify(uid)); // ...
         dispatch(setUser(uid));
         // ...
       } else {
@@ -91,20 +93,20 @@ function App() {
           <Route element={<ProtectedRouteReg auth={user} />}>
             <Route exact path="registration" element={<UserRegistration />} />
             <Route exact path="login" element={<UserLogin />} />
-            <Route path="checkout" element={<Checkout />} />
-            <Route path="success" element={<Success />} />
-            <Route path="cancel" element={<Cancel />} />
           </Route>
 
           <Route element={<ProtectedRoutes auth={user} />}>
             <Route path="home" element={<UserDashboard />}>
-              <Route index element={<Bookings />} />
+              <Route index element={<Welcome />} />
               <Route path="bookings" element={<Bookings />} />
               <Route path="reviews" element={<Reviews />} />
               <Route path="favourites" element={<Favourites />} />
 
               <Route path="profile" element={<UserProfile userId={user} />} />
             </Route>
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="success" element={<Success />} />
+            <Route path="cancel" element={<Cancel />} />
           </Route>
         </Routes>
       </div>

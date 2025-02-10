@@ -2,13 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { collection, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../config/firebase";
-
+import { v4 as uuidv4 } from "uuid";
 function Success() {
   const navigation = useNavigate();
   const user = useSelector((state) => state.user.currentUser);
-  function navigateHome() {
+  async function navigateHome() {
+    await addNotification(user);
     navigation("/");
-    addNotification(user);
+    navigation(0);
   }
   async function addNotification(userId) {
     try {
@@ -17,6 +18,7 @@ function Success() {
 
       await updateDoc(userRef, {
         notifications: arrayUnion({
+          id: uuidv4(),
           message: `Your just made a payment`,
         }),
       });

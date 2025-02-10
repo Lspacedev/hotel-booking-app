@@ -10,8 +10,9 @@ export const accomodationsSlice = createSlice({
     checkInOut: {},
     guests: {},
     location: "",
-    filters: {},
+    filters: { filters: [] },
     sort: {},
+    tags: { tags: [] },
   },
   reducers: {
     setSearchTerm: (state, action) => {
@@ -32,11 +33,21 @@ export const accomodationsSlice = createSlice({
     setGuests: (state, action) => {
       state.guests = action.payload;
     },
-    setFilters: (state, action) => {
-      state.filters = action.payload;
-    },
+    setFilters: (state, action) => {},
     setSort: (state, action) => {
       state.sort = action.payload;
+    },
+    setTags: (state, action) => {
+      const type = action.payload.type;
+      const tags = state.tags.tags;
+
+      if (type === "ADD") {
+        state.tags.tags = [...tags, action.payload.filter];
+      } else if (type === "REMOVE") {
+        state.tags.tags = tags.filter((tag) => tag !== action.payload.filter);
+      } else {
+        state.tags.tags = [];
+      }
     },
   },
 });
@@ -48,7 +59,8 @@ export const {
   setCheckInOut,
   setGuests,
   setFilters,
-  setSort
+  setSort,
+  setTags,
 } = accomodationsSlice.actions;
 
 export default accomodationsSlice.reducer;

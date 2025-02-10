@@ -1,5 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function ProtectedRoutes({ auth }) {
-  return auth != null ? <Outlet /> : <Navigate to="/" />;
+  const uid = localStorage.getItem("uid");
+
+  return uid !== null && uid !== "" ? <Outlet /> : <Navigate to="/" />;
 }

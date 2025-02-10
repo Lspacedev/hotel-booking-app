@@ -5,34 +5,14 @@ import { db } from "../../config/firebase";
 
 import { sendPasswordResetEmail } from "firebase/auth";
 import { updateDoc, collection, doc } from "firebase/firestore";
-import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
+import { getStorage } from "firebase/storage";
+import { CgClose } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
 
 function UserProfile({ userId }) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const navigation = useNavigate();
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      const imagesRef = ref(storage, userId);
-      let result = await listAll(imagesRef);
-      //if (typeof imagesRef.url !== "undefined") {
-      let urlPromises = result.items.map((imageRef) =>
-        getDownloadURL(imageRef)
-      );
-
-      return Promise.all(urlPromises);
-      // } else {
-      //return [""];
-      // }
-    };
-    const loadImages = async () => {
-      const url = await fetchImages();
-      setProfilePic(url[0]);
-      setLoading(false);
-    };
-    if (typeof userId !== "undefined") {
-      loadImages();
-    }
-  }, [userId]);
   const [userUpdate, setUserUpdate] = useState({
     name: "",
     surname: "",
@@ -40,13 +20,23 @@ function UserProfile({ userId }) {
   });
   const [profilePic, setProfilePic] = useState("");
   const [update, setUpdate] = useState(false);
+  const [newEmail, setNewEmail] = useState("");
 
   const isLoading = false;
   //get user from firestore
   const users = useSelector((state) => state.user.users);
   const currentUser = useSelector((state) => state.user.currentUser);
   const [user] = users.filter((user) => user.id === currentUser);
-
+  useEffect(() => {
+    if (typeof user !== "undefined") {
+      setLoading(false);
+      setUserUpdate((prev) => ({ ...prev, name: user.name }));
+      setUserUpdate((prev) => ({ ...prev, surname: user.surname }));
+      setUserUpdate((prev) => ({ ...prev, email: user.email }));
+    } else {
+      setLoading(true);
+    }
+  }, [user]);
   const storage = getStorage();
 
   async function handleSubmit() {
@@ -58,19 +48,17 @@ function UserProfile({ userId }) {
       updatedObj.name = userUpdate.name;
     }
     if (userUpdate.surname !== "") {
-      updatedObj.surname = userUpdate.name;
-    }
-    if (userUpdate.email !== "") {
-      updatedObj.email = userUpdate.email;
+      updatedObj.surname = userUpdate.surname;
     }
 
-    //update users to firestore
+    // update users to firestore
     try {
       const usersCollection = collection(db, "users");
       const userRef = doc(usersCollection, currentUser);
 
       if (JSON.stringify(updatedObj) !== "{}") {
         await updateDoc(userRef, updatedObj);
+
         alert("Updated successfully");
       } else {
         alert("Nothing to update");
@@ -79,6 +67,7 @@ function UserProfile({ userId }) {
       console.log(err);
     }
     setUpdate(false);
+    navigation(0);
   }
 
   function handleChange(e) {
@@ -91,14 +80,24 @@ function UserProfile({ userId }) {
       .then(() => {
         alert("Check your email");
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleToggleUpdate() {
+    if (user.name === "Guest") {
+      alert("Cannot update a guest account");
+      return;
+    }
+    setUpdate(true);
   }
 
   if (loading) return <div className="Loading">Loading...</div>;
 
   return (
     <div className="UserProfile">
-      {isLoading === true ? (
+      {loading === true ? (
         <div>Loading...</div>
       ) : (
         <div className="contact-details">
@@ -106,16 +105,20 @@ function UserProfile({ userId }) {
             {update ? (
               <div className="profile-pic2">
                 <button className="close" onClick={() => setUpdate(false)}>
-                  x
+                  <CgClose />
                 </button>
               </div>
             ) : (
               <div className="profile-pic">
-                {
+                {user && (
                   <img
-                    src={profilePic !== "" ? profilePic : "/images/profile.png"}
+                    src={
+                      user.profilePic !== ""
+                        ? user.profilePic
+                        : "/images/profile.png"
+                    }
                   />
-                }
+                )}
               </div>
             )}
           </div>
@@ -156,11 +159,9 @@ function UserProfile({ userId }) {
             </div>
 
             <div className="email-div">
-              <h4>Email</h4>
+              {!update && <h4>Email</h4>}
               {update ? (
-                <div className="email">
-                  <div>{user && user.email}</div>
-                </div>
+                <div className="email"></div>
               ) : (
                 <div>{user && user.email}</div>
               )}
@@ -168,21 +169,21 @@ function UserProfile({ userId }) {
 
             <div className="user-pass">
               <div className="pass">
-                <h4>Password:</h4>
                 {update ? (
                   <div>
+                    <h4>Password:</h4>
                     <div className="password">
                       <button onClick={resetPassword}>reset password</button>
                     </div>
                   </div>
                 ) : (
-                  <div className="password-text">{user && user.password}</div>
+                  <div className="password-text"></div>
                 )}
               </div>
             </div>
             <div className="account-update">
               <button
-                onClick={() => (update ? handleSubmit() : setUpdate(true))}
+                onClick={() => (update ? handleSubmit() : handleToggleUpdate())}
               >
                 {update ? "Submit" : "Update"}
               </button>

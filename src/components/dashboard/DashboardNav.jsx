@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getStorage, getDownloadURL, ref, listAll } from "firebase/storage";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import { IoCompassOutline } from "react-icons/io5";
 
 function DashboardNav() {
   const [profilePic, setProfilePic] = useState("");
@@ -12,27 +13,6 @@ function DashboardNav() {
   const [user] = users.filter((user) => user.id == userId);
   const storage = getStorage();
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      const imagesRef = ref(storage, userId);
-      let result = await listAll(imagesRef);
-
-      let urlPromises = result.items.map((imageRef) =>
-        getDownloadURL(imageRef)
-      );
-
-      return Promise.all(urlPromises);
-    };
-    const loadImages = async () => {
-      const url = await fetchImages();
-      setProfilePic(url[0]);
-    };
-
-    if (typeof user !== "undefined") {
-      loadImages();
-    }
-  }, []);
-
   const navigation = useNavigate();
   function navigateDiscover() {
     navigation("/");
@@ -40,27 +20,38 @@ function DashboardNav() {
   function navigateProfile() {
     navigation("/home/profile");
   }
-  console.log({ user });
   return (
     <div className="DashboardNav">
-      <p onClick={navigateDiscover}>Discover</p>
+      <div className="discover" onClick={navigateDiscover}>
+        <IoCompassOutline className="icon" />
+        <div>Discover</div>
+      </div>
       <div className="dropdown">
         <div className="dropbtn">
-          <IoIosNotificationsOutline />
+          <IoIosNotificationsOutline className="icon" />
           <span>{user && user.notifications.length}</span>
         </div>
         <div className="notification-content">
           <ul>
-            {user &&
+            {user && user.notifications.length > 0 ? (
               user.notifications.map((notification, i) => (
                 <li key={i}>{notification.message}</li>
-              ))}
+              ))
+            ) : (
+              <div>No notifications</div>
+            )}
           </ul>
         </div>
       </div>
       <div className="profile" onClick={navigateProfile}>
         <div className="profile-icon" onClick={navigateProfile}>
-          <img src={profilePic !== "" ? profilePic : "/images/profile.png"} />
+          {user && (
+            <img
+              src={
+                user.profilePic !== "" ? user.profilePic : "/images/profile.png"
+              }
+            />
+          )}
         </div>
       </div>
     </div>

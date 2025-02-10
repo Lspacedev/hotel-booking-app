@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { collection, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { CgClose } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
 
 function ReviewForm({ toggleClicked }) {
   const [obj, setObj] = useState({
@@ -11,6 +13,7 @@ function ReviewForm({ toggleClicked }) {
     date:
       new Date().toLocaleTimeString() + " " + new Date().toLocaleDateString(),
   });
+  const navigation = useNavigate();
 
   function handleChange(e) {
     e.preventDefault();
@@ -23,8 +26,7 @@ function ReviewForm({ toggleClicked }) {
     let reviewConfirmation = window.confirm(
       "You are about to add a review. Continue?"
     );
-    if(reviewConfirmation) {
-
+    if (reviewConfirmation) {
       //add review to firestore
       try {
         const accomodationsCollection = collection(
@@ -39,6 +41,7 @@ function ReviewForm({ toggleClicked }) {
           reviews: arrayUnion({ ...obj, userId: user }),
         });
         alert("added review");
+        navigation(0);
       } catch (err) {
         console.log(err);
       }
@@ -70,64 +73,72 @@ function ReviewForm({ toggleClicked }) {
       <div className="form-div">
         <div className="form-title-close">
           <div className="form-close" onClick={handleFormClose}>
-            x
+            <CgClose />
           </div>
         </div>
-        <form>
-          <div className="room_name">
-          <h3>Enter Review Information</h3>
-
-            <label htmlFor="room_name">
-              Room Name
-              <select
-                name="room_name"
-                onChange={(e) => handleChange(e)}
-                value={obj.room_type}
-              >
-                <option></option>
-                {typeof bookings !== "undefined" &&
-                  bookings.length > 0 &&
-                  bookings.map((booking, i) => (
-                    <option key={i} value={booking.id}>
-                      {booking.room_name}
-                    </option>
-                  ))}
-              </select>
-            </label>
+        {typeof bookings !== "undefined" && bookings.length === 0 ? (
+          <div className="no-bookings">
+            You currently have not bookings to review.
           </div>
+        ) : (
+          <form>
+            <div className="room_name">
+              <h3>Enter Review Information</h3>
 
-          <div className="rating">
-            <label htmlFor="rating">
-              Rating
-              <input
-                type="number"
-                id="rating"
-                name="rating"
-                onChange={(e) => handleChange(e)}
-                value={obj.rating}
-              />
-            </label>
-          </div>
+              <label htmlFor="room_name">
+                Room Name
+                <select
+                  name="room_name"
+                  onChange={(e) => handleChange(e)}
+                  value={obj.room_type}
+                >
+                  <option></option>
+                  {typeof bookings !== "undefined" &&
+                    bookings.length > 0 &&
+                    bookings.map((booking, i) => (
+                      <option key={i} value={booking.id}>
+                        {booking.room_name}
+                      </option>
+                    ))}
+                </select>
+              </label>
+            </div>
 
-          <div className="reviewText">
-            <label htmlFor="reviewText">
-              Write a short review
-              <input
-                id="reviewText"
-                name="reviewText"
-                onChange={(e) => handleChange(e)}
-                value={obj.reviewText}
-              />
-            </label>
-          </div>
+            <div className="rating">
+              <label htmlFor="rating">
+                Rating
+                <input
+                  type="number"
+                  id="rating"
+                  name="rating"
+                  max="5"
+                  min="1"
+                  onChange={(e) => handleChange(e)}
+                  value={obj.rating}
+                />
+              </label>
+            </div>
 
-          <input
-            id="task-add-submit"
-            type="submit"
-            value="submit"
-            onClick={handleSubmit}
-          ></input>
-        </form>
+            <div className="reviewText">
+              <label htmlFor="reviewText">
+                Write a short review
+                <input
+                  id="reviewText"
+                  name="reviewText"
+                  onChange={(e) => handleChange(e)}
+                  value={obj.reviewText}
+                />
+              </label>
+            </div>
+
+            <input
+              id="task-add-submit"
+              type="submit"
+              value="Submit"
+              onClick={handleSubmit}
+            ></input>
+          </form>
+        )}
       </div>
     </div>
   );

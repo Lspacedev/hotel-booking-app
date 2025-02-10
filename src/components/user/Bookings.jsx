@@ -20,11 +20,16 @@ function Bookings() {
   return (
     <div className="Bookings">
       <div className="bookings-div">
-        {typeof bookings !== "undefined" &&
-          bookings.length > 0 &&
+        {typeof bookings !== "undefined" && bookings.length > 0 ? (
           bookings.map((booking, i) => (
-            <BookingCard key={i} booking={booking} />
-          ))}
+            <div className="booking-card-div" key={i}>
+              <span>{i + 1}</span>
+              <BookingCard booking={booking} />
+            </div>
+          ))
+        ) : (
+          <div>You currently have no bookings.</div>
+        )}
       </div>
     </div>
   );

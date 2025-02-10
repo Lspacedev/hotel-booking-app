@@ -1,5 +1,4 @@
 import Nav from "./Nav";
-import SearchAccomodations from "./SearchAccomodations";
 import Footer from "./Footer";
 import SearchAccomodationsResults from "./searchAccomodationsResults";
 import NavPath from "./NavPath";
@@ -16,7 +15,6 @@ function ResultsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
   const guestsN = searchParams.get("guests") || "";
-  const filterTerm = searchParams.get("filters") || "";
   const dispatch = useDispatch();
   const accomodations = useSelector(
     (state) => state.accomodations.accomodations
@@ -25,26 +23,26 @@ function ResultsPage() {
     useSelector((state) => state.accomodations.searchTerm?.title) || "";
   const guestsNum =
     useSelector((state) => state.accomodations.guests?.num) || "";
-  const filters = useSelector((state) => state.accomodations.filters?.filter);
+  const tags = useSelector((state) => state.accomodations.tags?.tags);
 
   const sort = useSelector((state) => state.accomodations.sort?.by) || "";
   useEffect(() => {
     //if there is no sub page(:result_name)
     if (searchT !== "") {
       if (guestsNum !== "") {
-        if (filters !== "" && typeof filters !== "undefined") {
+        if (tags !== "" && typeof tags !== "undefined") {
           setSearchParams({
             search: searchT,
             guests: guestsNum,
-            filters: filters,
+            filters: tags,
           });
         } else {
           setSearchParams({ search: searchT, guests: guestsNum });
         }
-      } else if (filters !== "" && typeof filters !== "undefined") {
+      } else if (tags !== "" && typeof tags !== "undefined") {
         setSearchParams({
           search: searchT,
-          filters: filters,
+          filters: tags,
         });
       } else {
         setSearchParams({ search: searchT });
@@ -52,7 +50,7 @@ function ResultsPage() {
     }
     if (searchTerm !== "") {
     }
-  }, [searchT, guestsNum, filters]);
+  }, [searchT, guestsNum, tags]);
 
   useEffect(() => {
     if (
@@ -67,26 +65,27 @@ function ResultsPage() {
             .match(searchTerm.toLowerCase()) ||
           accomodation.room_type.toLowerCase().match(searchTerm.toLowerCase())
       );
-      if (guestsN !== "") {
-        console.log(guestsN);
+      if (guestsNum !== "") {
         let filteredAccomodationsGuests = filteredAccomodations.filter(
-          (accomodation) => accomodation.guests === guestsN
+          (accomodation) => Number(accomodation.guests) >= Number(guestsNum)
         );
-        console.log(filteredAccomodationsGuests);
         dispatch(setSearchResults(filteredAccomodationsGuests));
       } else {
         dispatch(setSearchResults(filteredAccomodations));
       }
-      if (filterTerm !== "") {
-        let filteredAccomodationsFilter = filteredAccomodations.filter(
-          (accomodation) => accomodation.room_type === filterTerm
-        );
 
+      if (tags && tags.length > 0) {
+        let filteredAccomodationsFilter = [];
+        tags.map((tag) => {
+          let arr = filteredAccomodations.filter(
+            (accomodation) => accomodation.room_type === tag
+          );
+
+          filteredAccomodationsFilter = filteredAccomodationsFilter.concat(arr);
+        });
+        console.log();
         dispatch(setSearchResults(filteredAccomodationsFilter));
-      } else {
-        dispatch(setSearchResults(filteredAccomodations));
       }
-
       if (sort === "low") {
         let arr = [...filteredAccomodations];
         let sorted = arr.sort((a, b) => a.price - b.price);
@@ -100,9 +99,9 @@ function ResultsPage() {
     }
 
     return () => {
-      //setSearchResults([]);
+      setSearchResults([]);
     };
-  }, [searchTerm, guestsN, accomodations, sort, filterTerm, dispatch]);
+  }, [searchTerm, guestsNum, accomodations, sort, tags, dispatch]);
 
   return (
     <div className="ResultsPage">
@@ -110,10 +109,16 @@ function ResultsPage() {
       <div className="search-div">
         <SearchAccomodationsResults />
       </div>
-      {searchTerm !== "" && (
+      {searchTerm !== "" && typeof result_id === "undefined" && (
         <NavPath>
-          <Link to="/">Home</Link> /
-          <Link to={`/results?search=${searchTerm}`}>{searchTerm}</Link>
+          <Link to="/" className="link">
+            Home
+          </Link>
+          <div className="arrow">{">"}</div>
+
+          <Link to={`/results?search=${searchTerm}`} className="link">
+            {searchTerm}
+          </Link>
         </NavPath>
       )}
       {result_id !== "" && typeof result_id !== "undefined" ? (

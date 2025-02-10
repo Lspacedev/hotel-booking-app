@@ -12,7 +12,11 @@ function Reviews() {
     if (accomodation.reviews.length > 0) {
       accomodation.reviews.forEach((review) => {
         if (review.userId === user) {
-          reviews.push({ ...review, roomId: accomodation.id });
+          reviews.push({
+            ...review,
+            roomId: accomodation.id,
+            reviewUrl: accomodation.images[0],
+          });
         }
       });
     }
@@ -21,9 +25,11 @@ function Reviews() {
     <div className="Reviews">
       <AddReview />
       <div className="reviews-div">
-        {typeof reviews !== "undefined" &&
-          reviews.length > 0 &&
-          reviews.map((review, i) => <ReviewCard key={i} review={review} />)}
+        {typeof reviews !== "undefined" && reviews.length > 0 ? (
+          reviews.map((review, i) => <ReviewCard key={i} review={review} />)
+        ) : (
+          <div>You have not made any reviews</div>
+        )}
       </div>
     </div>
   );

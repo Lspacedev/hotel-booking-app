@@ -1,8 +1,13 @@
+import { FaHotel } from "react-icons/fa";
+
 function Footer() {
   return (
     <div className="footer">
       <div className="footer-info">
-        <div className="footer-logo">ZaHotels.com</div>
+        <div className="footer-logo">
+          <FaHotel className="icon" />
+          <h3 className="logo">ZaHotels.com</h3>
+        </div>
         <div className="support-section">
           <div className="support-h">Support</div>
           <div className="support-links">

@@ -13,6 +13,7 @@ import {
   listAll,
   uploadBytes,
 } from "firebase/storage";
+import { FaHotel } from "react-icons/fa";
 
 function UserRegistration() {
   const [userDetails, setUserDetails] = useState({
@@ -21,7 +22,9 @@ function UserRegistration() {
     email: "",
     password: "",
   });
-  const [profilePic, setProfilePic] = useState("");
+  const [profilePic, setProfilePic] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const storage = getStorage();
   //navigation
   const navigation = useNavigate();
@@ -31,18 +34,14 @@ function UserRegistration() {
     const { name, value } = e.target;
     setUserDetails((prev) => ({ ...prev, [name]: value }));
   }
-  const uploadFile = (id, img) => {
-    if (img === null) {
-      alert("Please select an image");
-      return;
-    }
+  const uploadFile = async (id, img) => {
     const imageRef = ref(storage, `${id}/${img.name}`);
 
     uploadBytes(imageRef, img)
       .then((snapshot) => {
         getDownloadURL(snapshot.ref)
           .then((url) => {
-            console.log(url);
+            addUser(id, url);
           })
           .catch((error) => {
             console.log(error);
@@ -54,6 +53,12 @@ function UserRegistration() {
   };
 
   function register() {
+    if (profilePic === null) {
+      alert("Please select an image");
+      return;
+    }
+    setLoading(true);
+
     createUserWithEmailAndPassword(
       auth,
       userDetails.email,
@@ -61,17 +66,18 @@ function UserRegistration() {
     )
       .then((res) => {
         const userId = res.user.uid;
-
-        addUser(userId);
+        uploadFile(userId, profilePic);
+        setLoading(false);
         alert("Registered successfully");
         navigation("/login");
       })
       .catch((err) => {
+        setLoading(false);
         console.log(err.message);
       });
   }
 
-  async function addUser(userId) {
+  async function addUser(userId, url) {
     try {
       const salt = await bcrypt.genSalt();
       let encryptedPass = await bcrypt.hash(userDetails.password, salt);
@@ -81,10 +87,10 @@ function UserRegistration() {
         surname: userDetails.surname,
         email: userDetails.email,
         password: encryptedPass,
+        profilePic: url,
         notifications: [],
+        favourites: [],
       });
-
-      uploadFile(userId, profilePic);
     } catch (err) {
       console.log(err.message);
     }
@@ -140,87 +146,97 @@ function UserRegistration() {
   }
   return (
     <div className="UserRegistration">
-      <div className="register-img">
-        <img src="images/login-register.jpg" alt="login" />
-      </div>
-      <div className="register-form-container">
-        <h2>Create new account</h2>
-        <div className="register-to-login">
-          {/* <p onClick={handleNavigateLogin}>Login</p> */}
+      <div className="login-register-container">
+        <div className="register-img">
+          <img src="images/login-register.jpg" alt="login" />
         </div>
-        <div id="error"></div>
-        <div className="form" id="register-form">
-          <div className="name">
-            <label htmlFor="name">
-              Name:
-              <input
-                type="text"
-                id="name"
-                name="name"
-                onChange={(e) => handleChange(e)}
-                value={userDetails.name}
-              />
-            </label>
-            <span className="error"></span>
+        <div className="register-form-container">
+          <div className="logo-container" onClick={() => navigation("/")}>
+            <FaHotel className="icon" />
+            <h3 className="logo">ZaHotels.com</h3>
           </div>
-          <div className="surname">
-            <label htmlFor="surname">
-              Surname:
-              <input
-                type="text"
-                id="surname"
-                name="surname"
-                onChange={(e) => handleChange(e)}
-                value={userDetails.surname}
-              />
-            </label>
-            <span className="error"></span>
-          </div>
-          <div className="email">
-            <label htmlFor="email">
-              Email:
-              <input
-                type="email"
-                id="email"
-                name="email"
-                onChange={(e) => handleChange(e)}
-                value={userDetails.email}
-                required
-              />
-            </label>
-            <span className="error"></span>
-          </div>
+          <div className="create">Create a new account</div>
+          <div id="error"></div>
+          <div className="form" id="register-form">
+            <div className="name">
+              <label htmlFor="name">
+                Name:
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  onChange={(e) => handleChange(e)}
+                  value={userDetails.name}
+                />
+              </label>
+              <span className="error"></span>
+            </div>
+            <div className="surname">
+              <label htmlFor="surname">
+                Surname:
+                <input
+                  type="text"
+                  id="surname"
+                  name="surname"
+                  onChange={(e) => handleChange(e)}
+                  value={userDetails.surname}
+                />
+              </label>
+              <span className="error"></span>
+            </div>
+            <div className="email">
+              <label htmlFor="email">
+                Email:
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  onChange={(e) => handleChange(e)}
+                  value={userDetails.email}
+                  required
+                />
+              </label>
+              <span className="error"></span>
+            </div>
 
-          <div className="password">
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                id="password"
-                name="password"
-                onChange={(e) => handleChange(e)}
-                value={userDetails.password}
-              />
-            </label>
-            <span className="error"></span>
-          </div>
-          <div className="profile-pic">
-            <label htmlFor="profile-pic">
-              Profile picture:
-              <input
-                type="file"
-                id="profile-pic"
-                name="pic"
-                onChange={(e) => {
-                  setProfilePic(e.target.files[0]);
-                }}
-              />
-            </label>
-          </div>
+            <div className="password">
+              <label htmlFor="password">
+                Password:
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  onChange={(e) => handleChange(e)}
+                  value={userDetails.password}
+                />
+              </label>
+              <span className="error"></span>
+            </div>
+            <div className="profile-pic">
+              <label htmlFor="profile-pic">
+                Profile picture:
+                <input
+                  type="file"
+                  id="profile-pic"
+                  name="pic"
+                  onChange={(e) => {
+                    setProfilePic(e.target.files[0]);
+                  }}
+                />
+              </label>
+            </div>
 
-          <button className="submit-btn" onClick={handleSubmit}>
-            Register
-          </button>
+            <button
+              className="submit-btn"
+              onClick={loading ? console.log() : handleSubmit}
+            >
+              {loading ? "Loading..." : "Register"}
+            </button>
+          </div>
+          <div className="login-to-register">
+            Already have an account?
+            <p onClick={() => navigation("/login")}>Login</p>
+          </div>
         </div>
       </div>
     </div>

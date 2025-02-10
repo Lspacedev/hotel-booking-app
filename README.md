@@ -25,30 +25,25 @@ git@github.com:Lspacedev/hotel-booking-app.git
 cd hotel-booking-app
 ```
 
-3. Navigate to the git branch
-
-```bash
-git checkout development
-```
-
-4.  Install all dependencies
+3.  Install all dependencies
 
 ```bash
 npm install
 ```
 
-5. Create an env file and add the following:
+4. Create an env file and add the following:
 
 ```bash
-VITE_API_KEY="Firebase Api key"
-VITE_AUTH_DOMAIN="Firebase Auth Domain"
-VITE_PROJECT_ID="Firebase Project Id"
-VITE_STORAGE_BUCKET="Firebase Storage Bucket"
-VITE_MESSAGING_SENDER_ID="Firebase Messaging Sender Id"
-VITE_APP_ID="Firebase App Id"
-VITE_MEASUREMENT_ID="Firebase Measurement Id"
-VITE_NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="Stripe Publishable Key"
-VITE_NEXT_PUBLIC_STRIPE_PRICE_ID="Stripe Price Id"
+API_KEY="Firebase Api key"
+AUTH_DOMAIN="Firebase Auth Domain"
+PROJECT_ID="Firebase Project Id"
+STORAGE_BUCKET="Firebase Storage Bucket"
+MESSAGING_SENDER_ID="Firebase Messaging Sender Id"
+APP_ID="Firebase App Id"
+MEASUREMENT_ID="Firebase Measurement Id"
+STRIPE_PUBLISHABLE_KEY="Stripe Publishable Key"
+STRIPE_PRICE_ID="Stripe Price Id"
+CLIENT_URL="Deployed hotel app url or localhost"
 ```
 
 5. Run the project
@@ -56,6 +51,11 @@ VITE_NEXT_PUBLIC_STRIPE_PRICE_ID="Stripe Price Id"
 ```bash
 npm run dev
 ```
+
+## Screenshot
+
+![landing](public/images/screenshot.png)
+![landing](public/images/screenshot2.png)
 
 ## Features
 

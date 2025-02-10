@@ -3,6 +3,7 @@ import {
   setSearchTerm,
   setCheckInOut,
   setGuests,
+  setTags,
 } from "../../app/accomodationsSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -13,7 +14,7 @@ function SearchAccomodations() {
     checkIn: "",
     checkOut: "",
   });
-  const [guests, setGuestsNum] = useState(0);
+  const [guests, setGuestsNum] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
   const dispatch = useDispatch();
@@ -40,8 +41,13 @@ function SearchAccomodations() {
     setGuestsNum(e.target.value);
   }
   function handleSearchSubmit(e) {
-    console.log(e);
     e.preventDefault();
+    dispatch(setTags({ type: "RESET", filter: "" }));
+
+    if (searchInput === "") {
+      alert("Please enter hotel destination to search");
+      return;
+    }
 
     //setSearchParams({ search: searchInput });
     dispatch(setSearchTerm({ title: searchInput }));
@@ -56,23 +62,28 @@ function SearchAccomodations() {
     <div className="SearchAccomodations">
       <input type="text" placeholder="Hotel" onChange={handleSearchChange} />
       <label>
-        Check in
+        <div>CheckIn</div>
         <input
           type="date"
           name="checkIn"
           placeholder=""
           onChange={handleCheckInOut}
         />
-        Check out
-        <input type="date" name="checkOut" onChange={handleCheckInOut} />
+      </label>
+
+      <label>
+        <div>Checkout</div>
+        <input type="date" name="checkOut" onChange={handleCheckInOut} />{" "}
       </label>
       <input
         type="number"
         name="guests"
+        max="15"
+        min="1"
         placeholder="Guests"
         onChange={handleGuestsChange}
       />
-      <input type="submit" onClick={handleSearchSubmit} />
+      <input type="submit" value="Search" onClick={handleSearchSubmit} />
     </div>
   );
 }
