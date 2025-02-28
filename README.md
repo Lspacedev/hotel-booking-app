@@ -121,6 +121,13 @@ Photo by Pixabay: https://www.pexels.com/photo/silver-and-white-desk-lamp-beside
 <a href="https://www.freepik.com/free-vector/planning-illustration_19635378.htm#fromView=author&page=2&position=48&uuid=9282d6e1-7d19-423f-9db3-7a65fadf192c">Image by vectorjuice on Freepik</a>
 ```
 
+<a href="https://www.freepik.com/free-vector/hand-drawn-frugality-illustration_38680388.htm#fromView=search&page=2&position=35&uuid=cba62e24-3164-4913-9756-b6a03dc8731f&query=save+money">Image by freepik</a>
+<a href="https://www.freepik.com/free-vector/keyword-research-illustration_18611298.htm#fromView=search&page=1&position=12&uuid=c8ed9a16-7348-43ee-8710-f65fcdde6598&query=search">Image by vectorjuice on Freepik</a>
+<a href="https://www.flaticon.com/free-icons/wallet" title="wallet icons">Wallet icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/booking" title="Booking icons">Booking icons created by Icongeek26 - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/miscellaneous" title="miscellaneous icons">Miscellaneous icons created by DinosoftLabs - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/reservation" title="reservation icons">Reservation icons created by Freepik - Flaticon</a>
+
 ## Flows:
 
 ```python

@@ -235,22 +235,54 @@ input[type="text"] {
   background-color: #ebebeb;
 
   text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.SearchAccomodations input[type="date"]:before {
+  content: attr(placeholder) !important;
+  color: #888888;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+.SearchAccomodations input[type="date"]:focus:before,
+.SearchAccomodations input[type="date"]:valid:before {
+  content: "";
+}
+
+.FeaturesSection {
+  display: flex;
+  justify-content: center;
+  padding: 100px 0px;
+}
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.feature-card div {
+  width: 60%;
 }
 /* Categories */
+.categories-div {
+  width: 95%;
+  margin: 0px auto;
+}
 .Categories {
-  margin: 10px 100px 25px 0px;
+  margin: 10px 0px 25px 0px;
 }
 .Categories .heading {
   text-align: start;
-  padding-left: calc(100% / 3 - 380px);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   color: #212124;
-  font-weight: 700;
+  font-weight: 300;
+  margin: 0px;
+  padding-left: 0px;
 }
 
 .cards {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 5px;
 }
@@ -277,7 +309,7 @@ input[type="text"] {
 .Card .title {
   margin-top: 30px;
   font-size: 1.2rem;
-  color: #212124;
+  /* color: #212124; */
   font-weight: 600;
 }
 .Card .room-number {
@@ -836,7 +868,7 @@ input[type="text"] {
 
 .logo {
   font-size: 1.3rem;
-  font-weight: bold;
+  font-weight: 700;
   color: #b2bd7e;
   margin: 0px;
 }
@@ -1769,7 +1801,9 @@ input[type="date"]:in-range::-webkit-datetime-edit-year-field,
 input[type="date"]:in-range::-webkit-datetime-edit-month-field,
 input[type="date"]:in-range::-webkit-datetime-edit-day-field,
 input[type="date"]:in-range::-webkit-datetime-edit-text {
-  color: transparent;
+  color: #888888;
+  font-weight: 200;
+  font-size: 1.3rem;
 }
 code {
   font-family: Consolas, "courier new";
@@ -1895,7 +1929,7 @@ code {
 }
 .footer {
   color: white;
-  background-color: #1c1c1f;
+  background-color: #1b1b1d;
 
   font-family: "Ubuntu";
 
@@ -1981,12 +2015,30 @@ code {
 .connect-links > a:hover {
   text-decoration: underline;
 }
+@media screen and (min-width: 1440px) {
+  .categories-div {
+    width: 60%;
+    margin: 0px auto;
+  }
+  .FeaturesSection {
+    width: 60%;
+    margin: 0px auto;
+  }
+}
 @media screen and (min-width: 1287px) and (max-width: 1440px) {
   .SearchAccomodations {
     width: 80%;
   }
   .SearchAccomodationsResults {
     width: 80%;
+  }
+  .categories-div {
+    width: 80%;
+    margin: 0px auto;
+  }
+  .FeaturesSection {
+    width: 80%;
+    margin: 0px auto;
   }
 }
 @media screen and (min-width: 1025px) and (max-width: 1286px) {
@@ -2454,6 +2506,9 @@ code {
   .section-three-para2 {
     margin-bottom: 50px;
   }
+  .footer-info {
+    flex-direction: column;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -2469,9 +2524,6 @@ code {
   }
   .Card .img {
     width: 80%;
-  }
-  .footer-info {
-    flex-direction: column;
   }
 }
 @media screen and (max-width: 375px) {

@@ -3,6 +3,7 @@ import ShowCase from "./ShowCase";
 import Categories from "./Categories";
 import Card from "./Card";
 import Footer from "./Footer";
+import FeaturesSection from "./FeaturesSection";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -30,41 +31,44 @@ function HomePage() {
         <Nav />
         <ShowCase />
       </div>
-      <Categories heading="Hotels">
-        <Card
-          title="Pretoria"
-          url="images/pretoria.jpg"
-          room_number={getRoomNumber("Pretoria")}
-        />
-        <Card
-          title="Johannesburg"
-          url="images/jozi.jpg"
-          room_number={getRoomNumber("Johannesburg")}
-        />
-        <Card
-          title="Cape Town"
-          url="images/cape.jpg"
-          room_number={getRoomNumber("Cape Town")}
-        />
-      </Categories>
+      <div className="categories-div">
+        <Categories heading="Hotels">
+          <Card
+            title="Pretoria"
+            url="images/pretoria.jpg"
+            room_number={getRoomNumber("Pretoria")}
+          />
+          <Card
+            title="Johannesburg"
+            url="images/jozi.jpg"
+            room_number={getRoomNumber("Johannesburg")}
+          />
+          <Card
+            title="Cape Town"
+            url="images/cape.jpg"
+            room_number={getRoomNumber("Cape Town")}
+          />
+        </Categories>
 
-      <Categories heading="Room Types">
-        <Card
-          title="Standard"
-          url="images/standard.jpg"
-          room_number={getRoomTypeNumber("Standard")}
-        />
-        <Card
-          title="Deluxe"
-          url="images/deluxe.jpg"
-          room_number={getRoomTypeNumber("Deluxe")}
-        />
-        <Card
-          title="Suite"
-          url="images/suite.jpg"
-          room_number={getRoomTypeNumber("Suite")}
-        />
-      </Categories>
+        <Categories heading="Room Types">
+          <Card
+            title="Standard"
+            url="images/standard.jpg"
+            room_number={getRoomTypeNumber("Standard")}
+          />
+          <Card
+            title="Deluxe"
+            url="images/deluxe.jpg"
+            room_number={getRoomTypeNumber("Deluxe")}
+          />
+          <Card
+            title="Suite"
+            url="images/suite.jpg"
+            room_number={getRoomTypeNumber("Suite")}
+          />
+        </Categories>
+      </div>
+      {/* <FeaturesSection /> */}
 
       <Footer />
     </div>
