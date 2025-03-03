@@ -118,9 +118,12 @@ Photo by Taryn Elliott: https://www.pexels.com/photo/photo-of-mountain-during-da
 Derek Jensen (Tysto), Public domain, via Wikimedia Commons
 Photo by Eugenia Remark: https://www.pexels.com/photo/an-elegant-modern-hotel-room-design-16975987/
 Photo by Pixabay: https://www.pexels.com/photo/silver-and-white-desk-lamp-beside-bed-279805/
+Photo by Taryn Elliott: https://www.pexels.com/photo/aerial-view-of-cars-on-zigzag-road-near-buildings-6790337/
 <a href="https://www.freepik.com/free-vector/planning-illustration_19635378.htm#fromView=author&page=2&position=48&uuid=9282d6e1-7d19-423f-9db3-7a65fadf192c">Image by vectorjuice on Freepik</a>
 ```
 
+Image by <a href="https://pixabay.com/users/c10maj-14964495/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7016274">Clayton Majona</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7016274">Pixabay</a>
+Image by <a href="https://pixabay.com/users/martinah79-2385435/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2267795">Martina</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2267795">Pixabay</a>
 <a href="https://www.freepik.com/free-vector/hand-drawn-frugality-illustration_38680388.htm#fromView=search&page=2&position=35&uuid=cba62e24-3164-4913-9756-b6a03dc8731f&query=save+money">Image by freepik</a>
 <a href="https://www.freepik.com/free-vector/keyword-research-illustration_18611298.htm#fromView=search&page=1&position=12&uuid=c8ed9a16-7348-43ee-8710-f65fcdde6598&query=search">Image by vectorjuice on Freepik</a>
 <a href="https://www.flaticon.com/free-icons/wallet" title="wallet icons">Wallet icons created by Freepik - Flaticon</a>

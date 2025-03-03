@@ -3,7 +3,9 @@ import ShowCase from "./ShowCase";
 import Categories from "./Categories";
 import Card from "./Card";
 import Footer from "./Footer";
+import DealsSection from "./DealsSection";
 import FeaturesSection from "./FeaturesSection";
+import SaveCard from "./SaveCard";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
@@ -31,6 +33,17 @@ function HomePage() {
         <Nav />
         <ShowCase />
       </div>
+
+      <DealsSection
+        heading="Offers"
+        subHeading="Promotions, deals and special offers for you"
+        dealHeading="Save on stays worldwide"
+        dealText="Start your year with a sense of adventure, saving 15% or more with Early 2025 Deals."
+      />
+
+      {/* <FeaturesSection /> */}
+      <FeaturesSection />
+
       <div className="categories-div">
         <Categories heading="Hotels">
           <Card
@@ -68,8 +81,7 @@ function HomePage() {
           />
         </Categories>
       </div>
-      {/* <FeaturesSection /> */}
-
+      <SaveCard text="Members save 10% or more on over 1000 hotel rooms when signed in" />
       <Footer />
     </div>
   );

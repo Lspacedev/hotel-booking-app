@@ -8,11 +8,11 @@
 body {
   margin: 0px;
   /* background-color: #f2f2f1; */
-  background-color: #f2f2f1;
+  background-color: white;
 }
 .background-image {
   background: url("/images/showcase1.jpg");
-  background-position: center;
+  background-position: 20% 50%;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -249,19 +249,158 @@ input[type="text"] {
 .SearchAccomodations input[type="date"]:valid:before {
   content: "";
 }
-
+.SaveCard {
+  width: 100%;
+  padding: 50px 0px;
+}
+.save-card-container {
+  display: flex;
+  align-items: center;
+  padding: 15px 5px;
+  border-radius: 15px;
+  border: 1px solid #d4d4d4;
+  /* box-shadow: 1px 1px 5px #bbb; */
+}
+.save-card-icon {
+  flex: 1;
+  width: 50px;
+  font-size: 1.8rem;
+}
+.save-card-text {
+  flex: 5;
+  color: #1b1b1d;
+}
+.save-card-sign-in {
+  flex: 1;
+  padding: 10px 0px;
+  background-color: #1b1b1d;
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  color: white;
+}
 .FeaturesSection {
   display: flex;
-  justify-content: center;
-  padding: 100px 0px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 50px 0px;
+  border-radius: 25px;
+  /* background-color: rgb(238, 238, 238); */
+  background-color: whitesmoke;
+}
+.FeaturesSection h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #1b1b1d;
+  margin: 25px 5px;
+  padding: 10px 0px;
+}
+.feature-cards {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 50px;
+  width: 80%;
+  margin: 0px auto;
 }
 .feature-card {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  border-radius: 25px;
+  padding: 25px 45px;
+  /* box-shadow: 2px 2px 10px #e7e7e7e5; */
+  /* background-color: white; */
+}
+.feature-card h3 {
+  padding: 0px 10px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #1b1b1d;
 }
 .feature-card div {
-  width: 60%;
+  padding: 0px 5px;
+  width: 200px;
+  text-align: center;
+}
+.feature-card img {
+  margin: 0px auto;
+}
+.DealsSection {
+  margin-top: 50px;
+  z-index: 12;
+  padding: 50px 10px;
+}
+.deal-heading {
+  font-weight: 700;
+  font-size: 1.4rem;
+  /* color: #1b1b1d; */
+  margin: 25px 5px;
+}
+.deal-heading-line {
+  height: 3px;
+  width: 30px;
+  margin: 0px;
+  padding: 0px;
+  background-color: #777737;
+}
+.deal-sub-heading {
+  margin: 5px;
+  font-weight: 300;
+  color: #626267;
+}
+.deal-one-heading {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1b1b1d;
+  margin: 0px;
+  padding: 0px;
+}
+.deal-text {
+  font-size: 0.9rem;
+  margin: 0px;
+  padding: 0px;
+}
+.deal-btn {
+  padding: 10px 25px;
+  background-color: #1b1b1d;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 7px;
+}
+.deal-btn:hover {
+  background-color: #777737;
+  cursor: pointer;
+}
+.deal-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #dadada;
+  height: 120px;
+  padding: 20px;
+  border-radius: 7px;
+  margin: 15px 0px;
+}
+.deal-one {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+}
+.deal-two {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.deal-two img {
+  height: 90%;
+  width: 140px;
+  border-radius: 7px;
 }
 /* Categories */
 .categories-div {
@@ -273,13 +412,19 @@ input[type="text"] {
 }
 .Categories .heading {
   text-align: start;
-  font-size: 1.5rem;
-  color: #212124;
-  font-weight: 300;
+  font-size: 1.4rem;
+  /* color: #1b1b1d; */
+  font-weight: 700;
   margin: 0px;
   padding-left: 0px;
 }
-
+.categories-heading-line {
+  height: 3px;
+  width: 35px;
+  margin: 0px;
+  padding: 0px;
+  background-color: #a6a670;
+}
 .cards {
   display: flex;
   justify-content: space-between;
@@ -288,18 +433,19 @@ input[type="text"] {
 }
 
 .Card {
+  /* box-shadow: 1px 1px 5px #aaaaaa; */
+  border-radius: 7px;
 }
 
 .Card .img {
   height: 300px;
   width: 300px;
-  box-shadow: 1px 1px 5px #aaaaaa;
-  border-radius: 25px;
+  border-radius: 7px 7px 0px 0px;
 }
 .Card img {
   height: 100%;
   width: 100%;
-  border-radius: 25px;
+  border-radius: 7px 7px 0px 0px;
   cursor: pointer;
 }
 .Card img:hover {
@@ -307,16 +453,20 @@ input[type="text"] {
   filter: alpha(opacity=70) !important; /* For IE8 and ea rlier */
 }
 .Card .title {
-  margin-top: 30px;
+  margin-top: 5px;
   font-size: 1.2rem;
   /* color: #212124; */
   font-weight: 600;
+  margin: 5px 7px;
 }
 .Card .room-number {
   margin-top: 5px;
   font-size: 0.9rem;
   color: #646466;
+  margin: 5px 7px;
+  margin-bottom: 10px;
 }
+
 .heading {
   font-size: 1.2rem;
   font-weight: 600;
@@ -1929,7 +2079,7 @@ code {
 }
 .footer {
   color: white;
-  background-color: #1b1b1d;
+  background-color: #1c1c1f;
 
   font-family: "Ubuntu";
 
@@ -2020,7 +2170,15 @@ code {
     width: 60%;
     margin: 0px auto;
   }
+  .DealsSection {
+    width: 60%;
+    margin: 0px auto;
+  }
   .FeaturesSection {
+    width: 100%;
+    margin: 0px auto;
+  }
+  .SaveCard {
     width: 60%;
     margin: 0px auto;
   }
@@ -2036,7 +2194,15 @@ code {
     width: 80%;
     margin: 0px auto;
   }
+  .DealsSection {
+    width: 80%;
+    margin: 0px auto;
+  }
   .FeaturesSection {
+    width: 100%;
+    margin: 0px auto;
+  }
+  .SaveCard {
     width: 80%;
     margin: 0px auto;
   }
@@ -2278,6 +2444,10 @@ code {
   .sidebar-links .link {
     margin: 0px 50px;
   }
+  .feature-cards {
+    gap: 25px;
+    flex-wrap: wrap;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -2509,6 +2679,12 @@ code {
   .footer-info {
     flex-direction: column;
   }
+  .deal-container {
+    height: 200px;
+  }
+  .feature-card {
+    padding: 25px 25px;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -2543,5 +2719,17 @@ code {
   }
   .AccomodationCard .slides {
     height: 300px;
+  }
+  .deal-container {
+    height: 350px;
+    flex-direction: column-reverse;
+  }
+  .deal-two {
+    width: 100%;
+    align-items: flex-start;
+  }
+  .deal-two img {
+    width: 100%;
+    height: 150px;
   }
 }
