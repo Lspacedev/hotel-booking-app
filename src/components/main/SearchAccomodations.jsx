@@ -60,7 +60,12 @@ function SearchAccomodations() {
 
   return (
     <div className="SearchAccomodations">
-      <input type="text" placeholder="Hotel" onChange={handleSearchChange} />
+      <input
+        type="text"
+        placeholder="Hotel or room type"
+        className="hotel-search-input"
+        onChange={handleSearchChange}
+      />
       <label>
         <input
           type="date"
@@ -83,7 +88,8 @@ function SearchAccomodations() {
         name="guests"
         max="15"
         min="1"
-        placeholder="Guests"
+        className="guests-input"
+        placeholder="Number of guests"
         onChange={handleGuestsChange}
       />
       <input type="submit" value="Search" onClick={handleSearchSubmit} />

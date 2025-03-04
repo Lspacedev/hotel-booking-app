@@ -360,11 +360,15 @@ function AccomodationCard() {
                               getReviewer(review.userId).profilePic
                         }
                       />
-
-                      <p>
-                        {getReviewer(review.userId) &&
-                          getReviewer(review.userId).name}
-                      </p>
+                      <div className="review-name-location">
+                        <div className="review-name">
+                          {getReviewer(review.userId) &&
+                            getReviewer(review.userId).name}
+                        </div>
+                        <div className="review-city">
+                          {accomodation && accomodation.hotel_name}
+                        </div>
+                      </div>
                     </div>
                     <p>
                       {printStars(review.rating) &&
@@ -373,9 +377,13 @@ function AccomodationCard() {
                         ))}
                     </p>
                   </div>
-
+                  <p>
+                    Reviewed on:{" "}
+                    {accomodation &&
+                      review &&
+                      new Date(review.date).toDateString()}
+                  </p>
                   <p>{review.reviewText}</p>
-                  <p>Reviewed on: {review.date}</p>
                 </div>
               ))
             ) : (

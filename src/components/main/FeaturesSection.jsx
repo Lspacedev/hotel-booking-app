@@ -7,7 +7,7 @@ function FeaturesSection() {
         <div className="feature-card">
           <img src="/images/hotel.png" style={{ width: "100px" }} />
           <h3>Search simply</h3>
-          <div>Search through 5 million hotels in just a few seconds.</div>
+          <div>Search through our hotels in just a few seconds.</div>
         </div>
         <div className="feature-card">
           <img src="/images/purse.png" style={{ width: "100px" }} />

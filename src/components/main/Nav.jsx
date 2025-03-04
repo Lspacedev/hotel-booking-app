@@ -24,8 +24,9 @@ function Nav() {
   return (
     <div className="Nav">
       <div className="logo-container" onClick={() => navigation("/")}>
-        <FaHotel className="icon" />
-        <h3 className="logo">ZaHotels.com</h3>
+        <img src="/images/Zahotels.com-removebg-preview.png" />
+        {/* <FaHotel className="icon" />
+        <h3 className="logo">ZaHotels.com</h3> */}
       </div>
       <div className="nav-links">
         <div className="discover" onClick={() => navigation("/")}>

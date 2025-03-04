@@ -130,6 +130,8 @@ Image by <a href="https://pixabay.com/users/martinah79-2385435/?utm_source=link-
 <a href="https://www.flaticon.com/free-icons/booking" title="Booking icons">Booking icons created by Icongeek26 - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/miscellaneous" title="miscellaneous icons">Miscellaneous icons created by DinosoftLabs - Flaticon</a>
 <a href="https://www.flaticon.com/free-icons/reservation" title="reservation icons">Reservation icons created by Freepik - Flaticon</a>
+<a target="_blank" href="https://icons8.com/icon/mj4zUKpD4IjJ/person">Person</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+<a target="_blank" href="https://icons8.com/icon/lwZinoeNcL3F/search">Search</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 ## Flows:
 

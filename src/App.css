@@ -1,5 +1,6 @@
 * {
-  font-family: "Poppins", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 .link {
   text-decoration: none;
@@ -8,11 +9,10 @@
 body {
   margin: 0px;
   /* background-color: #f2f2f1; */
-  background-color: white;
 }
 .background-image {
-  background: url("/images/showcase1.jpg");
-  background-position: 20% 50%;
+  background: url("/images/showcase3.jpg");
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -70,13 +70,16 @@ body {
   gap: 400px;
   padding: 15px 50px;
   background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: saturate(180%) blur(4px);
+
+  /* background: white; */
+  /* backdrop-filter: saturate(180%) blur(4px); */
   z-index: 2;
 }
 .Nav .logo-container {
   display: flex;
   align-items: center;
-  gap: 15px;
+  /* flex-direction: column; */
+  gap: 7px;
   cursor: pointer;
 }
 .nav-links {
@@ -98,15 +101,16 @@ body {
 }
 .nav-links .login-btn {
   border: 1px solid #a6a670;
-  color: white;
   padding: 10px 25px;
   border-radius: 5px;
   background-color: transparent;
+  color: white;
 }
 .nav-links .discover {
   display: flex;
   align-items: center;
   gap: 5px;
+  color: #1b1b1d;
 }
 
 .nav-links .discover:hover {
@@ -127,11 +131,67 @@ body {
 }
 
 .nav-links .register-btn:hover {
-  background-color: #626267;
+  background-color: #8b8b45;
+}
+
+.FAQSection {
+  width: 90%;
+  margin: 15px auto;
+}
+
+.FAQTitle {
+  font-size: 1.4em;
+  font-weight: 700;
+  margin: 5px;
+}
+.question {
+  font-weight: 400;
+  font-size: 1.2rem;
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.answer {
+  background-color: #f3f3eb;
+  border-radius: 5px;
+  padding: 25px;
+  box-shadow: 2px 2px 5px #0000000d;
+}
+
+.answerTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.answerDescription {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.accordianDiv {
+  box-shadow: 5px 5px 10px #0000000d;
+  height: 75px;
+  border-radius: 5px;
+  margin: 25px 0px;
+  padding: 5px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.arrowIconDown {
+  width: 20px;
+  height: 20px;
+  color: #898b8e;
+}
+.arrowIconUp {
+  width: 20px;
+  height: 20px;
+  color: #898b8e;
+  transform: rotate(180deg);
 }
 /* ShowCase */
 .ShowCase {
-  height: 450px;
+  height: 600px;
   display: flex;
   flex-direction: column;
 
@@ -166,7 +226,7 @@ body {
 
 .ShowCase h3 {
   position: absolute;
-  top: 200px;
+  top: calc(100% / 3);
   left: 50%;
   transform: translate(-50%, 0%);
   width: 70%;
@@ -214,15 +274,15 @@ input[type="text"] {
 .SearchAccomodations input[type="submit"] {
   flex: 1;
   padding: 15px 32px;
-  border: 1px solid #a6a670;
-  background-color: #a6a670;
+  border: 1px solid #8b8b45;
+  background-color: #8b8b45;
   color: white;
   font-weight: 700;
   border-radius: 5px;
 }
 .SearchAccomodations input[type="submit"]:hover {
-  background-color: #36363a;
-  border: 1px solid #36363a;
+  background-color: #777737;
+  border: 1px solid #777737;
   cursor: pointer;
 }
 
@@ -248,6 +308,20 @@ input[type="text"] {
 .SearchAccomodations input[type="date"]:focus:before,
 .SearchAccomodations input[type="date"]:valid:before {
   content: "";
+}
+
+.SearchAccomodations .guests-input {
+  background: url("images/person.png") no-repeat scroll 7px 7px;
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  background-position: 20px 50%;
+}
+.SearchAccomodations .hotel-search-input {
+  background: url("images/search.png") no-repeat scroll 7px 7px;
+  background-size: 22px 22px;
+  background-repeat: no-repeat;
+  background-position: 20px 50%;
+  background-color: #ebebeb;
 }
 .SaveCard {
   width: 100%;
@@ -278,6 +352,99 @@ input[type="text"] {
   outline: none;
   border-radius: 15px;
   color: white;
+}
+.Avertisment {
+  width: 100%;
+  min-height: 400px;
+  background: url("/images/showcase3.jpg");
+  border-radius: 7px;
+  display: flex;
+  justify-content: space-evenly;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  align-items: center;
+}
+.Avertisment .backdrop {
+  width: 100%;
+  min-height: 400px;
+  background-color: #f5fdc6e3;
+  border-radius: 7px;
+  display: flex;
+  justify-content: space-evenly;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: #f5fdc6ec;
+  align-items: center;
+}
+.Avertisment .avert-deco {
+  width: 50px;
+  height: 200px;
+  background-color: #f1fcb5cb;
+  padding: 0px;
+  margin-right: 5px;
+  border-radius: 0px 50px 50px 0px;
+}
+
+.Avertisment .text-section {
+  height: 90%;
+  flex: 2;
+  font-weight: 700;
+  font-size: 2.6rem;
+  padding: 0px 10px;
+  padding-left: 20px;
+  /* backdrop-filter: saturate(180%) blur(4px); */
+}
+.Avertisment .text {
+  width: 95%;
+  font-weight: 700;
+  font-size: 3rem;
+  padding: 15px 10px;
+  padding-left: 20px;
+  /* backdrop-filter: saturate(180%) blur(4px); */
+}
+.Avertisment .avert-stats {
+  width: fit-content;
+  display: flex;
+  gap: 15px;
+  background-color: #e3f09aea;
+  padding: 10px 15px;
+  border-radius: 25px;
+  margin: 25px 0px;
+}
+.Avertisment .avert-stat {
+  font-weight: 400;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.Avertisment .avert-stat .check-icon {
+  color: white;
+}
+.Avertisment .avert-reg-btn {
+  background-color: #1b1b1d;
+  padding: 15px 25px;
+  color: white;
+  border: none;
+  outline: none;
+  border-radius: 7px;
+}
+.Avertisment .image-container {
+  flex: 3;
+  width: 50%;
+  margin: 0px auto;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  background-color: #f5fdc6e3;
+}
+.Avertisment img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 25px 0px 0px 25px;
 }
 .FeaturesSection {
   display: flex;
@@ -701,6 +868,7 @@ input[type="text"] {
   margin: 0px auto;
 
   padding: 15px 0px;
+  background-color: white;
 }
 .AccomodationCard h4 {
   font-size: 1.4rem;
@@ -738,6 +906,8 @@ input[type="text"] {
   font-weight: 400;
 }
 .acc-info-section p {
+  font-size: 1.1rem;
+  font-weight: 400;
   line-height: 1.6rem;
 }
 .accomodation-icon {
@@ -794,7 +964,7 @@ input[type="text"] {
 }
 
 .AccomodationCard .slides {
-  height: 400px;
+  height: 500px;
   width: 45vw;
   position: relative;
   margin: 25px 0px;
@@ -883,15 +1053,15 @@ input[type="text"] {
   gap: 25px;
 }
 .AccomodationCard .review-card {
-  width: 220px;
+  width: 40%;
   /* background-color: whitesmoke; */
   border-radius: 25px;
   padding: 5px 25px;
   margin: 15px 0px;
-  box-shadow: 1px 1px 3px #d4d4d4;
+  /* box-shadow: 1px 1px 3px #d4d4d4; */
 }
 .AccomodationCard .star {
-  color: yellow;
+  color: orangered;
 }
 .book-card .star {
   color: orange;
@@ -907,7 +1077,17 @@ input[type="text"] {
   height: 50px;
   border-radius: 50%;
 }
-
+.review-name-location {
+}
+.review-name-location p {
+  margin: 0px;
+}
+.review-name {
+  font-weight: 700;
+}
+.review-city {
+  font-weight: 400;
+}
 /* User Dashboard */
 
 .UserProfile {
@@ -1010,18 +1190,30 @@ input[type="text"] {
   align-items: center;
   gap: 0px;
 }
-
+.Nav .logo-container .icon {
+  font-size: 30px;
+  color: #1c1c1f;
+}
+.Nav .logo-container img {
+  width: 25px;
+}
 .logo-container .icon {
-  font-size: 34px;
+  font-size: 30px;
   color: #585851;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  color: #b2bd7e;
+  color: #a6a670;
   margin: 0px;
+  padding: 0px;
 }
+
 .logout {
   cursor: pointer;
   font-size: 1.1rem;
@@ -1030,6 +1222,10 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.Nav .logo {
+  color: #b8b88a;
+  font-weight: 650;
 }
 .sidebar-links {
   flex: 90%;
@@ -2079,7 +2275,7 @@ code {
 }
 .footer {
   color: white;
-  background-color: #1c1c1f;
+  background-color: #1b1b1d;
 
   font-family: "Ubuntu";
 
@@ -2182,6 +2378,14 @@ code {
     width: 60%;
     margin: 0px auto;
   }
+  .FAQSection {
+    width: 60%;
+    margin: 15px auto;
+  }
+  .Avertisment {
+    width: 60%;
+    margin: 15px auto;
+  }
 }
 @media screen and (min-width: 1287px) and (max-width: 1440px) {
   .SearchAccomodations {
@@ -2202,9 +2406,21 @@ code {
     width: 100%;
     margin: 0px auto;
   }
+  .feature-cards {
+    gap: 25px;
+    flex-wrap: wrap;
+  }
   .SaveCard {
     width: 80%;
     margin: 0px auto;
+  }
+  .FAQSection {
+    width: 80%;
+    margin: 15px auto;
+  }
+  .Avertisment {
+    width: 80%;
+    margin: 15px auto;
   }
 }
 @media screen and (min-width: 1025px) and (max-width: 1286px) {
@@ -2244,13 +2460,13 @@ code {
 
     text-align: center;
   }
-  .ShowCase h3 {
+  /* .ShowCase h3 {
     top: 20px;
     margin: 0px;
     left: 50%;
 
     font-size: 2rem;
-  }
+  } */
   .search-div {
     padding: 100px 0px;
   }
@@ -2290,6 +2506,10 @@ code {
     background-color: #ebebeb;
 
     text-align: center;
+  }
+  .feature-cards {
+    width: 90%;
+    gap: 15px;
   }
 }
 @media screen and (max-width: 1024px) {
@@ -2334,13 +2554,13 @@ code {
 
     text-align: center;
   }
-  .ShowCase h3 {
+  /* .ShowCase h3 {
     top: 20px;
     margin: 0px;
     left: 50%;
 
     font-size: 2rem;
-  }
+  } */
   .search-div {
     padding: 100px 0px;
   }
@@ -2483,7 +2703,7 @@ code {
     flex-direction: column;
   }
   .ShowCase h3 {
-    top: 20px;
+    top: calc(100% / 4);
     margin: 0px;
     left: 50%;
 
@@ -2571,6 +2791,9 @@ code {
     margin-left: 0px;
     text-align: center;
   }
+  .categories-heading-line {
+    display: none;
+  }
   .slides-book {
     flex-direction: column;
     gap: 25px;
@@ -2623,6 +2846,47 @@ code {
   }
   .notification-content {
     left: -120px;
+  }
+  .Avertisment {
+    width: calc(100% - 10px);
+    margin: 5px;
+  }
+  .Avertisment .avert-deco {
+    margin-right: 0px;
+  }
+
+  .Avertisment .backdrop {
+    width: calc(100% - 10px);
+    flex-direction: column-reverse;
+    padding: 25px 5px;
+  }
+  .Avertisment .avert-deco {
+    display: none;
+  }
+
+  .Avertisment .image-container {
+    width: 95%;
+    margin: 0px auto;
+    border-radius: 15px;
+  }
+  .Avertisment img {
+    width: 100%;
+    height: 200px;
+    border-radius: 15px;
+  }
+  .Avertisment .avert-stats {
+    min-width: calc(50% - 30px);
+    justify-content: space-between;
+    gap: 0px;
+  }
+  .Avertisment .text-section {
+    width: 95%;
+
+    padding-left: 0px;
+    margin: 5px;
+  }
+  .Avertisment .text {
+    padding-left: 0px;
   }
 }
 
@@ -2685,6 +2949,11 @@ code {
   .feature-card {
     padding: 25px 25px;
   }
+  .Avertisment .avert-stats {
+    width: calc(100% - 30px);
+    justify-content: space-between;
+    gap: 0px;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -2715,7 +2984,7 @@ code {
     text-align: center;
   }
   .ShowCase h3 {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
   .AccomodationCard .slides {
     height: 300px;
@@ -2731,5 +3000,14 @@ code {
   .deal-two img {
     width: 100%;
     height: 150px;
+  }
+  .save-card-sign-in {
+    padding: 5px 10px;
+  }
+  .save-card-container {
+    flex-wrap: wrap;
+  }
+  .Avertisment .text-section {
+    text-align: center;
   }
 }
