@@ -8,7 +8,9 @@ import { MdOutlineReceiptLong } from "react-icons/md";
 import { TiDocumentText } from "react-icons/ti";
 import { FiLogOut } from "react-icons/fi";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { useState } from "react";
 function UserDashboard() {
+  const [currentTab, setCurrentTab] = useState("");
   const navigation = useNavigate();
   function logOut() {
     signOut(auth)
@@ -21,28 +23,40 @@ function UserDashboard() {
   }
 
   function navigateBookings() {
+    setCurrentTab("Bookings");
     navigation("/home/bookings");
   }
   function navigateReviews() {
+    setCurrentTab("Reviews");
     navigation("/home/reviews");
   }
   function navigateFavourites() {
+    setCurrentTab("Favourites");
     navigation("/home/favourites");
   }
   return (
     <div className="UserDashboard">
       <Sidebar>
-        <div className="link" onClick={navigateBookings}>
+        <div
+          className={currentTab === "Bookings" ? "link currentTab" : "link"}
+          onClick={navigateBookings}
+        >
           <MdOutlineReceiptLong className="icon" />
           <div className="text">Bookings</div>
         </div>
 
-        <div className="link" onClick={navigateReviews}>
+        <div
+          className={currentTab === "Reviews" ? "link currentTab" : "link"}
+          onClick={navigateReviews}
+        >
           <TiDocumentText className="icon" />
           <div className="text">Reviews</div>
         </div>
 
-        <div className="link" onClick={navigateFavourites}>
+        <div
+          className={currentTab === "Favourites" ? "link currentTab" : "link"}
+          onClick={navigateFavourites}
+        >
           <MdOutlineFavoriteBorder className="icon" />
           <div className="text">Favourites</div>
         </div>

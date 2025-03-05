@@ -1,11 +1,18 @@
 import ResultCard from "./ResultCard";
 import { useSelector, useDispatch } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 import { setSort } from "../../app/accomodationsSlice";
 function Results() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
   const searchFilters = searchParams.get("filters") || "";
+  const location = useLocation();
+  const navigation = useNavigate();
+  const { hash, pathname, search } = location;
+
   const accomodations = useSelector(
     (state) => state.accomodations.accomodations
   );
@@ -16,6 +23,13 @@ function Results() {
     (state) => state.accomodations.searchResults
   );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log({ searchTerm, location });
+    if (search === "") {
+      navigation("/");
+    }
+  }, [searchTerm, location]);
 
   function handleSort(e) {
     dispatch(setSort({ by: e.target.value }));

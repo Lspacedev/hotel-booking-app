@@ -1,6 +1,7 @@
 * {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  /* border: 1px solid black; */
 }
 .link {
   text-decoration: none;
@@ -73,6 +74,8 @@ body {
 
   /* background: white; */
   /* backdrop-filter: saturate(180%) blur(4px); */
+  -webkit-transition: background 0.8s;
+  transition: background 0.8s;
   z-index: 2;
 }
 .Nav .logo-container {
@@ -105,16 +108,21 @@ body {
   border-radius: 5px;
   background-color: transparent;
   color: white;
+  font-weight: 600;
 }
 .nav-links .discover {
   display: flex;
   align-items: center;
-  gap: 5px;
-  color: #1b1b1d;
+  color: white;
 }
-
-.nav-links .discover:hover {
-  color: rgb(179, 179, 179);
+.nav-links .discover .icon {
+  padding-top: 2px;
+}
+.nav-links .discover div {
+  padding: 5px;
+  margin: 0px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .nav-links .login-btn:hover {
@@ -128,10 +136,32 @@ body {
   color: white;
   border-radius: 5px;
   border: none;
+  font-weight: 600;
 }
 
 .nav-links .register-btn:hover {
-  background-color: #8b8b45;
+  background-color: #1c1c1f;
+}
+
+.Nav:hover .register-btn {
+  background-color: #626267;
+}
+.Nav:hover .login-btn {
+  border: 1px solid #1b1b1d;
+  color: #1b1b1d;
+}
+.Nav:hover .register-btn:hover {
+  background-color: #555558;
+}
+.Nav:hover .login-btn:hover {
+  border: 1px solid rgb(179, 179, 179);
+  color: rgb(179, 179, 179);
+}
+.Nav:hover .discover {
+  color: #1b1b1d;
+}
+.Nav:hover .discover:hover {
+  color: rgb(179, 179, 179);
 }
 
 .FAQSection {
@@ -223,8 +253,7 @@ body {
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: saturate(180%) blur(4px);
 }
-
-.ShowCase h3 {
+.ShowCase .showcase-text {
   position: absolute;
   top: calc(100% / 3);
   left: 50%;
@@ -235,6 +264,21 @@ body {
   text-align: center;
 }
 
+.ShowCase h3 {
+  margin: 0px;
+  padding: 0px;
+  font-size: 2.5rem;
+  color: white;
+  text-align: center;
+}
+.ShowCase h4 {
+  margin: 0px;
+  padding: 0px;
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: white;
+  text-align: center;
+}
 .SearchAccomodations {
   position: absolute;
   bottom: 20px;
@@ -246,7 +290,7 @@ body {
   align-items: center;
 
   padding: 15px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.4);
 
   border-radius: 25px;
   z-index: 2;
@@ -753,9 +797,12 @@ input[type="text"] {
   border-radius: 25px;
 }
 .NavPath {
-  margin: 25px 0px 25px 12%;
+  /* margin: 25px 0px 25px 12%; */
   font-size: 1.1rem;
   display: flex;
+  width: 70%;
+
+  margin: 25px auto;
 }
 
 .NavPath .link {
@@ -799,7 +846,7 @@ input[type="text"] {
 
 .results-main {
   display: flex;
-  width: 80%;
+  width: 72%;
 
   margin: 0px auto;
 }
@@ -870,6 +917,12 @@ input[type="text"] {
   padding: 15px 0px;
   background-color: white;
 }
+.AccomodationCard .acc-info-container {
+  width: 90%;
+  margin: 0px auto;
+
+  padding: 15px 0px;
+}
 .AccomodationCard h4 {
   font-size: 1.4rem;
 
@@ -880,7 +933,13 @@ input[type="text"] {
   font-weight: 700;
 }
 .AccomodationCard .acc-name {
-  font-size: 1.6rem;
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+.AccomodationCard .acc-name-share {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .AccomodationCard .back {
   font-size: 1.8rem;
@@ -895,20 +954,43 @@ input[type="text"] {
   display: flex;
   gap: 50px;
 }
+.AccomodationCard .guests-type-div {
+  border: 1px solid rgb(231, 231, 231);
+  padding: 8px 25px;
+  border-radius: 7px;
+}
+.AccomodationCard .guests-type-div .icon {
+  width: 28px;
+  height: 28px;
+  font-weight: 400;
+}
 .guests-type .h {
   font-weight: 500;
+  font-size: 12px;
 }
 .guests-type .value {
+  font-size: 14px;
+  font-weight: 400;
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 .AccomodationCard .overview h4 {
   font-weight: 400;
 }
 .acc-info-section p {
-  font-size: 1.1rem;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.6rem;
+}
+.acc-info-section h5 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.6rem;
+}
+.acc-info-section .reviews-title {
+  padding-bottom: 7px;
+  border-bottom: 1px solid #e9e9e9;
 }
 .accomodation-icon {
   display: flex;
@@ -930,7 +1012,7 @@ input[type="text"] {
 }
 .book-card {
   width: 250px;
-  height: 50%;
+  height: 60%;
   border: 1px solid #bbb;
   border-radius: 5px;
   display: flex;
@@ -938,6 +1020,17 @@ input[type="text"] {
   align-items: center;
   justify-content: space-evenly;
   padding: 10px 0px;
+}
+.book-card .content p {
+  margin: 5px;
+  padding: 2px;
+  text-align: center;
+}
+.book-card h4 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin: 5px;
+  padding: 5px;
 }
 .book-card .title {
   width: calc(100% - 150px);
@@ -964,7 +1057,7 @@ input[type="text"] {
 }
 
 .AccomodationCard .slides {
-  height: 500px;
+  height: 450px;
   width: 45vw;
   position: relative;
   margin: 25px 0px;
@@ -973,7 +1066,7 @@ input[type="text"] {
   /* Add the following lines for smooth scrolling */
   scroll-behavior: smooth;
   transition: scroll 0.3s ease-in-out;
-  border-radius: 25px;
+  border-radius: 7px;
   box-shadow: 1px 1px 3px #bbb;
 }
 .currentSlide {
@@ -982,7 +1075,7 @@ input[type="text"] {
 .slides img {
   width: inherit;
   height: 100%;
-  border-radius: 25px;
+  border-radius: 7px;
 }
 
 /* Next & previous buttons */
@@ -1017,19 +1110,26 @@ input[type="text"] {
 
 .share-btn {
   text-align: end;
-  background-color: #1c1c1f;
+
   padding: 7px 15px;
   border: none;
-  color: white;
-  border-radius: 25px;
+  border-radius: 7px;
   cursor: pointer;
-  margin-right: 15px;
+  margin: 0px 15px 15px 0px;
   display: flex;
   align-items: center;
   gap: 5px;
+  font-weight: 500;
+  font-size: 14px;
 }
 .share-btn .icon {
   font-size: 1.2rem;
+}
+.AccomodationCard .code {
+  margin: 15px;
+}
+.AccomodationCard code {
+  padding: 5px;
 }
 .book-btn {
   background-color: #1c1c1f;
@@ -1041,24 +1141,24 @@ input[type="text"] {
   width: 75%;
 }
 .share-btn:hover {
-  background-color: #626267;
+  background-color: #dbdbdb;
 }
 .book-btn:hover {
   background-color: #626267;
 }
 .AccomodationCard .accomodation-reviews {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 25px;
 }
 .AccomodationCard .review-card {
   width: 40%;
   /* background-color: whitesmoke; */
-  border-radius: 25px;
+  border-radius: 7px;
   padding: 5px 25px;
   margin: 15px 0px;
   /* box-shadow: 1px 1px 3px #d4d4d4; */
+  /* border: 1px solid #bbb; */
 }
 .AccomodationCard .star {
   color: orangered;
@@ -1137,10 +1237,10 @@ input[type="text"] {
 }
 
 .Main {
-  flex: 8;
+  flex: 10;
   height: inherit;
   width: calc(100% - 355px);
-  background-color: white;
+  background-color: #eeeeee63;
   overflow-y: scroll;
 }
 
@@ -1149,9 +1249,14 @@ input[type="text"] {
   justify-content: end;
   align-items: center;
   gap: 45px;
-
-  box-shadow: 1px 0px 5px #bbb;
+  padding: 15px 0px;
+  border: 1px solid #f5f5f5;
   padding-right: 150px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+
+  z-index: 1;
 }
 .DashboardNav p {
   cursor: pointer;
@@ -1170,6 +1275,9 @@ input[type="text"] {
 .DashboardNav .discover .icon {
   font-size: 1.3rem;
 }
+.DashboardNav .discover:hover {
+  color: #555558;
+}
 .Sidebar {
   flex: 2;
   width: 30%;
@@ -1178,25 +1286,72 @@ input[type="text"] {
   flex-direction: column;
 
   text-align: center;
-  padding: 10px 5px;
+  padding: 10px 0px;
   background-color: #1c1c1f;
-  gap: 50px;
+  gap: 20px;
 }
 .Sidebar .logo-container {
   flex: 10%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: 0px;
+}
+
+.Sidebar .logo-icon-img {
+  width: 50px;
+  height: 50px;
+}
+.Sidebar .logo-text-img {
+  width: 150px;
+  height: 30px;
+}
+.Nav .logo-container {
+  display: flex;
 }
 .Nav .logo-container .icon {
   font-size: 30px;
   color: #1c1c1f;
 }
-.Nav .logo-container img {
-  width: 25px;
+.Nav .logo-container .img {
+  width: 50px;
+  height: 50px;
+  background: url("/images/logo-icon4.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 4;
 }
+.Nav .logo-container .logo-text {
+  width: 130px;
+  height: 50px;
+  background: url("/images/logo-text.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 4;
+}
+.Nav:hover {
+  background: white;
+}
+.Nav:hover .img {
+  width: 50px;
+  height: 50px;
+  background: url("/images/logo-icon2.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 4;
+}
+.Nav:hover .logo-text {
+  width: 130px;
+  height: 50px;
+  background: url("/images/logo-text2.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 4;
+}
+
 .logo-container .icon {
   font-size: 30px;
   color: #585851;
@@ -1227,25 +1382,32 @@ input[type="text"] {
   color: #b8b88a;
   font-weight: 650;
 }
+.sidebar-links .currentTab {
+  background-color: #3d3d41c4;
+  border-right: 5px solid #8b8b45;
+}
 .sidebar-links {
   flex: 90%;
+  width: 100%;
   color: white;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  align-items: center;
+
+  gap: 15px;
 }
 
 .sidebar-links .link {
+  width: calc(100% - 35px);
   cursor: pointer;
-  margin: 0px 80px;
+  margin: 0px;
   padding: 10px 15px;
-}
-.sidebar-links .link {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 5px;
 }
+
 .link .icon {
   flex: 5%;
   font-size: 32px;
@@ -1256,8 +1418,7 @@ input[type="text"] {
   display: flex;
 }
 .sidebar-links .link:hover {
-  background-color: #a6a670;
-  border-radius: 25px;
+  background-color: #18181a;
 }
 
 /* Bookings */
@@ -1275,7 +1436,7 @@ input[type="text"] {
   height: 200px;
 
   background-color: #eeeeee63;
-  border-radius: 25px;
+  border-radius: 7px;
 }
 .booking-card-div span {
   width: 10%;
@@ -1298,19 +1459,19 @@ input[type="text"] {
   gap: 15px;
 
   box-shadow: 1px 1px 5px #bbb;
-  border-radius: 25px;
+  border-radius: 7px;
   background-color: white;
 }
 .BookingCard .img {
   flex: 30%;
   height: 100%;
-  border-radius: 25px;
+  border-radius: 7px;
 }
 
 .BookingCard img {
   width: 100%;
   height: 100%;
-  border-radius: 25px;
+  border-radius: 7px;
 }
 .booking-card-info {
   flex: 70%;
@@ -1405,15 +1566,15 @@ input[type="text"] {
   gap: 15px;
 
   box-shadow: 1px 1px 5px #bbb;
-  border-radius: 25px;
+  border-radius: 7px;
   padding: 0px 5px 0px 0px;
 }
 .ReviewCard .img {
-  border-radius: 25px;
+  border-radius: 7px;
   height: 200px;
 }
 .ReviewCard .img img {
-  border-radius: 25px;
+  border-radius: 7px;
   height: 200px;
 }
 .ReviewCard .review-header {
@@ -1759,8 +1920,8 @@ input[type="text"] {
 }
 
 .login-register-container {
-  width: 70%;
-
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1771,7 +1932,6 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px 50px;
   background-color: white;
 }
 .UserLogin .logo-container {
@@ -1792,7 +1952,7 @@ input[type="text"] {
 }
 
 .login-form-container {
-  flex: 60%;
+  flex: 50%;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -1801,6 +1961,21 @@ input[type="text"] {
   padding: 0px;
 }
 
+.login-form-container .logo-container {
+  flex: 10%;
+  display: flex;
+  justify-content: center;
+  gap: 0px;
+}
+
+.login-form-container .logo-icon-img {
+  width: 50px;
+  height: 50px;
+}
+.login-form-container .logo-text-img {
+  width: 150px;
+  height: 30px;
+}
 .UserLogin .form {
   margin: 50px auto;
   padding: 25px 0px;
@@ -1812,12 +1987,12 @@ select {
   outline: none;
   border: 1px solid #bbb;
 
-  margin: 15px 0;
-  padding: 5px;
+  margin: 5px 0;
+  padding: 7px 0px;
   width: 98%;
   outline: none;
 
-  border-radius: 25px;
+  border-radius: 7px;
   display: inline-block;
   box-sizing: border-box;
 }
@@ -1831,14 +2006,14 @@ select {
 
 .UserLogin .submit-btn {
   margin: 5px 0px;
-  padding: 5px;
+  padding: 7px 0px;
   width: 100%;
-  background-color: #a6a670;
+  background-color: #36363a;
   color: white;
   outline: none;
   border: none;
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: 7px;
 }
 .UserLogin .guest-submit-btn {
   margin: 5px 0px;
@@ -1849,28 +2024,13 @@ select {
   outline: none;
   border: none;
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: 7px;
 }
 .UserLogin .guest-submit-btn:hover {
   background-color: #1c1c1f;
 }
 .UserLogin .submit-btn:hover {
   background-color: #626267;
-}
-
-.login-img {
-  flex: 40%;
-  height: 500px;
-  border-radius: 25px;
-  box-shadow: -2px 0px 3px 0px #bbbbbb67;
-}
-
-.login-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 25px;
 }
 
 /* Admin Login */
@@ -1944,9 +2104,8 @@ select {
 
 .login-img {
   flex: 40%;
-
-  height: 500px;
-  background-color: #bbb;
+  height: 100%;
+  height: inherit;
 }
 
 .login-img img {
@@ -1962,8 +2121,6 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
-  padding: 0px 50px;
 }
 .register-to-login {
   font-size: 0.7rem;
@@ -1996,8 +2153,23 @@ select {
   align-items: center;
 }
 
+.register-form-container .logo-container {
+  flex: 10%;
+  display: flex;
+  justify-content: center;
+  gap: 0px;
+}
+
+.register-form-container .logo-icon-img {
+  width: 50px;
+  height: 50px;
+}
+.register-form-container .logo-text-img {
+  width: 150px;
+  height: 30px;
+}
 .UserRegistration .form {
-  width: 50%;
+  width: 70%;
   margin: 0px;
   padding: 25px 0px;
 }
@@ -2007,11 +2179,11 @@ select {
   outline: none;
   border: 1px solid #bbb;
 
-  margin: 15px 0px 5px 0px;
-  padding: 5px;
+  margin: 5px 0px 5px 0px;
+  padding: 7px 0px;
   width: 100%;
   outline: none;
-  border-radius: 25px;
+  border-radius: 7px;
   display: inline-block;
   box-sizing: border-box;
   background-color: white;
@@ -2022,15 +2194,15 @@ select {
   font-size: 14px;
   color: rgb(133, 133, 133);
   cursor: pointer;
-  margin: 15px 0px;
+  margin: 5px 0px;
 }
 
 .UserRegistration .submit-btn {
   margin: 5px 0px;
-  padding: 5px 7px;
+  padding: 7px 0px;
   width: 100%;
-  border-radius: 25px;
-  background-color: #a6a670;
+  border-radius: 7px;
+  background-color: #36363a;
   color: white;
   outline: none;
   border: none;
@@ -2041,9 +2213,8 @@ select {
 }
 .register-img {
   flex: 40%;
-  height: 500px;
-  box-shadow: -2px 0px 3px 0px #bbbbbb67;
-  border-radius: 25px;
+  height: 100%;
+  height: inherit;
 }
 
 .register-img img {
@@ -2051,7 +2222,6 @@ select {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  border-radius: 25px;
 }
 
 /* Checkout */
@@ -2234,7 +2404,7 @@ code {
   width: 200px;
   padding: 10px 25px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 7;
   border-radius: 25px;
 }
 .notification-content div {
@@ -2254,19 +2424,19 @@ code {
 }
 /* Footer */
 .footer-logo {
-  color: #a6a670;
-  font-size: 1.2rem;
-  font-weight: 700;
+  height: 50px;
   display: flex;
-  align-items: start;
-  gap: 15px;
+  align-items: center;
   cursor: pointer;
 }
-.footer-logo .icon {
-  font-size: 34px;
-  color: #585851;
+.footer-logo .logo-icon-img {
+  width: 50px;
+  height: 50px;
 }
-
+.footer-logo .logo-text-img {
+  width: 150px;
+  height: 30px;
+}
 .footer-logo .logo {
   font-size: 1.3rem;
   font-weight: bold;
@@ -2386,6 +2556,9 @@ code {
     width: 60%;
     margin: 15px auto;
   }
+  .AccomodationCard {
+    width: 75%;
+  }
 }
 @media screen and (min-width: 1287px) and (max-width: 1440px) {
   .SearchAccomodations {
@@ -2421,6 +2594,9 @@ code {
   .Avertisment {
     width: 80%;
     margin: 15px auto;
+  }
+  .AccomodationCard {
+    width: 80%;
   }
 }
 @media screen and (min-width: 1025px) and (max-width: 1286px) {
@@ -2511,8 +2687,14 @@ code {
     width: 90%;
     gap: 15px;
   }
+  .AccomodationCard {
+    width: 80%;
+  }
 }
 @media screen and (max-width: 1024px) {
+  .AccomodationCard {
+    width: 90%;
+  }
   /* Nav */
   .Nav {
     justify-content: space-around;
@@ -2611,10 +2793,11 @@ code {
   }
   .login-register-container {
     flex-direction: column;
-    width: 80%;
+    /* width: 70%; */
   }
   .UserLogin {
     overflow-y: auto;
+    padding: 50px;
   }
   .UserLogin .form {
     margin: 0px;
@@ -2622,8 +2805,7 @@ code {
     width: 100%;
   }
   .login-img {
-    background-color: white;
-    box-shadow: none;
+    display: none;
   }
   .login-form-container {
     width: 100%;
@@ -2633,6 +2815,7 @@ code {
   }
   .UserRegistration {
     overflow-y: auto;
+    padding: 50px;
   }
   .UserRegistration .form {
     margin: 0px;
@@ -2642,9 +2825,14 @@ code {
   .register-img {
     background-color: white;
     box-shadow: none;
+    /* height: 20%;
+    width: 100%; */
+    display: none;
   }
   .register-form-container {
     width: 100%;
+
+    flex: 100%;
   }
   .login-to-register {
     flex-direction: column;
@@ -2668,9 +2856,18 @@ code {
     gap: 25px;
     flex-wrap: wrap;
   }
+  .login-form-container .logo-container {
+    flex: none;
+  }
+  .register-form-container .logo-container {
+    flex: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
+  .AccomodationCard {
+    width: 98%;
+  }
   /* Nav */
   .Nav {
     flex-direction: column;
@@ -2754,6 +2951,11 @@ code {
   }
   .sidebar-links .link {
     margin: 0px;
+  }
+  .sidebar-links .currentTab {
+    background-color: #1c1c1f;
+    border-right: none;
+    border-bottom: 5px solid #8b8b45;
   }
   .ReviewForm {
     padding: 0px;
@@ -2888,6 +3090,9 @@ code {
   .Avertisment .text {
     padding-left: 0px;
   }
+  .login-register-container {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -2954,6 +3159,12 @@ code {
     justify-content: space-between;
     gap: 0px;
   }
+  .UserRegistration {
+    padding: 25px;
+  }
+  .UserLogin {
+    padding: 25px;
+  }
 }
 
 @media screen and (max-width: 425px) {
@@ -3008,6 +3219,14 @@ code {
     flex-wrap: wrap;
   }
   .Avertisment .text-section {
+    text-align: center;
+  }
+  .ShowCase h4 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: white;
     text-align: center;
   }
 }

@@ -231,170 +231,179 @@ function AccomodationCard() {
   return (
     <div className="AccomodationCard">
       <IoMdArrowBack onClick={goBack} className="back" />
-      <h3 className="acc-name">{accomodation && accomodation.room_name}</h3>
-      <div className="acc-address">
-        {accomodation && (
-          <div className="accomodation-icon">
-            <FaLocationDot color="#777737" size={20} />
-            <p>{accomodation.address}</p>
-          </div>
-        )}
-      </div>
-      <div className="slides-book">
-        <div className="slides" ref={slidesRef}>
-          {accomodation &&
-            accomodation.images.length > 0 &&
-            accomodation.images.map((image, i) => {
-              return (
-                <div
-                  className={
-                    i === activeImageNum
-                      ? "currentSlide active"
-                      : "currentSlide"
-                  }
-                  key={i}
-                >
-                  {i === activeImageNum && <img src={image} />}
-                </div>
-              );
-            })}
-          <button className="prev" onClick={prevSlide}>
-            <IoIosArrowBack />
-          </button>
-          <button className="next" onClick={nextSlide}>
-            <IoIosArrowForward />
-          </button>
+      <div className="acc-info-container">
+        <div className="acc-name-share">
+          <h3 className="acc-name">{accomodation && accomodation.room_name}</h3>
         </div>
-        <div className="book-map">
-          <div className="book-card">
-            <div className="title">
-              {accomodation && (
-                <>
-                  <div className="text">
-                    {getRoomPoints(accomodation.rating).text}
-                  </div>
-                  <div className="pts">
-                    {getRoomPoints(accomodation.rating).pts}
-                  </div>
-                </>
-              )}
-            </div>
-            <div className="content">
-              <p>This room has recieved</p>
-              <p>
-                {accomodation &&
-                  accomodation.rating &&
-                  printStars(accomodation.rating).map((elem, i) => (
-                    <IoStarSharp key={i} className="star" />
-                  ))}
-              </p>
-            </div>
-            <button className="book-btn" onClick={book}>
-              Book
-            </button>
-          </div>
+        <div className="acc-address">
           {accomodation && (
-            <iframe
-              src={getMap(accomodation.hotel_name)}
-              width="250"
-              height="200"
-            ></iframe>
+            <div className="accomodation-icon">
+              <FaLocationDot color="#777737" size={20} />
+              <p>{accomodation.address}</p>
+            </div>
           )}
         </div>
-      </div>
-      <button className="share-btn" onClick={handleShare}>
-        <CiShare2 className="icon" />
-      </button>
-      {isShared && (
-        <code>{`${process.env.CLIENT_URL}/results/${result_id}`}</code>
-      )}
-      <div className="accomodation-info">
-        <div className="overview">
-          <h4>R{accomodation && accomodation.price}</h4>
-          <div className="guests-type">
-            <div>
-              <div className="h">Room Type</div>
-              <div className="value">
-                <LiaBedSolid />
-                {accomodation && accomodation.room_type}
-              </div>
-            </div>
-            <div>
-              <div className="h">Guests</div>
-              <div className="value">
-                <GoPerson />
-                {accomodation && accomodation.guests}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="acc-info-section">
-          <h5>Description</h5>
-          <p>{accomodation && accomodation.description}</p>
-        </div>
-        <div className="acc-info-section">
-          <h5>Amenties</h5>
-          <p>{accomodation && accomodation.amenities}</p>
-        </div>
-        <div className="acc-info-section">
-          <h5>Policies</h5>
-          <p>{accomodation && accomodation.policies}</p>
-        </div>
-        <div className="acc-info-section">
-          <h5>Reviews</h5>
-          <div className="accomodation-reviews">
+        <div className="slides-book">
+          <div className="slides" ref={slidesRef}>
             {accomodation &&
-            accomodation.reviews &&
-            accomodation.reviews.length > 0 ? (
-              accomodation.reviews.map((review, i) => (
-                <div key={i} className="review-card">
-                  <div className="user-rating">
-                    <div className="name-pic">
-                      <img
-                        src={
-                          getReviewer(review.userId) &&
-                          typeof getReviewer(review.userId).profilePic ===
-                            "undefined"
-                            ? "/images/profile.png"
-                            : getReviewer(review.userId) &&
-                              getReviewer(review.userId).profilePic
-                        }
-                      />
-                      <div className="review-name-location">
-                        <div className="review-name">
-                          {getReviewer(review.userId) &&
-                            getReviewer(review.userId).name}
-                        </div>
-                        <div className="review-city">
-                          {accomodation && accomodation.hotel_name}
-                        </div>
-                      </div>
-                    </div>
-                    <p>
-                      {printStars(review.rating) &&
-                        printStars(review.rating).map((elem, i) => (
-                          <IoStarSharp key={i} className="star" />
-                        ))}
-                    </p>
+              accomodation.images.length > 0 &&
+              accomodation.images.map((image, i) => {
+                return (
+                  <div
+                    className={
+                      i === activeImageNum
+                        ? "currentSlide active"
+                        : "currentSlide"
+                    }
+                    key={i}
+                  >
+                    {i === activeImageNum && <img src={image} />}
                   </div>
-                  <p>
-                    Reviewed on:{" "}
-                    {accomodation &&
-                      review &&
-                      new Date(review.date).toDateString()}
-                  </p>
-                  <p>{review.reviewText}</p>
-                </div>
-              ))
-            ) : (
-              <div style={{ textAlign: "start" }}>
-                No reviews yet for this accomodation
+                );
+              })}
+            <button className="prev" onClick={prevSlide}>
+              <IoIosArrowBack />
+            </button>
+            <button className="next" onClick={nextSlide}>
+              <IoIosArrowForward />
+            </button>
+          </div>
+          <div className="book-map">
+            <div className="book-card">
+              <div className="title">
+                {accomodation && (
+                  <>
+                    <div className="text">
+                      {getRoomPoints(accomodation.rating).text}
+                    </div>
+                    <div className="pts">
+                      {getRoomPoints(accomodation.rating).pts}
+                    </div>
+                  </>
+                )}
               </div>
+              <div className="content">
+                <p>This room has recieved:</p>
+                <p>
+                  {accomodation &&
+                    accomodation.rating &&
+                    printStars(accomodation.rating).map((elem, i) => (
+                      <IoStarSharp key={i} className="star" />
+                    ))}
+                </p>
+              </div>
+              <h4>R{accomodation && accomodation.price} per night</h4>
+
+              <button className="book-btn" onClick={book}>
+                Book Now
+              </button>
+            </div>
+            {accomodation && (
+              <iframe
+                src={getMap(accomodation.hotel_name)}
+                width="250"
+                height="200"
+              ></iframe>
             )}
           </div>
         </div>
+        <button className="share-btn" onClick={handleShare}>
+          <CiShare2 className="icon" /> Share
+        </button>
+        <div className="code">
+          {isShared && (
+            <code>{`${process.env.CLIENT_URL}/results/${result_id}`}</code>
+          )}
+        </div>
+        <div className="accomodation-info">
+          <div className="overview">
+            <div className="guests-type">
+              <div className="guests-type-div">
+                <div className="h">Room Type</div>
+                <div className="value">
+                  <LiaBedSolid className="icon" />
+                  {accomodation && accomodation.room_type}
+                </div>
+              </div>
+              <div className="guests-type-div">
+                <div className="h">Guests</div>
+                <div className="value">
+                  <GoPerson className="icon" />
+                  {accomodation && accomodation.guests}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="acc-info-section">
+            <h5>Description</h5>
+            <p>{accomodation && accomodation.description}</p>
+          </div>
+          <div className="acc-info-section">
+            <h5>Amenties</h5>
+            <p>{accomodation && accomodation.amenities}</p>
+          </div>
+          <div className="acc-info-section">
+            <h5>Policies</h5>
+            <p>{accomodation && accomodation.policies}</p>
+          </div>
+          <div className="acc-info-section">
+            <h5 className="reviews-title">
+              {accomodation.reviews && accomodation.reviews.length} reviews
+            </h5>
+            <div className="accomodation-reviews">
+              {accomodation &&
+              accomodation.reviews &&
+              accomodation.reviews.length > 0 ? (
+                accomodation.reviews.map((review, i) => (
+                  <div key={i} className="review-card">
+                    <div className="user-rating">
+                      <div className="name-pic">
+                        <img
+                          src={
+                            getReviewer(review.userId) &&
+                            typeof getReviewer(review.userId).profilePic ===
+                              "undefined"
+                              ? "/images/profile.png"
+                              : getReviewer(review.userId) &&
+                                getReviewer(review.userId).profilePic
+                          }
+                        />
+                        <div className="review-name-location">
+                          <div className="review-name">
+                            {getReviewer(review.userId) &&
+                              getReviewer(review.userId).name}
+                          </div>
+                          <div className="review-city">
+                            {accomodation && accomodation.hotel_name}
+                          </div>
+                        </div>
+                      </div>
+                      <p>
+                        {printStars(review.rating) &&
+                          printStars(review.rating).map((elem, i) => (
+                            <IoStarSharp key={i} className="star" />
+                          ))}
+                      </p>
+                    </div>
+                    <p>
+                      Reviewed on:{" "}
+                      {accomodation &&
+                        review &&
+                        new Date(review.date).toDateString()}
+                    </p>
+                    <p>{review.reviewText}</p>
+                  </div>
+                ))
+              ) : (
+                <div style={{ textAlign: "start" }}>
+                  No reviews yet for this accomodation
+                </div>
+              )}
+            </div>
+          </div>
 
-        <div className="acc-btns"></div>
+          <div className="acc-btns"></div>
+        </div>
       </div>
     </div>
   );

@@ -5,8 +5,8 @@ function Footer() {
     <div className="footer">
       <div className="footer-info">
         <div className="footer-logo">
-          <FaHotel className="icon" />
-          <h3 className="logo">ZaHotels.com</h3>
+          <img src="/images/logo-icon4.png" className="logo-icon-img" />
+          <img src="/images/logo-text.png" className="logo-text-img" />
         </div>
         <div className="support-section">
           <div className="support-h">Support</div>

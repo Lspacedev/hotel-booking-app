@@ -4,8 +4,8 @@ function Sidebar({ children }) {
   return (
     <div className="Sidebar">
       <div className="logo-container">
-        <FaHotel className="icon" />
-        <h3 className="logo">ZaHotels.com</h3>
+        <img src="/images/logo-icon2.png" className="logo-icon-img" />
+        <img src="/images/logo-text.png" className="logo-text-img" />
       </div>
       <div className="sidebar-links">{children}</div>
     </div>

@@ -53,12 +53,12 @@ function UserLogin() {
     <div className="UserLogin">
       <div className="login-register-container">
         <div className="login-img">
-          <img src="images/login-register.jpg" alt="login" />
+          <img src="images/capetownbeach.jpg" alt="login" />
         </div>
         <div className="login-form-container">
           <div className="logo-container" onClick={() => navigation("/")}>
-            <FaHotel className="icon" />
-            <h3 className="logo">ZaHotels.com</h3>
+            <img src="/images/logo-icon2.png" className="logo-icon-img" />
+            <img src="/images/logo-text2.png" className="logo-text-img" />
           </div>
           <p>Log in to your account.</p>
           <div className="form">

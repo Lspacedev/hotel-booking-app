@@ -148,12 +148,12 @@ function UserRegistration() {
     <div className="UserRegistration">
       <div className="login-register-container">
         <div className="register-img">
-          <img src="images/login-register.jpg" alt="login" />
+          <img src="images/capetownbeach.jpg" alt="login" />
         </div>
         <div className="register-form-container">
           <div className="logo-container" onClick={() => navigation("/")}>
-            <FaHotel className="icon" />
-            <h3 className="logo">ZaHotels.com</h3>
+            <img src="/images/logo-icon2.png" className="logo-icon-img" />
+            <img src="/images/logo-text2.png" className="logo-text-img" />
           </div>
           <div className="create">Create a new account</div>
           <div id="error"></div>

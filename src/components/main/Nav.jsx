@@ -1,11 +1,14 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { FaHotel } from "react-icons/fa";
 import { IoCompassOutline } from "react-icons/io5";
 
 function Nav() {
+  const location = useLocation();
+  const { pathname } = location;
   const [profilePic, setProfilePic] = useState("");
+
   const userId = useSelector((state) => state.user.currentUser);
   const users = useSelector((state) => state.user.users);
 
@@ -24,9 +27,22 @@ function Nav() {
   return (
     <div className="Nav">
       <div className="logo-container" onClick={() => navigation("/")}>
-        <img src="/images/Zahotels.com-removebg-preview.png" />
-        {/* <FaHotel className="icon" />
-        <h3 className="logo">ZaHotels.com</h3> */}
+        {pathname === "/" ? (
+          <div className="img"></div>
+        ) : (
+          <img
+            src="/images/logo-icon2.png"
+            style={{ width: "50px", height: "50px" }}
+          />
+        )}
+        {pathname === "/" ? (
+          <div className="logo-text"></div>
+        ) : (
+          <img
+            src="/images/logo-text2.png"
+            style={{ width: "130px", height: "25px" }}
+          />
+        )}
       </div>
       <div className="nav-links">
         <div className="discover" onClick={() => navigation("/")}>
