@@ -17,7 +17,6 @@ function UserDashboard() {
       .then(() => {
         localStorage.removeItem("uid");
         navigation("/");
-        navigation(0);
       })
       .catch((err) => {});
   }

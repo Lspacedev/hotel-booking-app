@@ -68,7 +68,6 @@ function UserRegistration() {
         const userId = res.user.uid;
         uploadFile(userId, profilePic);
         setLoading(false);
-        alert("Registered successfully");
         navigation("/login");
       })
       .catch((err) => {
@@ -160,7 +159,7 @@ function UserRegistration() {
           <div className="form" id="register-form">
             <div className="name">
               <label htmlFor="name">
-                Name:
+                Name
                 <input
                   type="text"
                   id="name"
@@ -173,7 +172,7 @@ function UserRegistration() {
             </div>
             <div className="surname">
               <label htmlFor="surname">
-                Surname:
+                Surname
                 <input
                   type="text"
                   id="surname"
@@ -186,7 +185,7 @@ function UserRegistration() {
             </div>
             <div className="email">
               <label htmlFor="email">
-                Email:
+                Email
                 <input
                   type="email"
                   id="email"
@@ -201,7 +200,7 @@ function UserRegistration() {
 
             <div className="password">
               <label htmlFor="password">
-                Password:
+                Password
                 <input
                   type="password"
                   id="password"
@@ -214,7 +213,7 @@ function UserRegistration() {
             </div>
             <div className="profile-pic">
               <label htmlFor="profile-pic">
-                Profile picture:
+                Profile picture
                 <input
                   type="file"
                   id="profile-pic"
@@ -235,7 +234,7 @@ function UserRegistration() {
           </div>
           <div className="login-to-register">
             Already have an account?
-            <p onClick={() => navigation("/login")}>Login</p>
+            <p onClick={() => navigation("/login")}>Login here</p>
           </div>
         </div>
       </div>

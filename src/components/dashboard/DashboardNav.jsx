@@ -20,6 +20,9 @@ function DashboardNav() {
   function navigateProfile() {
     navigation("/home/profile");
   }
+  console.log(
+    user && user.profilePic ? user.profilePic : "/images/profile.png"
+  );
   return (
     <div className="DashboardNav">
       <div className="discover" onClick={navigateDiscover}>
@@ -45,13 +48,15 @@ function DashboardNav() {
       </div>
       <div className="profile" onClick={navigateProfile}>
         <div className="profile-icon" onClick={navigateProfile}>
-          {user && (
+          {
             <img
               src={
-                user.profilePic !== "" ? user.profilePic : "/images/profile.png"
+                user && user.profilePic
+                  ? user.profilePic
+                  : "/images/profile.png"
               }
             />
-          )}
+          }
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import HomePage from "./components/main/HomePage";
 import ResultsPage from "./components/main/ResultsPage";
 import AccomodationCard from "./components/main/AccomodationCard";
@@ -28,6 +28,7 @@ import Success from "./components/checkout/Sucess";
 import Cancel from "./components/checkout/Cancel";
 
 function App() {
+  const [userId, setuserId] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,7 +37,9 @@ function App() {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
         const uid = user.uid;
-        localStorage.setItem("uid", JSON.stringify(uid)); // ...
+        setuserId(uid);
+
+        // localStorage.setItem("uid", JSON.stringify(uid)); // ...
         dispatch(setUser(uid));
         // ...
       } else {
@@ -50,7 +53,7 @@ function App() {
   useEffect(() => {
     fetchAccomodations();
     fetchUsers();
-  }, []);
+  }, [userId]);
   async function fetchAccomodations() {
     try {
       const querySnapshot = await getDocs(collectionGroup(db, "accomodations"));

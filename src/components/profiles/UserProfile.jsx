@@ -27,6 +27,7 @@ function UserProfile({ userId }) {
   const users = useSelector((state) => state.user.users);
   const currentUser = useSelector((state) => state.user.currentUser);
   const [user] = users.filter((user) => user.id === currentUser);
+  console.log({ user, users, currentUser });
   useEffect(() => {
     if (typeof user !== "undefined") {
       setLoading(false);
