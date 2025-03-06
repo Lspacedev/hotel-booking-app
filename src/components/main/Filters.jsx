@@ -29,55 +29,57 @@ function Filters() {
     <div className="Filters">
       <iframe src={getMap()} width="250" height="200"></iframe>
       <div className="title">Filter By:</div>
-      <div className="filter-section">
-        <div className="filter-h">Popular Filters</div>
-        {/* <input
+      {/* <div className="filter-section">
+        <div className="filter-h">Popular Filters</div> */}
+      {/* <input
           type="checkbox"
           id="Breakfast"
           name="breakfast"
           value="Breakfast"
         />
         <label>Breakfast</label> */}
-        {/* <br /> */}
-        {/* <input type="checkbox" id="Beds" name="beds" value="Beds" />
+      {/* <br /> */}
+      {/* <input type="checkbox" id="Beds" name="beds" value="Beds" />
         <label>Beds</label>
         <br /> */}
-        {/* <input
+      {/* <input
           type="checkbox"
           id="cancellation"
           name="cancellation"
           value="Cancellation"
         />
         <label>Cancellation</label> */}
-      </div>
+      {/* </div> */}
       <div className="filter-section">
         <div className="filter-h">Room Types</div>
-        <input
-          type="checkbox"
-          id="standard"
-          name="standard"
-          value="Standard"
-          onChange={handleAddFilter}
-        />
-        <label>Standard</label>
-        <br />
-        <input
-          type="checkbox"
-          id="deluxe"
-          name="deluxe"
-          value="Deluxe"
-          onChange={handleAddFilter}
-        />
-        <label>Deluxe</label>
-        <br />
-        <input
-          type="checkbox"
-          id="suite"
-          name="suite"
-          value="Suite"
-          onChange={handleAddFilter}
-        />
-        <label>Suite</label>
+        <div className="filter-inputs">
+          <input
+            type="checkbox"
+            id="standard"
+            name="standard"
+            value="Standard"
+            onChange={handleAddFilter}
+          />
+          <label>Standard</label>
+          <br />
+          <input
+            type="checkbox"
+            id="deluxe"
+            name="deluxe"
+            value="Deluxe"
+            onChange={handleAddFilter}
+          />
+          <label>Deluxe</label>
+          <br />
+          <input
+            type="checkbox"
+            id="suite"
+            name="suite"
+            value="Suite"
+            onChange={handleAddFilter}
+          />
+          <label>Suite</label>
+        </div>
       </div>
     </div>
   );

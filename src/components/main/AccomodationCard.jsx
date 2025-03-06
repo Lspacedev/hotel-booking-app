@@ -15,13 +15,21 @@ import { FaLocationDot } from "react-icons/fa6";
 import { CiShare2 } from "react-icons/ci";
 import { LiaBedSolid } from "react-icons/lia";
 import { GoPerson } from "react-icons/go";
+import { setCheckInOut } from "../../app/accomodationsSlice";
+import { useDispatch } from "react-redux";
+
 function AccomodationCard() {
   const [loading, setLoading] = useState(true);
+  const [checkInCheckOut, setCheckInCheckOut] = useState({
+    checkIn: "",
+    checkOut: "",
+  });
   const [searchParams, setSearchParams] = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
   const searchT =
     useSelector((state) => state.accomodations.searchTerm?.title) || "";
   const navigation = useNavigate();
+  const dispatch = useDispatch();
 
   const { result_id } = useParams();
   const slidesRef = useRef(null);
@@ -227,6 +235,14 @@ function AccomodationCard() {
       return { pts: "1/5", text: "Not Good" };
     }
   }
+  function handleCheckInOut(e) {
+    e.preventDefault();
+    const { name, value } = e.target;
+    setCheckInCheckOut((prev) => ({ ...prev, [name]: value }));
+    let obj = { ...checkInCheckOut, [name]: value };
+    dispatch(setCheckInOut(obj));
+  }
+  console.log(checkInOut);
   //if (loading) return <div className="Loading">Loading...</div>;
   return (
     <div className="AccomodationCard">
@@ -292,6 +308,27 @@ function AccomodationCard() {
                     ))}
                 </p>
               </div>
+              <div className="setCheckDates">
+                <label>
+                  <div>Check In</div>
+                  <input
+                    type="date"
+                    name="checkIn"
+                    placeholder="Check in"
+                    onChange={handleCheckInOut}
+                  ></input>
+                </label>
+
+                <label>
+                  <div>Check Out</div>
+                  <input
+                    type="date"
+                    name="checkOut"
+                    placeholder="Check out"
+                    onChange={handleCheckInOut}
+                  />
+                </label>
+              </div>
               <h4>R{accomodation && accomodation.price} per night</h4>
 
               <button className="book-btn" onClick={book}>
@@ -348,7 +385,10 @@ function AccomodationCard() {
           </div>
           <div className="acc-info-section">
             <h5 className="reviews-title">
-              {accomodation.reviews && accomodation.reviews.length} reviews
+              {accomodation &&
+                accomodation.reviews &&
+                accomodation.reviews.length}{" "}
+              reviews
             </h5>
             <div className="accomodation-reviews">
               {accomodation &&

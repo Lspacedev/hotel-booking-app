@@ -53,6 +53,10 @@ function SearchAccomodationsResults() {
     } else {
       //setSearchParams({ search: searchInput });
       if (searchInput !== "") {
+        if (checkInOut.checkIn !== "" && checkInOut.checkOut !== "") {
+          dispatch(setCheckInOut(checkInOut));
+          //alert("Added check in and check out dates");
+        }
         dispatch(setSearchTerm({ title: searchInput }));
         if (result_id !== "" && typeof result_id !== "undefined") {
           // alert("Results set");
@@ -61,13 +65,11 @@ function SearchAccomodationsResults() {
         // alert("Please enter hotel destination to search");
         // return;
       }
-      if (checkInOut.checkIn !== "" && checkInOut.checkOut !== "") {
-        dispatch(setCheckInOut(checkInOut));
-        alert("Added check in and check out dates");
-      }
+
       if (guests !== 0) {
         dispatch(setGuests({ num: guests }));
       }
+      navigation("/results?search=" + searchInput);
     }
   }
 

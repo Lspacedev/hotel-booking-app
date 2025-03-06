@@ -13,6 +13,10 @@ function ResetPassword() {
   }
   return (
     <div className="ResetPassword">
+      <div className="logo-container" onClick={() => navigation("/")}>
+        <img src="/images/logo-icon2.png" className="logo-icon-img" />
+        <img src="/images/logo-text2.png" className="logo-text-img" />
+      </div>
       <h4>Reset your password</h4>
 
       <input

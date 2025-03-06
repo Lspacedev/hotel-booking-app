@@ -27,7 +27,7 @@ function UserProfile({ userId }) {
   const users = useSelector((state) => state.user.users);
   const currentUser = useSelector((state) => state.user.currentUser);
   const [user] = users.filter((user) => user.id === currentUser);
-  console.log({ user, users, currentUser });
+
   useEffect(() => {
     if (typeof user !== "undefined") {
       setLoading(false);
@@ -105,6 +105,13 @@ function UserProfile({ userId }) {
           <div className="profile-picture">
             {update ? (
               <div className="profile-pic2">
+                <img
+                  src={
+                    user.profilePic !== ""
+                      ? user.profilePic
+                      : "/images/profile.png"
+                  }
+                />
                 <button className="close" onClick={() => setUpdate(false)}>
                   <CgClose />
                 </button>
@@ -138,7 +145,7 @@ function UserProfile({ userId }) {
                   />
                 </div>
               ) : (
-                <div>{user && user.name}</div>
+                <div className="value">{user && user.name}</div>
               )}
             </div>
 
@@ -155,7 +162,7 @@ function UserProfile({ userId }) {
                   />
                 </div>
               ) : (
-                <div>{user && user.surname}</div>
+                <div className="value">{user && user.surname}</div>
               )}
             </div>
 
@@ -164,7 +171,7 @@ function UserProfile({ userId }) {
               {update ? (
                 <div className="email"></div>
               ) : (
-                <div>{user && user.email}</div>
+                <div className="value">{user && user.email}</div>
               )}
             </div>
 
@@ -174,7 +181,7 @@ function UserProfile({ userId }) {
                   <div>
                     <h4>Password:</h4>
                     <div className="password">
-                      <button onClick={resetPassword}>reset password</button>
+                      <div onClick={resetPassword}>Reset password</div>
                     </div>
                   </div>
                 ) : (
@@ -186,7 +193,7 @@ function UserProfile({ userId }) {
               <button
                 onClick={() => (update ? handleSubmit() : handleToggleUpdate())}
               >
-                {update ? "Submit" : "Update"}
+                {update ? "Update" : "Edit"}
               </button>
             </div>
           </div>

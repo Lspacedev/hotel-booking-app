@@ -1,4 +1,8 @@
+import { useNavigate, useLocation } from "react-router-dom";
+
 function DealsSection({ heading, subHeading, dealHeading, dealText }) {
+  const navigation = useNavigate();
+
   return (
     <div className="DealsSection">
       <div className="deal-heading">
@@ -11,7 +15,12 @@ function DealsSection({ heading, subHeading, dealHeading, dealText }) {
         <div className="deal-one">
           <div className="deal-one-heading">{dealHeading}</div>
           <p className="deal-text">{dealText}</p>
-          <button className="deal-btn">Save 15% or more</button>
+          <button
+            className="deal-btn"
+            onClick={() => navigation("/registration")}
+          >
+            Save 15% or more
+          </button>
         </div>
         <div className="deal-two">
           <img src="/images/showcase2.jpg" />

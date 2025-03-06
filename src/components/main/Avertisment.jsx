@@ -1,6 +1,9 @@
 import { GiCheckMark } from "react-icons/gi";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Avertisment() {
+  const navigation = useNavigate();
+
   return (
     <div className="Avertisment">
       <div className="backdrop">
@@ -21,7 +24,12 @@ function Avertisment() {
             </div>
           </div>
           <div>Planning your next stay has never been simpler!</div>
-          <button className="avert-reg-btn">Register Now</button>
+          <button
+            className="avert-reg-btn"
+            onClick={() => navigation("/registration")}
+          >
+            Register Now
+          </button>
         </div>
         <div className="image-container">
           <img src="/images/capetownbeach.jpg" />

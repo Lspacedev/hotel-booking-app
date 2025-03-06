@@ -110,6 +110,15 @@ body {
   color: white;
   font-weight: 600;
 }
+
+.nav-links .login-btn2 {
+  border: 1px solid #626267;
+  padding: 10px 25px;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #1c1c1f;
+  font-weight: 600;
+}
 .nav-links .discover {
   display: flex;
   align-items: center;
@@ -129,6 +138,10 @@ body {
   border: 1px solid #626267;
   color: rgb(179, 179, 179);
 }
+.nav-links .login-btn2:hover {
+  border: 1px solid rgb(179, 179, 179);
+  color: rgb(179, 179, 179);
+}
 
 .nav-links .register-btn {
   background-color: #a6a670;
@@ -138,9 +151,20 @@ body {
   border: none;
   font-weight: 600;
 }
+.nav-links .register-btn2 {
+  background-color: #626267;
+  padding: 10px 25px;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+}
 
 .nav-links .register-btn:hover {
   background-color: #1c1c1f;
+}
+.nav-links .register-btn2:hover {
+  background-color: #555558;
 }
 
 .Nav:hover .register-btn {
@@ -321,7 +345,8 @@ input[type="text"] {
   border: 1px solid #8b8b45;
   background-color: #8b8b45;
   color: white;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 400;
   border-radius: 5px;
 }
 .SearchAccomodations input[type="submit"]:hover {
@@ -397,6 +422,10 @@ input[type="text"] {
   border-radius: 15px;
   color: white;
 }
+.save-card-sign-in:hover {
+  background-color: #222224;
+  cursor: pointer;
+}
 .Avertisment {
   width: 100%;
   min-height: 400px;
@@ -412,20 +441,20 @@ input[type="text"] {
 .Avertisment .backdrop {
   width: 100%;
   min-height: 400px;
-  background-color: #f5fdc6e3;
+  background-color: #f5fdc6dc;
   border-radius: 7px;
   display: flex;
   justify-content: space-evenly;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: #f5fdc6ec;
+  /* background-color: #f9ffd6e7; */
   align-items: center;
 }
 .Avertisment .avert-deco {
   width: 50px;
   height: 200px;
-  background-color: #f1fcb5cb;
+  /* background-color: #f1fcb5cb; */
   padding: 0px;
   margin-right: 5px;
   border-radius: 0px 50px 50px 0px;
@@ -453,6 +482,8 @@ input[type="text"] {
   display: flex;
   gap: 15px;
   background-color: #e3f09aea;
+  /* background-color: #e3f09ad2; */
+
   padding: 10px 15px;
   border-radius: 25px;
   margin: 25px 0px;
@@ -474,6 +505,10 @@ input[type="text"] {
   border: none;
   outline: none;
   border-radius: 7px;
+}
+.Avertisment .avert-reg-btn:hover {
+  background-color: #222224;
+  cursor: pointer;
 }
 .Avertisment .image-container {
   flex: 3;
@@ -581,7 +616,7 @@ input[type="text"] {
   border-radius: 7px;
 }
 .deal-btn:hover {
-  background-color: #777737;
+  background-color: #242424;
   cursor: pointer;
 }
 .deal-container {
@@ -707,7 +742,7 @@ input[type="text"] {
 }
 
 .ResultsPage .nav-links .discover:hover {
-  color: #777737;
+  color: #555558;
 }
 
 .search-div {
@@ -757,16 +792,17 @@ input[type="text"] {
 .SearchAccomodationsResults input[type="submit"] {
   flex: 1;
   padding: 15px 32px;
-  border: 1px solid #a6a670;
-  background-color: #a6a670;
+  border: 1px solid #8b8b45;
+  background-color: #8b8b45;
   color: white;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 400;
   border-radius: 5px;
 }
 
 .SearchAccomodationsResults input[type="submit"]:hover {
-  background-color: #36363a;
-  border: 1px solid #36363a;
+  background-color: #777737;
+  border: 1px solid #777737;
 
   cursor: pointer;
 }
@@ -861,7 +897,7 @@ input[type="text"] {
   gap: 15px;
   background-color: white;
   box-shadow: 1px 1px 5px #bbb;
-  border-radius: 25px;
+  border-radius: 15px;
 }
 .ResultCard .star {
   color: orange;
@@ -885,12 +921,12 @@ input[type="text"] {
   flex: 30%;
   height: 200px;
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: 15px;
 }
 .ResultCard img {
   width: 100%;
   height: 100%;
-  border-radius: 25px;
+  border-radius: 15px;
 }
 .ResultCard img:hover {
   opacity: 0.8 !important;
@@ -1005,14 +1041,14 @@ input[type="text"] {
 }
 .book-map {
   width: 250px;
-  height: 400px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 .book-card {
   width: 250px;
-  height: 60%;
+  height: 70%;
   border: 1px solid #bbb;
   border-radius: 5px;
   display: flex;
@@ -1055,7 +1091,35 @@ input[type="text"] {
   border-radius: 25px;
   box-shadow: 1px 1px 3px #bbb;
 }
+.setCheckDates {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.setCheckDates label {
+  flex: 1;
+  margin: 0px auto;
+  width: 75%;
 
+  font-size: 14px;
+}
+
+.setCheckDates input[type="date"]:in-range::-webkit-datetime-edit-year-field,
+input[type="date"]:in-range::-webkit-datetime-edit-month-field,
+input[type="date"]:in-range::-webkit-datetime-edit-day-field,
+input[type="date"]:in-range::-webkit-datetime-edit-text {
+  color: #888888;
+  font-weight: 200;
+  font-size: 1.3rem;
+  width: 50px;
+}
+.setCheckDates input[type="date"] {
+  margin-left: 0px;
+  margin: 0px auto;
+  padding: 2px 0px;
+  width: 100%;
+  border: 1px solid #b9b9b9;
+}
 .AccomodationCard .slides {
   height: 450px;
   width: 45vw;
@@ -1191,7 +1255,6 @@ input[type="text"] {
 /* User Dashboard */
 
 .UserProfile {
-  text-align: center;
 }
 .UserProfile .close {
   background-color: transparent;
@@ -1202,33 +1265,47 @@ input[type="text"] {
   cursor: pointer;
 }
 .UserProfile input {
-  width: 25%;
+  width: 100%;
   padding: 10px;
-  border-radius: 25px;
+  border-radius: 7px;
   outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.521);
+  border: 1px solid #b9b9b9;
+  text-align: start;
+  background-color: white;
 }
-.UserProfile .password button {
-  background-color: #d42727;
+.UserProfile .password div {
   padding: 7px 2px;
-  outline: none;
-  border: none;
-  color: white;
+
+  color: #d42727;
   cursor: pointer;
-  border-radius: 15px;
+  width: fit-content;
+}
+.UserProfile .password div:hover {
+  text-decoration: underline;
 }
 .UserProfile .account-update {
   margin-top: 25px;
+  width: 100%;
 }
 .UserProfile .account-update button {
   background-color: #1c1c1f;
   padding: 10px 30px;
   cursor: pointer;
-  border-radius: 25px;
-  width: 25%;
+  border-radius: 7px;
+  width: 100%;
 }
 .UserProfile .account-update button:hover {
   background-color: #1c1c1fe7;
+}
+.UserProfile .profile-content {
+  width: 50%;
+  margin: 0px auto;
+}
+.UserProfile .value {
+  border: 1px solid #b9b9b9;
+  padding: 7px 5px;
+  background-color: #e9e9e9;
+  border-radius: 7px;
 }
 .UserDashboard {
   height: 100vh;
@@ -1384,7 +1461,7 @@ input[type="text"] {
 }
 .sidebar-links .currentTab {
   background-color: #3d3d41c4;
-  border-right: 5px solid #8b8b45;
+  border-right: 5px solid #c1963d;
 }
 .sidebar-links {
   flex: 90%;
@@ -1622,7 +1699,7 @@ input[type="text"] {
   width: 700px;
 
   background-color: white;
-  border-radius: 25px;
+  border-radius: 7px;
 }
 .ReviewForm form input[type="file"] {
   font-size: 0.7rem;
@@ -1630,12 +1707,20 @@ input[type="text"] {
   outline: none;
   border: none;
 }
-.ReviewForm form input {
+.ReviewForm form input,
+select {
   margin: 10px 0px;
-  padding: 5px;
+  padding: 10px 5px;
   outline: none;
   border: 1px solid #bbb;
-  border-radius: 25px;
+  border-radius: 7px;
+}
+.ReviewForm form select {
+  margin: 10px 0px;
+  padding: 10px 5px;
+  outline: none;
+  border: 1px solid #bbb;
+  border-radius: 7px;
 }
 
 .ReviewForm form label {
@@ -1656,22 +1741,26 @@ input[type="text"] {
   cursor: pointer;
 }
 .ReviewForm .form-close:hover {
-  color: #a6a670;
+  color: #555558;
   cursor: pointer;
 }
 
 .ReviewForm input[type="submit"] {
-  padding: 7px 15px;
+  padding: 10px 15px;
   width: 100%;
-  background-color: #a6a670;
+  background-color: #1b1b1d;
   color: white;
   border: none;
   cursor: pointer;
-  border-radius: 25px;
+  border-radius: 7px;
 }
 .ReviewForm input[type="submit"]:hover {
-  background-color: #626267;
+  background-color: #2c2c2c;
   cursor: pointer;
+}
+
+.ReviewForm .room_name h3 {
+  text-align: start;
 }
 
 .rating-guests {
@@ -1709,16 +1798,16 @@ input[type="text"] {
   text-align: end;
 }
 .AddReview button {
-  background-color: #a6a670;
+  background-color: #1b1b1d;
   border: none;
-  padding: 5px 15px;
+  padding: 7px 15px;
   color: white;
   cursor: pointer;
   margin: 0px 25px 0px 0px;
-  border-radius: 25px;
+  border-radius: 7px;
 }
 .AddReview button:hover {
-  background-color: #777737;
+  background-color: #2c2c2c;
 }
 /* Favourites */
 .Favourites {
@@ -1991,7 +2080,8 @@ select {
 
   margin: 5px 0;
   padding: 10px 5px;
-  width: 98%;
+  width: calc(100% - 10px);
+
   outline: none;
 
   border-radius: 7px;
@@ -2187,7 +2277,7 @@ select {
 
   margin: 5px 0px 5px 0px;
   padding: 10px 5px;
-  width: 100%;
+  width: calc(100% - 10px);
   outline: none;
   border-radius: 7px;
   display: inline-block;
@@ -2206,6 +2296,7 @@ select {
   cursor: pointer;
   margin: 5px 0px;
   text-align: start;
+  width: 100%;
 }
 
 .UserRegistration .submit-btn {
@@ -2235,6 +2326,21 @@ select {
   object-position: center;
 }
 
+.ResetPassword .logo-container {
+  flex: none;
+  display: flex;
+  justify-content: center;
+  gap: 0px;
+}
+
+.ResetPassword .logo-icon-img {
+  width: 50px;
+  height: 50px;
+}
+.ResetPassword .logo-text-img {
+  width: 150px;
+  height: 30px;
+}
 /* Checkout */
 .Checkout {
   height: 100vh;
@@ -2307,11 +2413,23 @@ select {
 }
 .profile-pic {
   margin-top: 25px;
+  display: flex;
+  justify-content: center;
 }
 .profile-pic img {
   width: 200px;
   height: 200px;
   border-radius: 50%;
+}
+.profile-pic2 {
+  display: flex;
+  flex-direction: column;
+}
+.profile-pic2 img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: 0px auto;
 }
 .profile-icon img {
   width: 30px;
@@ -2933,11 +3051,19 @@ code {
   }
   .Filters {
     display: flex;
-    overflow-x: scroll;
+    flex-direction: column;
+    padding: 0px;
+  }
+  .Filters iframe {
+    width: 100%;
   }
   .filter-section {
     display: flex;
     align-items: center;
+  }
+  .filter-inputs {
+    display: flex;
+    overflow-x: auto;
   }
   .UserDashboard {
     flex-direction: column;
@@ -3106,6 +3232,14 @@ code {
   }
 }
 
+@media screen and (max-width: 600px) {
+  .AccomodationCard .accomodation-reviews {
+    display: block;
+  }
+  .AccomodationCard .review-card {
+    width: calc(100% - 50px);
+  }
+}
 @media screen and (max-width: 480px) {
   .Sidebar {
     gap: 10px;

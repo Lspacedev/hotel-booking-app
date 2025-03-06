@@ -51,11 +51,17 @@ function Nav() {
         </div>
         {userId === "" ? (
           <div className="auth-btn">
-            <button className="login-btn" onClick={navigateLogin}>
+            <button
+              className={pathname !== "/" ? "login-btn2" : "login-btn"}
+              onClick={navigateLogin}
+            >
               Login
             </button>
 
-            <button className="register-btn" onClick={navigateRegister}>
+            <button
+              className={pathname !== "/" ? "register-btn2" : "register-btn"}
+              onClick={navigateRegister}
+            >
               Register
             </button>
           </div>

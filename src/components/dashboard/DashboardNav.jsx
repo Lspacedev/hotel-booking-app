@@ -20,9 +20,7 @@ function DashboardNav() {
   function navigateProfile() {
     navigation("/home/profile");
   }
-  console.log(
-    user && user.profilePic ? user.profilePic : "/images/profile.png"
-  );
+
   return (
     <div className="DashboardNav">
       <div className="discover" onClick={navigateDiscover}>
