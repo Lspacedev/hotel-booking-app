@@ -63,7 +63,14 @@ body {
 .Welcome .text {
   text-align: center;
 }
+.welcome-image {
+  width: 100%;
+}
+.welcome-image img {
+  width: 100%;
 
+  height: 600px;
+}
 /* Nav */
 .Nav {
   display: flex;
@@ -103,7 +110,7 @@ body {
   cursor: pointer;
 }
 .nav-links .login-btn {
-  border: 1px solid #a6a670;
+  border: 1px solid #a08c71;
   padding: 10px 25px;
   border-radius: 5px;
   background-color: transparent;
@@ -144,7 +151,7 @@ body {
 }
 
 .nav-links .register-btn {
-  background-color: #a6a670;
+  background-color: #a78250;
   padding: 10px 25px;
   color: white;
   border-radius: 5px;
@@ -342,16 +349,16 @@ input[type="text"] {
 .SearchAccomodations input[type="submit"] {
   flex: 1;
   padding: 15px 32px;
-  border: 1px solid #8b8b45;
-  background-color: #8b8b45;
+  border: 1px solid #9b733b;
+  background-color: #9b733b;
   color: white;
   font-size: 16px;
   font-weight: 400;
   border-radius: 5px;
 }
 .SearchAccomodations input[type="submit"]:hover {
-  background-color: #777737;
-  border: 1px solid #777737;
+  background-color: #88683a;
+  border: 1px solid #88683a;
   cursor: pointer;
 }
 
@@ -588,7 +595,7 @@ input[type="text"] {
   width: 30px;
   margin: 0px;
   padding: 0px;
-  background-color: #777737;
+  background-color: #c1963d;
 }
 .deal-sub-heading {
   margin: 5px;
@@ -669,7 +676,7 @@ input[type="text"] {
   width: 35px;
   margin: 0px;
   padding: 0px;
-  background-color: #a6a670;
+  background-color: #c1963d;
 }
 .cards {
   display: flex;
@@ -792,8 +799,8 @@ input[type="text"] {
 .SearchAccomodationsResults input[type="submit"] {
   flex: 1;
   padding: 15px 32px;
-  border: 1px solid #8b8b45;
-  background-color: #8b8b45;
+  border: 1px solid #aca090;
+  background-color: #aca090;
   color: white;
   font-size: 16px;
   font-weight: 400;
@@ -801,8 +808,8 @@ input[type="text"] {
 }
 
 .SearchAccomodationsResults input[type="submit"]:hover {
-  background-color: #777737;
-  border: 1px solid #777737;
+  background-color: #9b9184;
+  border: 1px solid #9b9184;
 
   cursor: pointer;
 }
@@ -815,6 +822,20 @@ input[type="text"] {
   background-color: #ebebeb;
 
   text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.SearchAccomodationsResults input[type="date"]:before {
+  content: attr(placeholder) !important;
+  color: #888888;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+.SearchAccomodationsResults input[type="date"]:focus:before,
+.SearchAccomodationsResults input[type="date"]:valid:before {
+  content: "";
 }
 /* Filters */
 .Filters {
@@ -2990,6 +3011,9 @@ code {
   }
   .register-form-container .logo-container {
     flex: none;
+  }
+  .results-main {
+    flex-direction: column;
   }
 }
 

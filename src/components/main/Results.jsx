@@ -25,7 +25,6 @@ function Results() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log({ searchTerm, location });
     if (search === "") {
       navigation("/");
     }

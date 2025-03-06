@@ -5,6 +5,9 @@ function Welcome() {
       <div className="text">
         Track bookings, manage your favourites and write reviews
       </div>
+      {/* <div className="welcome-image">
+        <img src="/images/showcase4.jpg" />
+      </div> */}
     </div>
   );
 }
